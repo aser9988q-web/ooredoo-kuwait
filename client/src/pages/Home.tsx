@@ -8,12 +8,57 @@ import {
   MessageCircle,
   X,
   Menu,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function Home() {
   const [showChat, setShowChat] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  const scrollCarousel = (direction: "left" | "right") => {
+    if (carouselRef.current) {
+      const scrollAmount = 320;
+      if (direction === "left") {
+        carouselRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      } else {
+        carouselRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      }
+    }
+  };
+
+  const products = [
+    {
+      name: "Samsung S26 Ultra",
+      series: "Galaxy S26 Series",
+      price: "KD 33",
+      period: "/month",
+      image: "/manus-storage/samsung_s26_ultra_0c176c4d.jpg",
+    },
+    {
+      name: "Samsung S26 Plus",
+      series: "Galaxy S26 Series",
+      price: "KD 26",
+      period: "/month",
+      image: "/manus-storage/samsung_s26_plus_721a6428.jpg",
+    },
+    {
+      name: "Samsung Galaxy Z Fold 7",
+      series: "The ultimate foldable powered by Galaxy AI",
+      price: "KD 39",
+      period: "/month",
+      image: "/manus-storage/samsung_fold6_01266d50.jpg",
+    },
+    {
+      name: "Samsung S26",
+      series: "Galaxy S26 Series",
+      price: "KD 24",
+      period: "/month",
+      image: "/manus-storage/samsung_s26_normal_5ab82e36.jpg",
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-white flex flex-col" dir="rtl">
@@ -116,7 +161,7 @@ export default function Home() {
                   badge: "51",
                 },
                 {
-                  icon: "/manus-storage/update_info_icon_5a4b1ad7.svg",
+                  icon: "/manus-storage/kuwait_51_icon_2d59fe18.png",
                   label: "51 Kuwait",
                   badge: "51",
                 },
@@ -165,48 +210,54 @@ export default function Home() {
               AI powered 5G Smartphones at a special price
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {[
-                {
-                  name: "Samsung S26 Ultra",
-                  series: "Galaxy S26 Series",
-                  price: "KD 33",
-                  period: "/month",
-                  image: "/manus-storage/samsung_s26_ultra_0c176c4d.jpg",
-                },
-                {
-                  name: "Samsung S26 Plus",
-                  series: "Galaxy S26 Series",
-                  price: "KD 26",
-                  period: "/month",
-                  image: "/manus-storage/samsung_s26_plus_721a6428.jpg",
-                },
-              ].map((product) => (
-                <div
-                  key={product.name}
-                  className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 hover:shadow-sm transition-all cursor-pointer"
-                >
-                  <div className="h-24 md:h-32 rounded-lg mb-2 md:mb-3 flex items-center justify-center overflow-hidden bg-gray-100">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="w-full h-full object-cover"
-                    />
+            {/* Carousel Container */}
+            <div className="relative">
+              <div
+                ref={carouselRef}
+                className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-2"
+                style={{ scrollBehavior: "smooth" }}
+              >
+                {products.map((product) => (
+                  <div
+                    key={product.name}
+                    className="flex-shrink-0 w-40 md:w-48 bg-white border border-gray-200 rounded-lg p-3 md:p-4 hover:shadow-sm transition-all cursor-pointer"
+                  >
+                    <div className="h-24 md:h-32 rounded-lg mb-2 md:mb-3 flex items-center justify-center overflow-hidden bg-gray-100">
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <h4 className="font-bold text-black text-xs md:text-xs mb-1 line-clamp-2">
+                      {product.name}
+                    </h4>
+                    <p className="text-xs text-gray-600 mb-2 font-medium line-clamp-2">
+                      {product.series}
+                    </p>
+                    <p className="text-sm md:text-base font-bold text-black">
+                      {product.price}
+                      <span className="text-xs text-gray-500 ml-1 font-normal">
+                        {product.period}
+                      </span>
+                    </p>
                   </div>
-                  <h4 className="font-bold text-black text-xs md:text-xs mb-1">
-                    {product.name}
-                  </h4>
-                  <p className="text-xs text-gray-600 mb-2 font-medium">
-                    {product.series}
-                  </p>
-                  <p className="text-sm md:text-base font-bold text-black">
-                    {product.price}
-                    <span className="text-xs text-gray-500 ml-1 font-normal">
-                      {product.period}
-                    </span>
-                  </p>
-                </div>
-              ))}
+                ))}
+              </div>
+
+              {/* Carousel Navigation Buttons */}
+              <button
+                onClick={() => scrollCarousel("right")}
+                className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-6 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-50 z-10 hidden md:flex items-center justify-center"
+              >
+                <ChevronLeft size={20} className="text-gray-700" />
+              </button>
+              <button
+                onClick={() => scrollCarousel("left")}
+                className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 bg-white border border-gray-200 rounded-full p-2 hover:bg-gray-50 z-10 hidden md:flex items-center justify-center"
+              >
+                <ChevronRight size={20} className="text-gray-700" />
+              </button>
             </div>
 
             {/* Red accent line */}
@@ -257,6 +308,16 @@ export default function Home() {
           </p>
         </div>
       )}
+
+      <style>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }
