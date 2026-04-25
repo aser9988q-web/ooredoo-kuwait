@@ -159,6 +159,7 @@ input[type=password] {
 .footer-content #knet-brand {
     width: 43px;
     height: 43px;
+    background: url(../images/knet-links.png) -148px 0 no-repeat;
     margin-top: 5px;
 }
 
@@ -170,6 +171,31 @@ input[type=password] {
 .footer-content .social-links div {
     height: 30px;
     display: inline-block;
+}
+
+.footer-content .social-links div#knet-yt {
+    background: url(../images/knet-links.png) 0 0 no-repeat;
+    width: 35px;
+}
+
+.footer-content .social-links div#knet-sn {
+    background: url(../images/knet-links.png) -36px 0 no-repeat;
+    width: 27px;
+}
+
+.footer-content .social-links div#knet-tw {
+    background: url(../images/knet-links.png) -64px 0 no-repeat;
+    width: 27px;
+}
+
+.footer-content .social-links div#knet-it {
+    background: url(../images/knet-links.png) -93px 0 no-repeat;
+    width: 27px;
+}
+
+.footer-content .social-links div#knet-fb {
+    background: url(../images/knet-links.png) -120px 0 no-repeat;
+    width: 27px;
 }
 
 button {
