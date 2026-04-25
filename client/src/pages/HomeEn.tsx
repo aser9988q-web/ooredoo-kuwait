@@ -13,6 +13,8 @@ import { Link } from "wouter";
 
 export default function HomeEn() {
   const [showChat, setShowChat] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', problem: '' });
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const products = [
@@ -234,10 +236,95 @@ export default function HomeEn() {
         {showChat ? <X size={24} /> : <MessageCircle size={24} />}
       </button>
 
-      {/* Chat Panel */}
-      {showChat && (
-        <div className="fixed bottom-32 right-4 bg-white rounded-lg shadow-lg p-4 w-80 z-10">
-          <p className="text-sm text-gray-700">Having a problem?</p>
+      {/* Contact Form Panel */}
+      {showChat && !showSuccess && (
+        <div className="fixed bottom-32 left-4 bg-white rounded-lg shadow-2xl p-6 w-96 z-10 max-h-96 overflow-y-auto">
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-bold text-black">Contact Us</h3>
+            <button onClick={() => setShowChat(false)} className="text-gray-500 hover:text-gray-700">
+              <X size={20} />
+            </button>
+          </div>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              setShowSuccess(true);
+              setTimeout(() => {
+                setShowSuccess(false);
+                setShowChat(false);
+                setFormData({ name: '', phone: '', email: '', problem: '' });
+              }, 3000);
+            }}
+            className="space-y-3"
+          >
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-sm"
+                placeholder="Enter your name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+              <input
+                type="tel"
+                required
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-sm"
+                placeholder="Enter your phone number"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-sm"
+                placeholder="Enter your email"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Problem Description</label>
+              <textarea
+                required
+                value={formData.problem}
+                onChange={(e) => setFormData({ ...formData, problem: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-600 text-sm resize-none"
+                placeholder="Describe your problem"
+                rows={3}
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition-colors text-sm"
+            >
+              Send
+            </button>
+          </form>
+        </div>
+      )}
+
+      {/* Success Message */}
+      {showSuccess && (
+        <div className="fixed bottom-32 left-4 bg-white rounded-lg shadow-2xl p-6 w-96 z-10">
+          <div className="text-center">
+            <div className="mb-4 flex justify-center">
+              <div className="bg-green-100 rounded-full p-3">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+            </div>
+            <h3 className="text-lg font-bold text-black mb-2">Thank you for choosing Ooredoo</h3>
+            <p className="text-sm text-gray-700">We will contact you as soon as possible</p>
+          </div>
         </div>
       )}
     </div>
