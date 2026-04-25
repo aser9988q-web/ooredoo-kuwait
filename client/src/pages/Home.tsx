@@ -7,33 +7,48 @@ import {
   MoreHorizontal,
   MessageCircle,
   X,
+  Menu,
 } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
   const [showChat, setShowChat] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   return (
     <div className="min-h-screen bg-white flex flex-col" dir="rtl">
       {/* Header */}
-      <header className="border-b border-gray-200 px-6 py-3 flex justify-between items-center bg-white">
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-bold text-black">Hello</span>
-          <span className="text-xs text-gray-700">
+      <header className="border-b border-gray-200 px-4 md:px-6 py-3 flex justify-between items-center bg-white">
+        <div className="flex items-center gap-2 flex-1">
+          <span className="text-xs md:text-sm font-bold text-black">Hello</span>
+          <span className="text-xs text-gray-700 hidden md:inline">
             Ooredoo user?{" "}
             <button className="text-red-600 font-semibold hover:underline">
               Login
             </button>
           </span>
         </div>
-        <div className="w-24 h-8 bg-red-600 rounded flex items-center justify-center">
-          <span className="text-white font-bold text-xs">ooredoo</span>
+        <div className="w-20 md:w-24 h-7 md:h-8 bg-red-600 rounded flex items-center justify-center">
+          <span className="text-white font-bold text-xs md:text-xs">ooredoo</span>
         </div>
+        <button 
+          onClick={() => setShowMobileMenu(!showMobileMenu)}
+          className="md:hidden ml-4 text-gray-700"
+        >
+          <Menu size={20} />
+        </button>
       </header>
 
-      <div className="flex flex-1">
+      <div className="flex flex-1 relative">
+        {/* Mobile Menu Overlay */}
+        {showMobileMenu && (
+          <div className="fixed inset-0 bg-black/50 z-40 md:hidden" onClick={() => setShowMobileMenu(false)} />
+        )}
+
         {/* Sidebar Navigation */}
-        <aside className="w-32 border-r border-gray-200 py-6 px-3 bg-white">
+        <aside className={`${
+          showMobileMenu ? 'absolute left-0 top-0 z-50' : 'hidden md:block'
+        } w-32 md:w-32 border-r border-gray-200 py-6 px-3 bg-white h-screen md:h-auto md:relative`}>
           <nav className="space-y-0">
             {[
               { icon: HomeIcon, label: "Home", active: true },
@@ -44,6 +59,7 @@ export default function Home() {
             ].map((item) => (
               <button
                 key={item.label}
+                onClick={() => setShowMobileMenu(false)}
                 className={`w-full flex items-center gap-2 px-3 py-2 text-xs transition-all ${
                   item.active
                     ? "bg-red-100 text-red-600 font-semibold"
@@ -51,33 +67,33 @@ export default function Home() {
                 }`}
               >
                 <item.icon size={18} strokeWidth={1.5} />
-                <span>{item.label}</span>
+                <span className="hidden sm:inline">{item.label}</span>
               </button>
             ))}
           </nav>
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 p-6 overflow-y-auto bg-white">
+        <main className="flex-1 p-4 md:p-6 overflow-y-auto bg-white">
           {/* Upgrade Section */}
-          <section className="bg-white rounded-lg p-6 mb-6 border border-gray-200">
-            <div className="flex justify-between items-start">
+          <section className="bg-white rounded-lg p-4 md:p-6 mb-4 md:mb-6 border border-gray-200">
+            <div className="flex flex-col md:flex-row justify-between items-start gap-4">
               <div>
-                <h2 className="text-2xl font-bold text-black mb-1 leading-tight">
+                <h2 className="text-xl md:text-2xl font-bold text-black mb-1 leading-tight">
                   UPGRADE
                   <br />
                   YOUR{" "}
                   <span className="text-red-600">WORLD</span>
                 </h2>
               </div>
-              <div className="flex gap-2">
+              <div className="flex gap-2 w-full md:w-auto">
                 <Button
                   variant="outline"
-                  className="border border-gray-400 text-gray-700 rounded-full px-5 py-1 text-xs font-medium hover:bg-gray-50"
+                  className="border border-gray-400 text-gray-700 rounded-full px-3 md:px-5 py-1 text-xs font-medium hover:bg-gray-50 flex-1 md:flex-none"
                 >
                   Add Existing Line
                 </Button>
-                <Button className="bg-black text-white rounded-full px-5 py-1 text-xs font-medium hover:bg-gray-900">
+                <Button className="bg-black text-white rounded-full px-3 md:px-5 py-1 text-xs font-medium hover:bg-gray-900 flex-1 md:flex-none">
                   Join Us
                 </Button>
               </div>
@@ -85,9 +101,9 @@ export default function Home() {
           </section>
 
           {/* Shortcuts Section */}
-          <section className="mb-6">
-            <h3 className="text-lg font-bold text-black mb-4">Shortcuts</h3>
-            <div className="grid grid-cols-4 gap-3">
+          <section className="mb-4 md:mb-6">
+            <h3 className="text-lg md:text-lg font-bold text-black mb-3 md:mb-4">Shortcuts</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
               {[
                 {
                   icon: "/manus-storage/recharge_icon_4b9b5a6d.svg",
@@ -112,44 +128,44 @@ export default function Home() {
               ].map((item) => (
                 <div
                   key={item.label}
-                  className="relative bg-white border border-gray-200 rounded-lg p-4 text-center hover:shadow-sm transition-shadow cursor-pointer"
+                  className="relative bg-white border border-gray-200 rounded-lg p-3 md:p-4 text-center hover:shadow-sm transition-shadow cursor-pointer"
                 >
-                  <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold rounded px-1.5 py-0.5">
+                  <div className="absolute top-1.5 right-1.5 bg-red-600 text-white text-xs font-bold rounded px-1.5 py-0.5">
                     {item.badge}
                   </div>
                   <div className="flex justify-center mb-2">
                     <img
                       src={item.icon}
                       alt={item.label}
-                      className="w-6 h-6"
+                      className="w-5 h-5 md:w-6 md:h-6"
                     />
                   </div>
-                  <p className="text-xs font-semibold text-black">{item.label}</p>
+                  <p className="text-xs font-semibold text-black line-clamp-2">{item.label}</p>
                 </div>
               ))}
             </div>
           </section>
 
           {/* Samsung Banner */}
-          <section className="mb-6">
-            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 rounded-lg overflow-hidden h-40 flex items-center justify-center relative">
+          <section className="mb-4 md:mb-6">
+            <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 rounded-lg overflow-hidden h-32 md:h-40 flex items-center justify-center relative">
               <div className="text-white text-center">
-                <p className="text-xs font-semibold opacity-75 mb-1">Galaxy S26 Series</p>
-                <p className="text-2xl font-bold">Galaxy AI</p>
+                <p className="text-xs md:text-xs font-semibold opacity-75 mb-1">Galaxy S26 Series</p>
+                <p className="text-xl md:text-2xl font-bold">Galaxy AI</p>
               </div>
             </div>
           </section>
 
           {/* Samsung AI Devices Section */}
-          <section className="mb-8">
-            <h3 className="text-lg font-bold text-black mb-1">
+          <section className="mb-6 md:mb-8">
+            <h3 className="text-lg md:text-lg font-bold text-black mb-1">
               SAMSUNG AI Devices.
             </h3>
-            <p className="text-gray-600 text-xs mb-4 font-medium">
+            <p className="text-gray-600 text-xs mb-3 md:mb-4 font-medium">
               AI powered 5G Smartphones at a special price
             </p>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {[
                 {
                   name: "Samsung S26 Ultra",
@@ -168,22 +184,22 @@ export default function Home() {
               ].map((product) => (
                 <div
                   key={product.name}
-                  className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-sm transition-all cursor-pointer"
+                  className="bg-white border border-gray-200 rounded-lg p-3 md:p-4 hover:shadow-sm transition-all cursor-pointer"
                 >
-                  <div className="h-32 rounded-lg mb-3 flex items-center justify-center overflow-hidden bg-gray-100">
+                  <div className="h-24 md:h-32 rounded-lg mb-2 md:mb-3 flex items-center justify-center overflow-hidden bg-gray-100">
                     <img
                       src={product.image}
                       alt={product.name}
                       className="w-full h-full object-cover"
                     />
                   </div>
-                  <h4 className="font-bold text-black text-xs mb-1">
+                  <h4 className="font-bold text-black text-xs md:text-xs mb-1">
                     {product.name}
                   </h4>
                   <p className="text-xs text-gray-600 mb-2 font-medium">
                     {product.series}
                   </p>
-                  <p className="text-base font-bold text-black">
+                  <p className="text-sm md:text-base font-bold text-black">
                     {product.price}
                     <span className="text-xs text-gray-500 ml-1 font-normal">
                       {product.period}
@@ -194,12 +210,12 @@ export default function Home() {
             </div>
 
             {/* Red accent line */}
-            <div className="h-0.5 bg-red-600 w-8 mt-4"></div>
+            <div className="h-0.5 bg-red-600 w-8 mt-3 md:mt-4"></div>
           </section>
 
           {/* Explore Vouchers Section */}
           <section className="mb-8">
-            <h3 className="text-lg font-bold text-black mb-1">
+            <h3 className="text-lg md:text-lg font-bold text-black mb-1">
               Explore Vouchers
             </h3>
             <p className="text-gray-600 text-xs font-medium">
@@ -212,21 +228,21 @@ export default function Home() {
       {/* Chat Button */}
       <button
         onClick={() => setShowChat(!showChat)}
-        className="fixed bottom-6 right-6 bg-red-600 text-white rounded-full p-3 shadow-lg hover:bg-red-700 transition-all duration-200 flex items-center gap-1 font-semibold z-50"
+        className="fixed bottom-6 right-4 md:right-6 bg-red-600 text-white rounded-full p-3 shadow-lg hover:bg-red-700 transition-all duration-200 flex items-center gap-1 font-semibold z-40"
       >
         {showChat ? (
           <X size={20} />
         ) : (
           <>
             <MessageCircle size={20} />
-            <span className="text-xs">Chat with us</span>
+            <span className="text-xs hidden sm:inline">Chat with us</span>
           </>
         )}
       </button>
 
       {/* Chat Panel */}
       {showChat && (
-        <div className="fixed bottom-24 right-6 bg-white border border-gray-200 rounded-lg shadow-xl p-4 w-72 z-50">
+        <div className="fixed bottom-20 right-4 md:right-6 bg-white border border-gray-200 rounded-lg shadow-xl p-4 w-72 md:w-80 z-40">
           <div className="flex justify-between items-center mb-3">
             <h4 className="font-bold text-black text-sm">Having trouble?</h4>
             <button
