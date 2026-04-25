@@ -89,27 +89,32 @@ export default function HomeEn() {
               {
                 icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
                 label: "Update My Info",
+                href: "/myooredoo/index.html",
               },
               {
                 icon: "/manus-storage/payment_icon_034f944b.svg",
                 label: "Pay Bill",
+                href: "/myooredoo/index.html",
               },
               {
                 icon: "/manus-storage/kuwait_51_icon_new_b68a3967.png",
                 label: "Kuwait 51",
+                href: "/myooredoo/index.html",
               },
               {
                 icon: "/manus-storage/recharge_icon_127b65ef.svg",
                 label: "Recharge",
+                href: "/myooredoo/index.html",
               },
             ].map((item) => (
-              <div
+              <a
                 key={item.label}
-                className="flex-1 flex flex-col items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
+                href={item.href}
+                className="flex-1 flex flex-col items-center gap-2 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer no-underline"
               >
                 <img src={item.icon} alt={item.label} className="w-8 h-8" />
                 <p className="text-xs font-medium text-gray-800 text-center">{item.label}</p>
-              </div>
+              </a>
             ))}
           </div>
         </section>
