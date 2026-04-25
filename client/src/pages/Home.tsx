@@ -49,13 +49,7 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 flex flex-col pb-24" dir="rtl">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-4 text-center sticky top-0 z-30">
-        <h1 className="text-2xl font-bold text-black mb-1">مرحبا</h1>
-        <p className="text-sm text-gray-700">
-          مستخدم Ooredoo؟{" "}
-          <button className="text-red-600 font-semibold hover:underline">
-            تسجيل الدخول
-          </button>
-        </p>
+        <h1 className="text-2xl font-bold text-black">مرحبا مستخدم Ooredoo</h1>
       </header>
 
       {/* Main Content Area */}
