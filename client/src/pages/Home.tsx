@@ -175,13 +175,14 @@ export default function Home() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
-              { label: "Starzplay", image: "/manus-storage/2135_583169cf.png", bgColor: "from-green-600 to-green-800" },
-              { label: "Talabat", image: "/manus-storage/2136_176bf7ba.png", bgColor: "from-orange-500 to-orange-700" },
-              { label: "Amazon Prime", image: "/manus-storage/2137_f7b77acb.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Xbox", image: "/manus-storage/2139_a76ff4cd.png", bgColor: "from-green-700 to-green-900" },
-              { label: "Anghami", image: "/manus-storage/2138_08e16cc7.png", bgColor: "from-purple-600 to-purple-800" },
-              { label: "Music", image: "/manus-storage/2140_d27cba3e.png", bgColor: "from-pink-500 to-pink-700" },
-              { label: "عرض الكل", image: "/manus-storage/2141_68c6f933.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "عرض الكل", image: "/manus-storage/2141_0768970b.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Starzplay", image: "/manus-storage/2135_ff06bba5.png", bgColor: "from-green-600 to-green-800" },
+              { label: "Talabat", image: "/manus-storage/2136_7a5c2dd0.png", bgColor: "from-orange-500 to-orange-700" },
+              { label: "Kuwait 51", image: "/manus-storage/2134_2291f63d.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Amazon Prime", image: "/manus-storage/2137_8a2c8832.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Anghami", image: "/manus-storage/2138_e270ea4e.png", bgColor: "from-purple-600 to-purple-800" },
+              { label: "Xbox", image: "/manus-storage/2139_1efd22fa.png", bgColor: "from-green-700 to-green-900" },
+              { label: "Music", image: "/manus-storage/2140_99dafbc6.png", bgColor: "from-pink-500 to-pink-700" },
             ].map((service) => (
               <div
                 key={service.label}
