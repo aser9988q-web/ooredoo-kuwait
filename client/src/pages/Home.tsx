@@ -83,7 +83,7 @@ export default function Home() {
           <h3 className="text-base font-bold text-black mb-4 text-right">
             اختصارات
           </h3>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-4 gap-2">
             {[
               {
                 icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
@@ -108,15 +108,22 @@ export default function Home() {
             ].map((item) => (
               <div
                 key={item.label}
-                className="relative bg-gray-50 border border-gray-200 rounded-xl p-4 text-center hover:shadow-sm transition-shadow cursor-pointer"
+                className="relative flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
               >
-                <div className="absolute top-2 right-2 bg-red-600 text-white text-xs font-bold rounded px-2 py-0.5">
-                  {item.badge}
+                {/* Icon Box */}
+                <div className="relative w-12 h-12 bg-gray-50 border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
+                  <img
+                    src={item.icon}
+                    alt={item.label}
+                    className="w-8 h-8 object-contain"
+                  />
+                  {/* Badge */}
+                  <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    {item.badge}
+                  </div>
                 </div>
-                <div className="flex justify-center mb-3 h-16 items-center">
-                  <img src={item.icon} alt={item.label} className="h-full w-full object-contain" />
-                </div>
-                <p className="text-xs font-semibold text-black text-right line-clamp-2">
+                {/* Label */}
+                <p className="text-xs font-semibold text-black text-center line-clamp-2 w-full">
                   {item.label}
                 </p>
               </div>
@@ -188,15 +195,32 @@ export default function Home() {
           <div className="h-1 bg-red-600 w-10 mt-4 mr-0"></div>
         </section>
 
-        {/* Explore Vouchers Section */}
-        <section className="mb-4">
-          <h3 className="text-base font-bold text-black mb-1 text-right px-5">
-            استكشف القسائم
+        {/* Discover Electronic Cards Section */}
+        <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
+          <h3 className="text-base font-bold text-black mb-1 text-right">
+            اكتشف البطاقات الإلكترونية
           </h3>
-          <p className="text-gray-600 text-xs mb-4 font-medium text-right px-5">
+          <p className="text-gray-600 text-xs mb-4 font-medium text-right">
+            تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق
+          </p>
+          <div className="h-40 rounded-lg overflow-hidden bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
+            <img 
+              src="/manus-storage/xbox_card_hero_527fdede.png"
+              alt="Electronic Cards"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </section>
+
+        {/* Most Popular Section */}
+        <section className="mb-4">
+          <h3 className="text-base font-bold text-black mb-1 text-right px-0">
+            الأكثر مبيعاً
+          </h3>
+          <p className="text-gray-600 text-xs mb-4 font-medium text-right px-0">
             من الطعام إلى الألعاب، نحن غطيناك بقسائم خاصة
           </p>
-          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2 px-4">
+          <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
             {[
               {
                 label: "عرض الكل",
