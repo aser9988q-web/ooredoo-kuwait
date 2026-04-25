@@ -252,18 +252,15 @@ export default function Home() {
           ].map((service) => (
             <div
               key={service.label}
-              className="flex-shrink-0 w-40 h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-all hover:scale-105 relative group flex items-center justify-center"
+              className="flex-shrink-0 w-40 h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-all hover:scale-105 relative group"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor}`}></div>
               <img
                 src={service.image}
                 alt={service.label}
-                className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+                className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
               />
-              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
-              <p className="text-white text-xs font-bold text-center relative z-10 px-2">
-                {service.label}
-              </p>
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors"></div>
             </div>
           ))}
           </div>
