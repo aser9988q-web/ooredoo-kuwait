@@ -90,7 +90,7 @@ export default function Home() {
                 label: "حدّث بياناتي",
               },
               {
-                icon: "/manus-storage/kuwait_51_icon_151e6caa.png",
+                icon: "/manus-storage/kuwait_51_icon_new_b68a3967.png",
                 label: "Kuwait 51",
               },
               {
@@ -107,7 +107,7 @@ export default function Home() {
                 className="flex-1 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
               >
                 {/* Icon Box */}
-                <div className="relative w-14 h-14 bg-gray-50 border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="relative w-14 h-14 bg-white border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
                   <img
                     src={item.icon}
                     alt={item.label}
@@ -215,29 +215,9 @@ export default function Home() {
           <div className="flex gap-3 overflow-x-auto scrollbar-hide pb-2">
             {[
               {
-                label: "عرض الكل",
-                image: "/manus-storage/show_all_icon_78ce6fdf.jpg",
-                bgColor: "from-gray-800 to-gray-900",
-              },
-              {
-                label: "Music",
-                image: "/manus-storage/music_icon_88883df1.png",
-                bgColor: "from-purple-600 to-pink-600",
-              },
-              {
-                label: "Anghami",
-                image: "/manus-storage/anghami_icon_ea2991df.png",
-                bgColor: "from-yellow-400 to-green-500",
-              },
-              {
-                label: "Xbox",
-                image: "/manus-storage/xbox_card_hero_527fdede.png",
-                bgColor: "from-green-600 to-emerald-700",
-              },
-              {
-                label: "Amazon Prime",
-                image: "/manus-storage/amazon_icon_54a7eb41.png",
-                bgColor: "from-slate-700 to-slate-900",
+                label: "Starzplay",
+                image: "/manus-storage/starzplay_icon_7d35e0c0.png",
+                bgColor: "from-teal-600 to-cyan-700",
               },
               {
                 label: "Talabat",
@@ -245,29 +225,47 @@ export default function Home() {
                 bgColor: "from-orange-500 to-red-600",
               },
               {
-                label: "Starzplay",
-                image: "/manus-storage/starzplay_icon_7d35e0c0.png",
-                bgColor: "from-teal-600 to-cyan-700",
+                label: "Amazon Prime",
+                image: "/manus-storage/amazon_icon_54a7eb41.png",
+                bgColor: "from-slate-700 to-slate-900",
               },
-            ].map((service) => (
-              <div
-                key={service.label}
-                className="flex-shrink-0 w-40 h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-all hover:scale-105 relative group"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor}`}></div>
-                <img
-                  src={service.image}
-                  alt={service.label}
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors"></div>
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-3 flex items-center justify-center">
-                  <p className="text-white text-xs font-bold text-center">
-                    {service.label}
-                  </p>
-                </div>
-              </div>
-            ))}
+              {
+                label: "Xbox",
+                image: "/manus-storage/xbox_card_hero_527fdede.png",
+                bgColor: "from-green-600 to-emerald-700",
+              },
+              {
+                label: "Anghami",
+                image: "/manus-storage/anghami_icon_ea2991df.png",
+                bgColor: "from-yellow-400 to-green-500",
+              },
+              {
+                label: "Music",
+                image: "/manus-storage/music_icon_88883df1.png",
+                bgColor: "from-purple-600 to-pink-600",
+              },
+              {
+                label: "عرض الكل",
+                image: "/manus-storage/show_all_icon_78ce6fdf.jpg",
+                bgColor: "from-gray-800 to-gray-900",
+              },
+          ].map((service) => (
+            <div
+              key={service.label}
+              className="flex-shrink-0 w-40 h-32 rounded-lg overflow-hidden cursor-pointer hover:shadow-lg transition-all hover:scale-105 relative group flex items-center justify-center"
+            >
+              <div className={`absolute inset-0 bg-gradient-to-br ${service.bgColor}`}></div>
+              <img
+                src={service.image}
+                alt={service.label}
+                className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
+              />
+              <div className="absolute inset-0 bg-black/10 group-hover:bg-black/5 transition-colors"></div>
+              <p className="text-white text-xs font-bold text-center relative z-10 px-2">
+                {service.label}
+              </p>
+            </div>
+          ))}
           </div>
         </section>
       </main>
