@@ -35,28 +35,28 @@ export default function Home() {
       series: "Galaxy S26 Series",
       price: "KD 33",
       period: "/month",
-      image: "/manus-storage/samsung_s26_ultra_0c176c4d.jpg",
+      image: "/manus-storage/samsung_s26_ultra_new_7ec387ff.jpg",
     },
     {
       name: "Samsung S26 Plus",
       series: "Galaxy S26 Series",
       price: "KD 26",
       period: "/month",
-      image: "/manus-storage/samsung_s26_plus_721a6428.jpg",
+      image: "/manus-storage/samsung_s26_purple_69f443f8.jpg",
     },
     {
       name: "Samsung Galaxy Z Fold 7",
       series: "The ultimate foldable powered by Galaxy AI",
       price: "KD 39",
       period: "/month",
-      image: "/manus-storage/samsung_fold6_01266d50.jpg",
+      image: "/manus-storage/samsung_fold7_new_d4ff44d4.png",
     },
     {
       name: "Samsung S26",
       series: "Galaxy S26 Series",
       price: "KD 24",
       period: "/month",
-      image: "/manus-storage/samsung_s26_normal_5ab82e36.jpg",
+      image: "/manus-storage/samsung_s26_white_b27c32bc.jpg",
     },
   ];
 
@@ -194,8 +194,13 @@ export default function Home() {
           {/* Samsung Banner */}
           <section className="mb-4 md:mb-6">
             <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 rounded-lg overflow-hidden h-32 md:h-40 flex items-center justify-center relative">
-              <div className="text-white text-center">
-                <p className="text-xs md:text-xs font-semibold opacity-75 mb-1">Galaxy S26 Series</p>
+              <img 
+                src="/manus-storage/samsung_s26_series_banner_e38fcde5.jpg"
+                alt="Galaxy S26 Series"
+                className="absolute inset-0 w-full h-full object-cover opacity-60"
+              />
+              <div className="text-white text-center relative z-10">
+                <p className="text-xs md:text-xs font-semibold opacity-90 mb-1">Galaxy S26 Series</p>
                 <p className="text-xl md:text-2xl font-bold">Galaxy AI</p>
               </div>
             </div>
@@ -226,7 +231,7 @@ export default function Home() {
                       <img
                         src={product.image}
                         alt={product.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-contain"
                       />
                     </div>
                     <h4 className="font-bold text-black text-xs md:text-xs mb-1 line-clamp-2">
