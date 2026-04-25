@@ -11,7 +11,7 @@ import {
 import { useState, useRef } from "react";
 import { Link } from "wouter";
 
-export default function Home() {
+export default function HomeEn() {
   const [showChat, setShowChat] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
 
@@ -20,77 +20,77 @@ export default function Home() {
       name: "Samsung S26 Ultra",
       series: "Galaxy S26 Series",
       price: "KD 33",
-      period: "/شهر",
+      period: "/month",
       image: "/manus-storage/samsung_s26_ultra_new_7ec387ff.jpg",
     },
     {
       name: "Samsung S26 Plus",
       series: "Galaxy S26 Series",
       price: "KD 26",
-      period: "/شهر",
+      period: "/month",
       image: "/manus-storage/samsung_s26_purple_69f443f8.jpg",
     },
     {
       name: "Samsung Galaxy Z Fold 7",
-      series: "الهاتف الذكي القابل للطي الأقوى بتقنية Galaxy AI",
+      series: "The ultimate foldable powered by Galaxy AI",
       price: "KD 39",
-      period: "/شهر",
+      period: "/month",
       image: "/manus-storage/samsung_fold7_new_d4ff44d4.png",
     },
     {
       name: "Samsung S26",
       series: "Galaxy S26 Series",
       price: "KD 24",
-      period: "/شهر",
+      period: "/month",
       image: "/manus-storage/samsung_s26_white_b27c32bc.jpg",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col pb-24 rtl">
+    <div className="min-h-screen bg-gray-50 flex flex-col pb-24 ltr">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-4 py-4 flex justify-between items-center sticky top-0 z-30">
-        <Link href="/en" className="text-sm font-semibold text-red-600 hover:text-red-700 px-3 py-1 border border-red-600 rounded-full">
-          EN
-        </Link>
-        <h1 className="text-2xl font-bold text-black flex-1 text-center">مرحبا مستخدم Ooredoo</h1>
         <div className="w-12"></div>
+        <h1 className="text-2xl font-bold text-black flex-1 text-center">Hello Ooredoo User</h1>
+        <Link href="/" className="text-sm font-semibold text-red-600 hover:text-red-700 px-3 py-1 border border-red-600 rounded-full">
+          AR
+        </Link>
       </header>
 
       {/* Main Content Area */}
       <main className="flex-1 px-4 py-4 overflow-y-auto">
         {/* Upgrade Section */}
         <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
-          <h2 className="text-2xl font-bold text-black mb-4 text-right leading-tight">
-            ظهر عالمك
+          <h2 className="text-2xl font-bold text-black mb-4 text-left leading-tight">
+            Upgrade Your World
           </h2>
           <div className="flex flex-col gap-3">
             <Button className="bg-black text-white rounded-full w-full py-3 font-semibold hover:bg-gray-900 text-sm">
-              انضم إلينا
+              Join Us
             </Button>
             <Button
               variant="outline"
               className="border-2 border-gray-400 text-gray-700 rounded-full w-full py-3 font-semibold hover:bg-gray-50 text-sm"
             >
-              إضافة رقم حالي
+              Add Existing Line
             </Button>
           </div>
         </section>
 
         {/* Shortcuts Section */}
         <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
-          <h3 className="text-base font-bold text-black mb-4 text-right">
-            اختصارات
+          <h3 className="text-base font-bold text-black mb-4 text-left">
+            Shortcuts
           </h3>
           <div className="flex justify-between gap-3">
             {[
               {
                 icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
-                label: "حدّث بياناتي",
+                label: "Update My Info",
               },
               {
                 icon: "/manus-storage/payment_icon_034f944b.svg",
-                label: "دفع الفاتورة",
+                label: "Pay Bill",
               },
               {
                 icon: "/manus-storage/kuwait_51_icon_new_b68a3967.png",
@@ -98,7 +98,7 @@ export default function Home() {
               },
               {
                 icon: "/manus-storage/recharge_icon_127b65ef.svg",
-                label: "إعادة التعبئة",
+                label: "Recharge",
               },
             ].map((item) => (
               <div
@@ -123,9 +123,9 @@ export default function Home() {
 
         {/* Products Section */}
         <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
-          <div className="mb-4 text-right">
-            <h2 className="text-xl font-bold text-black mb-1">أجهزة SAMSUNG AI بسلسلة Galaxy S26</h2>
-            <p className="text-sm text-gray-600">هواتف ذكية بتقنية 5G موضوعة بالذاكرة الاصطناعية بسعر خاص</p>
+          <div className="mb-4 text-left">
+            <h2 className="text-xl font-bold text-black mb-1">SAMSUNG AI Devices Galaxy S26 Series</h2>
+            <p className="text-sm text-gray-600">Smart phones with 5G technology powered by artificial intelligence at special prices</p>
           </div>
           <div
             ref={carouselRef}
@@ -156,9 +156,9 @@ export default function Home() {
 
         {/* Digital Cards Section */}
         <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
-          <div className="mb-4 text-right">
-            <h2 className="text-xl font-bold text-black mb-1">اكتشف البطاقات الالكترونية</h2>
-            <p className="text-sm text-gray-600">تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق</p>
+          <div className="mb-4 text-left">
+            <h2 className="text-xl font-bold text-black mb-1">Discover Digital Cards</h2>
+            <p className="text-sm text-gray-600">Enjoy an amazing experience with digital cards exclusively through the app</p>
           </div>
           <img
             src="/manus-storage/xbox_banner_2144.png"
@@ -169,9 +169,9 @@ export default function Home() {
 
         {/* Most Sold Section */}
         <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
-          <div className="mb-4 text-right">
-            <h2 className="text-xl font-bold text-black mb-1">الأكثر مبيعاً</h2>
-            <p className="text-sm text-gray-600">من الخدمات والتطبيقات، تجربة حصرياً عبر بطاقاتنا الالكترونية</p>
+          <div className="mb-4 text-left">
+            <h2 className="text-xl font-bold text-black mb-1">Most Sold</h2>
+            <p className="text-sm text-gray-600">From services and applications, exclusively through our digital cards</p>
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
@@ -181,7 +181,7 @@ export default function Home() {
               { label: "Xbox", image: "/manus-storage/xbox_icon_m3n4o5p6.png", bgColor: "from-green-700 to-green-900" },
               { label: "Anghami", image: "/manus-storage/anghami_icon_q7r8s9t0.png", bgColor: "from-purple-600 to-purple-800" },
               { label: "Music", image: "/manus-storage/music_icon_u1v2w3x4.png", bgColor: "from-pink-500 to-pink-700" },
-              { label: "عرض الكل", image: "/manus-storage/show_all_icon_78ce6fdf.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Show All", image: "/manus-storage/show_all_icon_78ce6fdf.jpg", bgColor: "from-gray-800 to-gray-900" },
             ].map((service) => (
               <div
                 key={service.label}
@@ -204,23 +204,23 @@ export default function Home() {
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20 z-20">
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <MoreHorizontal size={24} />
-          <span className="text-xs">المزيد</span>
+          <span className="text-xs">More</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <Settings size={24} />
-          <span className="text-xs">إدارة</span>
+          <span className="text-xs">Manage</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <CreditCard size={24} />
-          <span className="text-xs">دفع</span>
+          <span className="text-xs">Pay</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <ShoppingCart size={24} />
-          <span className="text-xs">المنجر</span>
+          <span className="text-xs">Store</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
           <HomeIcon size={24} />
-          <span className="text-xs">الرئيسية</span>
+          <span className="text-xs">Home</span>
         </button>
       </nav>
 
@@ -235,7 +235,7 @@ export default function Home() {
       {/* Chat Panel */}
       {showChat && (
         <div className="fixed bottom-32 right-4 bg-white rounded-lg shadow-lg p-4 w-80 z-10">
-          <p className="text-sm text-gray-700">تواجه مشكلة؟</p>
+          <p className="text-sm text-gray-700">Having a problem?</p>
         </div>
       )}
     </div>
