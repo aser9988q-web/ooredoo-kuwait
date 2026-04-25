@@ -83,44 +83,36 @@ export default function Home() {
           <h3 className="text-base font-bold text-black mb-4 text-right">
             اختصارات
           </h3>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="flex justify-between gap-3">
             {[
               {
                 icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
                 label: "حدّث بياناتي",
-                badge: "51",
               },
               {
                 icon: "/manus-storage/kuwait_51_icon_151e6caa.png",
                 label: "Kuwait 51",
-                badge: "51",
               },
               {
                 icon: "/manus-storage/payment_icon_034f944b.svg",
                 label: "دفع الفاتورة",
-                badge: "51",
               },
               {
                 icon: "/manus-storage/recharge_icon_127b65ef.svg",
                 label: "إعادة التعبئة",
-                badge: "51",
               },
             ].map((item) => (
               <div
                 key={item.label}
-                className="relative flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
+                className="flex-1 flex flex-col items-center gap-2 cursor-pointer hover:opacity-80 transition-opacity"
               >
                 {/* Icon Box */}
-                <div className="relative w-12 h-12 bg-gray-50 border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
+                <div className="relative w-14 h-14 bg-gray-50 border border-gray-300 rounded-lg flex items-center justify-center overflow-hidden">
                   <img
                     src={item.icon}
                     alt={item.label}
                     className="w-8 h-8 object-contain"
                   />
-                  {/* Badge */}
-                  <div className="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                    {item.badge}
-                  </div>
                 </div>
                 {/* Label */}
                 <p className="text-xs font-semibold text-black text-center line-clamp-2 w-full">
