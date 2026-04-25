@@ -161,7 +161,7 @@ export default function Home() {
             <p className="text-sm text-gray-600">تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق</p>
           </div>
           <img
-            src="/manus-storage/xbox_card_hero_ef55e39b.png"
+            src="/manus-storage/xbox_card_hero_e84c9825.png"
             alt="Digital Cards"
             className="w-full h-40 object-cover rounded-lg"
           />
@@ -175,13 +175,13 @@ export default function Home() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
-              { label: "Starzplay", image: "/manus-storage/starzplay_icon_a1b2c3d4.png", bgColor: "from-green-600 to-green-800" },
-              { label: "Talabat", image: "/manus-storage/talabat_icon_e5f6g7h8.png", bgColor: "from-orange-500 to-orange-700" },
-              { label: "Amazon Prime", image: "/manus-storage/amazon_icon_i9j0k1l2.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Xbox", image: "/manus-storage/xbox_icon_m3n4o5p6.png", bgColor: "from-green-700 to-green-900" },
-              { label: "Anghami", image: "/manus-storage/anghami_icon_q7r8s9t0.png", bgColor: "from-purple-600 to-purple-800" },
-              { label: "Music", image: "/manus-storage/music_icon_u1v2w3x4.png", bgColor: "from-pink-500 to-pink-700" },
-              { label: "عرض الكل", image: "/manus-storage/show_all_icon_78ce6fdf.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Starzplay", image: "/manus-storage/starzplay_icon_35c88d5d.png", bgColor: "from-green-600 to-green-800" },
+              { label: "Talabat", image: "/manus-storage/talabat_icon_bab98dda.png", bgColor: "from-orange-500 to-orange-700" },
+              { label: "Amazon Prime", image: "/manus-storage/amazon_icon_0216d714.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Xbox", image: "/manus-storage/xbox_icon_7164fc98.png", bgColor: "from-green-700 to-green-900" },
+              { label: "Anghami", image: "/manus-storage/anghami_icon_96b79e53.png", bgColor: "from-purple-600 to-purple-800" },
+              { label: "Music", image: "/manus-storage/music_icon_d27cba3e.png", bgColor: "from-pink-500 to-pink-700" },
+              { label: "عرض الكل", image: "/manus-storage/show_all_icon_9f373766.jpg", bgColor: "from-gray-800 to-gray-900" },
             ].map((service) => (
               <div
                 key={service.label}
