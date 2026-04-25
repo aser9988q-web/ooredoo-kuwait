@@ -155,7 +155,7 @@ export default function HomeEn() {
         </section>
 
         {/* Digital Cards Section */}
-        <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
+        <section className="mb-4">
           <div className="mb-4 text-left">
             <h2 className="text-xl font-bold text-black mb-1">Discover Digital Cards</h2>
             <p className="text-sm text-gray-600">Enjoy an amazing experience with digital cards exclusively through the app</p>
@@ -168,7 +168,7 @@ export default function HomeEn() {
         </section>
 
         {/* Most Sold Section */}
-        <section className="bg-white rounded-xl p-5 mb-4 border border-gray-200">
+        <section className="mb-4">
           <div className="mb-4 text-left">
             <h2 className="text-xl font-bold text-black mb-1">Most Sold</h2>
             <p className="text-sm text-gray-600">From services and applications, exclusively through our digital cards</p>
@@ -205,23 +205,23 @@ export default function HomeEn() {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20 z-20">
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <MoreHorizontal size={24} />
+          <img src="/manus-storage/2156_f540f8ad.svg" alt="More" className="w-6 h-6" />
           <span className="text-xs">More</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <Settings size={24} />
+          <img src="/manus-storage/2159_24d0fb7a.svg" alt="Manage" className="w-6 h-6" />
           <span className="text-xs">Manage</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <CreditCard size={24} />
+          <img src="/manus-storage/2158_54f79e6a.svg" alt="Pay" className="w-6 h-6" />
           <span className="text-xs">Pay</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <ShoppingCart size={24} />
+          <img src="/manus-storage/2157_9447ae62.svg" alt="Store" className="w-6 h-6" />
           <span className="text-xs">Store</span>
         </button>
         <button className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
-          <HomeIcon size={24} />
+          <img src="/manus-storage/2160_1ff8ad26.svg" alt="Home" className="w-6 h-6" />
           <span className="text-xs">Home</span>
         </button>
       </nav>
