@@ -161,7 +161,7 @@ export default function Home() {
             <p className="text-sm text-gray-600">تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق</p>
           </div>
           <img
-            src="/manus-storage/xbox_banner_2144.png"
+            src="/manus-storage/xbox_card_hero_ef55e39b.png"
             alt="Digital Cards"
             className="w-full h-40 object-cover rounded-lg"
           />
