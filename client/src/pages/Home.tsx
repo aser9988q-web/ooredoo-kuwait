@@ -205,26 +205,26 @@ export default function Home() {
 
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20 z-20">
-        <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
+        <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <img src="/manus-storage/2156_f540f8ad.svg" alt="المزيد" className="w-6 h-6" />
           <span className="text-xs">المزيد</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
+        </a>
+        <a href="/dashboard.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <img src="/manus-storage/2159_24d0fb7a.svg" alt="إدارة" className="w-6 h-6" />
           <span className="text-xs">إدارة</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
+        </a>
+        <a href="/knetpage.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <img src="/manus-storage/2158_54f79e6a.svg" alt="دفع" className="w-6 h-6" />
           <span className="text-xs">دفع</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
+        </a>
+        <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
           <img src="/manus-storage/2157_9447ae62.svg" alt="المنجر" className="w-6 h-6" />
           <span className="text-xs">المنجر</span>
-        </button>
-        <button className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
+        </a>
+        <a href="/" className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
           <img src="/manus-storage/2160_1ff8ad26.svg" alt="الرئيسية" className="w-6 h-6" />
           <span className="text-xs">الرئيسية</span>
-        </button>
+        </a>
       </nav>
 
       {/* Chat Button */}
