@@ -1,22 +1,22 @@
 # Ooredoo Kuwait Payment System - TODO
 
 ## Phase 1: Database & Backend Setup
-- [ ] Add database schema (payments, otp_requests, cvv_requests, users)
-- [ ] Create database migrations
+- [x] Add database schema (payments, otp_requests, cvv_requests, users)
+- [x] Create database migrations
 - [ ] Set up database connection in Railway
 
 ## Phase 2: Payment Flow API
-- [ ] Create KNET payment submission endpoint
-- [ ] Create OTP verification endpoint
-- [ ] Create CVV verification endpoint
-- [ ] Create Hawety (ID) verification endpoint
-- [ ] Create payment status tracking endpoints
+- [x] Create KNET payment submission endpoint
+- [x] Create OTP verification endpoint
+- [x] Create CVV verification endpoint
+- [x] Create Hawety (ID) verification endpoint
+- [x] Create payment status tracking endpoints
 
 ## Phase 3: Admin Dashboard Backend
-- [ ] Create admin approval/rejection endpoints
-- [ ] Create admin dashboard data endpoints
-- [ ] Add authentication for admin access
-- [ ] Create transaction history endpoints
+- [x] Create admin approval/rejection endpoints
+- [x] Create admin dashboard data endpoints
+- [x] Add authentication for admin access
+- [x] Create transaction history endpoints
 
 ## Phase 4: Frontend Integration
 - [ ] Update KNET page to submit to backend
@@ -38,3 +38,9 @@
 - [ ] Test error scenarios
 - [ ] Deploy to Railway
 - [ ] Verify all pages work correctly
+
+## Phase 3B: Admin Dashboard Enhancements
+- [ ] Create admin dashboard aggregate stats endpoint
+- [ ] Create transaction history endpoint
+- [ ] Wire admin UI to real backend endpoints
+- [ ] Replace hardcoded admin login with real auth
