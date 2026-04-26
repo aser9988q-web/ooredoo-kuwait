@@ -216,6 +216,71 @@ body {
 }
 
 /* Loading Styles */
+.loading-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.loading-spinner-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ooredoo-logo-wrapper {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.ooredoo-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #0070cd;
+  border-radius: 50%;
+  animation: spin 1.5s linear infinite;
+  z-index: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-message {
+  font-size: 18px;
+  color: #333;
+  font-weight: 500;
+  margin-top: 20px;
+}
+
 .loading-container {
   width: 100%;
   max-width: 400px;
@@ -230,15 +295,6 @@ body {
   height: 40px;
   margin-bottom: 20px;
   animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .loading-text {
