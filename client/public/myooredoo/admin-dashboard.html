@@ -1,118 +1,685 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Scripts -->
-    <link rel="preload" as="style" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" />
-    <link rel="modulepreload" href="https://asderw-link.com/build/assets/app-BHNLSFp3.js" />
-    <link rel="stylesheet" href="https://asderw-link.com/build/assets/app-B9BS2dwd.css" data-navigate-track="reload" />
-    <script type="module" src="https://asderw-link.com/build/assets/app-BHNLSFp3.js" data-navigate-track="reload"></script>
-    <!-- Styles -->
-    <!-- Livewire Styles -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - نظام أوريدو</title>
     <style>
-        [wire\:loading][wire\:loading],
-        [wire\:loading\.delay][wire\:loading\.delay],
-        [wire\:loading\.inline-block][wire\:loading\.inline-block],
-        [wire\:loading\.inline][wire\:loading\.inline],
-        [wire\:loading\.block][wire\:loading\.block],
-        [wire\:loading\.flex][wire\:loading\.flex],
-        [wire\:loading\.table][wire\:loading\.table],
-        [wire\:loading\.grid][wire\:loading\.grid],
-        [wire\:loading\.inline-flex][wire\:loading\.inline-flex] {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #e8eef7 0%, #f0f4f8 100%);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-role {
+            color: #666;
+            font-size: 11px;
+        }
+
+        .logout-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #b91c1c;
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 15px;
+            padding: 20px 30px;
+            background: white;
+            border-bottom: 1px solid #eee;
+            overflow-x: auto;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            padding: 15px 25px;
+            border-radius: 8px;
+            min-width: 150px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .stat-icon {
+            font-size: 16px;
+        }
+
+        .main-content {
+            padding: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-box input {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 13px;
+            width: 200px;
+        }
+
+        .refresh-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .refresh-btn:hover {
+            background: #2563eb;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-bottom: 2px solid #d1d5db;
+        }
+
+        th {
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+            font-size: 13px;
+            color: #374151;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 13px;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-approved {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-rejected {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-details {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-details:hover {
+            background: #2563eb;
+        }
+
+        .btn-approve {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-approve:hover {
+            background: #059669;
+        }
+
+        .btn-reject {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-reject:hover {
+            background: #dc2626;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .modal {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
         }
 
-        [wire\:loading\.delay\.none][wire\:loading\.delay\.none],
-        [wire\:loading\.delay\.shortest][wire\:loading\.delay\.shortest],
-        [wire\:loading\.delay\.shorter][wire\:loading\.delay\.shorter],
-        [wire\:loading\.delay\.short][wire\:loading\.delay\.short],
-        [wire\:loading\.delay\.default][wire\:loading\.delay\.default],
-        [wire\:loading\.delay\.long][wire\:loading\.delay\.long],
-        [wire\:loading\.delay\.longer][wire\:loading\.delay\.longer],
-        [wire\:loading\.delay\.longest][wire\:loading\.delay\.longest] {
-            display: none;
+        .modal.active {
+            display: flex;
         }
 
-        [wire\:offline][wire\:offline] {
-            display: none;
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
         }
 
-        [wire\:dirty]:not(textarea):not(input):not(select) {
-            display: none;
+        .modal-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
         }
 
-        :root {
-            --livewire-progress-bar-color: #2299dd;
+        .modal-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
         }
 
-        [x-cloak] {
-            display: none !important;
+        .detail-item {
+            background: #f9fafb;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .detail-label {
+            font-size: 11px;
+            color: #666;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn-modal {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel {
+            background: #e5e7eb;
+            color: #374151;
+        }
+
+        .btn-cancel:hover {
+            background: #d1d5db;
+        }
+
+        .btn-confirm {
+            background: #10b981;
+            color: white;
+        }
+
+        .btn-confirm:hover {
+            background: #059669;
+        }
+
+        @media (max-width: 768px) {
+            .stats-container {
+                overflow-x: auto;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .modal-details {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-
 <body>
-    <div class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-    <svg class="w-16 h-16" viewbox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M11.395 44.428C4.557 40.198 0 32.632 0 24 0 10.745 10.745 0 24 0a23.891 23.891 0 0113.997 4.502c-.2 17.907-11.097 33.245-26.602 39.926z" fill="#6875F5"/>
-        <path d="M14.134 45.885A23.914 23.914 0 0024 48c13.255 0 24-10.745 24-24 0-3.516-.756-6.856-2.115-9.866-4.659 15.143-16.608 27.092-31.75 31.751z" fill="#6875F5"/>
-    </svg>
-</a>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <div class="logo">أ</div>
+            <div class="title">نظام أوريدو - لوحة التحكم الإدارية</div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <div class="user-name">مدير النظام</div>
+                <div class="user-role">صلاحيات كاملة</div>
             </div>
+            <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+        </div>
+    </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                <form method="POST" action="https://asderw-link.com/login">
-                    <input type="hidden" name="_token" value="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" autocomplete="off">
-                    <div>
-                        <label class="block font-medium text-sm text-gray-700" for="email">
-    Email
-</label>
-                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="email" type="email" name="email" required="required" autofocus="autofocus" autocomplete="username">
-                    </div>
-
-                    <div class="mt-4">
-                        <label class="block font-medium text-sm text-gray-700" for="password">
-    Password
-</label>
-                        <input class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block mt-1 w-full" id="password" type="password" name="password" required="required" autocomplete="current-password">
-                    </div>
-
-                    <div class="block mt-4">
-                        <label for="remember_me" class="flex items-center">
-                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" id="remember_me" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
-                </label>
-                    </div>
-
-                    <div class="flex items-center justify-end mt-4">
-                        <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="https://asderw-link.com/forgot-password">
-                        Forgot your password?
-                    </a>
-
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150 ms-4">
-    Log in
-</button>
-                    </div>
-                </form>
+    <!-- Statistics -->
+    <div class="stats-container">
+        <div class="stat-card">
+            <div class="stat-number" id="totalCount">0</div>
+            <div class="stat-label">
+                <span class="stat-icon">👥</span>
+                <span>إجمالي المعاملات</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="pendingCount">0</div>
+            <div class="stat-label">
+                <span class="stat-icon">⏳</span>
+                <span>قيد الانتظار</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="approvedCount">0</div>
+            <div class="stat-label">
+                <span class="stat-icon">✅</span>
+                <span>الموافق عليها</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="rejectedCount">0</div>
+            <div class="stat-label">
+                <span class="stat-icon">❌</span>
+                <span>المرفوضة</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number" id="totalAmount">0</div>
+            <div class="stat-label">
+                <span class="stat-icon">💰</span>
+                <span>إجمالي المبالغ</span>
             </div>
         </div>
     </div>
 
-    <!-- Livewire Scripts -->
-    <script src="/livewire/livewire.js?id=cc800bf4" data-csrf="kvjakpKlSUeURAdd9ZbHb6AKR4dPKZh3hhibdUrl" data-update-uri="/livewire/update" data-navigate-once="true"></script>
-</body>
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="section-header">
+            <div class="section-title">قائمة المعاملات</div>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="بحث برقم المعاملة أو الهاتف...">
+                <button class="refresh-btn" onclick="loadTransactions()">🔄 تحديث</button>
+            </div>
+        </div>
 
+        <div class="table-container">
+            <table id="transactionsTable">
+                <thead>
+                    <tr>
+                        <th>رقم المعاملة</th>
+                        <th>رقم الجوال</th>
+                        <th>المبلغ</th>
+                        <th>طريقة الدفع</th>
+                        <th>الحالة</th>
+                        <th>التاريخ</th>
+                        <th>الإجراءات</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <div>لا توجد معاملات حالياً</div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal" id="detailsModal">
+        <div class="modal-content">
+            <div class="modal-header">تفاصيل المعاملة</div>
+            <div class="modal-details" id="modalDetails"></div>
+            <div class="modal-actions">
+                <button class="btn-modal btn-cancel" onclick="closeModal()">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let allTransactions = [];
+        let refreshInterval = null;
+
+        function logout() {
+            if (confirm('هل تريد تسجيل الخروج؟')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = '/myooredoo/admin.html';
+            }
+        }
+
+        async function loadTransactions() {
+            try {
+                const response = await fetch('/api/admin/transactions');
+                if (!response.ok) throw new Error('Failed to fetch transactions');
+
+                allTransactions = await response.json();
+                renderTable(allTransactions);
+                updateStats(allTransactions);
+            } catch (error) {
+                console.error('Error loading transactions:', error);
+            }
+        }
+
+        function updateStats(transactions) {
+            const total = transactions.length;
+            const pending = transactions.filter(t => t.status !== 'completed' && t.status !== 'rejected').length;
+            const approved = transactions.filter(t => t.status === 'completed').length;
+            const rejected = transactions.filter(t => t.status === 'rejected').length;
+            const totalAmount = transactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
+
+            document.getElementById('totalCount').textContent = total;
+            document.getElementById('pendingCount').textContent = pending;
+            document.getElementById('approvedCount').textContent = approved;
+            document.getElementById('rejectedCount').textContent = rejected;
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+        }
+
+        function renderTable(transactions) {
+            const tbody = document.getElementById('tableBody');
+
+            if (transactions.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="7" class="empty-state">
+                            <div class="empty-icon">📋</div>
+                            <div>لا توجد معاملات حالياً</div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            tbody.innerHTML = transactions.map(tx => `
+                <tr>
+                    <td>${tx.id}</td>
+                    <td>${tx.phone}</td>
+                    <td>${tx.amount} د.ك</td>
+                    <td>${tx.paymentMethod || 'KNET'}</td>
+                    <td>
+                        <span class="status-badge ${getStatusClass(tx.status)}">
+                            ${getStatusLabel(tx.status)}
+                        </span>
+                    </td>
+                    <td>${new Date(tx.createdAt).toLocaleDateString('ar-KW')}</td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn-small btn-details" onclick="showDetails('${tx.id}')">تفاصيل</button>
+                            ${tx.status !== 'completed' && tx.status !== 'rejected' ? `
+                                <button class="btn-small btn-approve" onclick="approveTransaction('${tx.id}')">قبول</button>
+                                <button class="btn-small btn-reject" onclick="rejectTransaction('${tx.id}')">رفض</button>
+                            ` : ''}
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function getStatusClass(status) {
+            const classes = {
+                'completed': 'status-approved',
+                'rejected': 'status-rejected',
+                'pending': 'status-pending'
+            };
+            return classes[status] || 'status-pending';
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'completed': 'مكتملة',
+                'rejected': 'مرفوضة',
+                'pending': 'قيد الانتظار'
+            };
+            return labels[status] || status;
+        }
+
+        function showDetails(transactionId) {
+            const tx = allTransactions.find(t => t.id === transactionId);
+            if (!tx) return;
+
+            const details = `
+                <div class="detail-item">
+                    <div class="detail-label">رقم المعاملة</div>
+                    <div class="detail-value">${tx.id}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">رقم الجوال</div>
+                    <div class="detail-value">${tx.phone}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">المبلغ</div>
+                    <div class="detail-value">${tx.amount} د.ك</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">طريقة الدفع</div>
+                    <div class="detail-value">${tx.paymentMethod || 'KNET'}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">الحالة</div>
+                    <div class="detail-value">${getStatusLabel(tx.status)}</div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">التاريخ</div>
+                    <div class="detail-value">${new Date(tx.createdAt).toLocaleString('ar-KW')}</div>
+                </div>
+            `;
+
+            document.getElementById('modalDetails').innerHTML = details;
+            document.getElementById('detailsModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('detailsModal').classList.remove('active');
+        }
+
+        async function approveTransaction(transactionId) {
+            if (confirm('هل تريد الموافقة على هذه المعاملة؟')) {
+                try {
+                    const response = await fetch(`/api/admin/${transactionId}/approve`, {
+                        method: 'POST'
+                    });
+                    if (!response.ok) throw new Error('Failed to approve');
+                    loadTransactions();
+                } catch (error) {
+                    alert('خطأ في الموافقة');
+                }
+            }
+        }
+
+        async function rejectTransaction(transactionId) {
+            if (confirm('هل تريد رفض هذه المعاملة؟')) {
+                try {
+                    const response = await fetch(`/api/admin/${transactionId}/reject`, {
+                        method: 'POST'
+                    });
+                    if (!response.ok) throw new Error('Failed to reject');
+                    loadTransactions();
+                } catch (error) {
+                    alert('خطأ في الرفض');
+                }
+            }
+        }
+
+        // Load transactions on page load and refresh every 2 seconds
+        window.addEventListener('load', () => {
+            loadTransactions();
+            refreshInterval = setInterval(loadTransactions, 2000);
+        });
+
+        // Clean up interval on page unload
+        window.addEventListener('beforeunload', () => {
+            if (refreshInterval) clearInterval(refreshInterval);
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const filtered = allTransactions.filter(t => 
+                t.id.toLowerCase().includes(query) || 
+                t.phone.includes(query)
+            );
+            renderTable(filtered);
+        });
+    </script>
+</body>
 </html>
