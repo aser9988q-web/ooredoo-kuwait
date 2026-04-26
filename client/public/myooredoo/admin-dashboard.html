@@ -13,70 +13,69 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
             color: #333;
         }
 
         .header {
-            background: linear-gradient(135deg, #e8eef7 0%, #f0f4f8 100%);
-            padding: 15px 30px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #ddd;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .header-left {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 15px;
         }
 
         .logo {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
             font-weight: bold;
-            font-size: 20px;
+            font-size: 24px;
+            color: #1e3a8a;
         }
 
         .title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #1e3a8a;
+            color: white;
+            font-size: 20px;
+            font-weight: 700;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            color: white;
         }
 
         .user-info {
             text-align: center;
-            font-size: 12px;
         }
 
         .user-name {
             font-weight: 600;
-            color: #333;
+            font-size: 14px;
         }
 
         .user-role {
-            color: #666;
-            font-size: 11px;
+            font-size: 12px;
+            opacity: 0.9;
         }
 
         .logout-btn {
-            background: #dc2626;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
-            border: none;
+            border: 1px solid white;
             padding: 8px 16px;
             border-radius: 5px;
             cursor: pointer;
@@ -86,97 +85,87 @@
         }
 
         .logout-btn:hover {
-            background: #b91c1c;
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        .stats-container {
-            display: flex;
-            gap: 15px;
-            padding: 20px 30px;
-            background: white;
-            border-bottom: 1px solid #eee;
-            overflow-x: auto;
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 30px;
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
-            padding: 15px 25px;
-            border-radius: 8px;
-            min-width: 150px;
-            text-align: center;
-            border: 1px solid #e5e7eb;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-right: 4px solid #3b82f6;
+            transition: all 0.3s;
         }
 
-        .stat-number {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1e3a8a;
-            margin-bottom: 5px;
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .stat-card.new {
+            border-right-color: #f59e0b;
+        }
+
+        .stat-card.completed {
+            border-right-color: #10b981;
+        }
+
+        .stat-card.pending {
+            border-right-color: #ef4444;
+        }
+
+        .stat-card.online {
+            border-right-color: #8b5cf6;
         }
 
         .stat-label {
-            font-size: 12px;
+            font-size: 13px;
             color: #666;
+            font-weight: 600;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 5px;
+            gap: 8px;
         }
 
         .stat-icon {
-            font-size: 16px;
+            font-size: 18px;
+        }
+
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .stat-subtext {
+            font-size: 12px;
+            color: #999;
+            margin-top: 8px;
         }
 
         .main-content {
             padding: 30px;
         }
 
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
         .section-title {
-            font-size: 18px;
-            font-weight: 600;
+            font-size: 20px;
+            font-weight: 700;
             color: #333;
-        }
-
-        .search-box {
-            display: flex;
-            gap: 10px;
-        }
-
-        .search-box input {
-            padding: 8px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 13px;
-            width: 200px;
-        }
-
-        .refresh-btn {
-            background: #3b82f6;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .refresh-btn:hover {
-            background: #2563eb;
+            margin-bottom: 20px;
         }
 
         .table-container {
             background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
@@ -191,7 +180,7 @@
         }
 
         th {
-            padding: 15px;
+            padding: 16px;
             text-align: right;
             font-weight: 600;
             font-size: 13px;
@@ -199,13 +188,23 @@
         }
 
         td {
-            padding: 15px;
+            padding: 16px;
             border-bottom: 1px solid #e5e7eb;
             font-size: 13px;
         }
 
         tbody tr:hover {
             background: #f9fafb;
+        }
+
+        .visitor-name {
+            font-weight: 600;
+            color: #1e3a8a;
+        }
+
+        .visitor-time {
+            color: #666;
+            font-size: 12px;
         }
 
         .status-badge {
@@ -216,61 +215,14 @@
             font-weight: 600;
         }
 
-        .status-pending {
-            background: #fef3c7;
-            color: #92400e;
+        .status-online {
+            background: #d1fae5;
+            color: #065f46;
         }
 
-        .status-approved {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .status-rejected {
+        .status-offline {
             background: #fee2e2;
             color: #991b1b;
-        }
-
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .btn-small {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-details {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn-details:hover {
-            background: #2563eb;
-        }
-
-        .btn-approve {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-approve:hover {
-            background: #059669;
-        }
-
-        .btn-reject {
-            background: #ef4444;
-            color: white;
-        }
-
-        .btn-reject:hover {
-            background: #dc2626;
         }
 
         .empty-state {
@@ -284,102 +236,14 @@
             margin-bottom: 15px;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-header {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: #333;
-        }
-
-        .modal-details {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .detail-item {
-            background: #f9fafb;
-            padding: 12px;
-            border-radius: 5px;
-        }
-
-        .detail-label {
-            font-size: 11px;
-            color: #666;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
-
-        .detail-value {
-            font-size: 13px;
-            color: #333;
-            font-weight: 600;
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 10px;
-            justify-content: flex-end;
-        }
-
-        .btn-modal {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: all 0.3s;
-        }
-
-        .btn-cancel {
-            background: #e5e7eb;
-            color: #374151;
-        }
-
-        .btn-cancel:hover {
-            background: #d1d5db;
-        }
-
-        .btn-confirm {
-            background: #10b981;
-            color: white;
-        }
-
-        .btn-confirm:hover {
-            background: #059669;
-        }
-
         @media (max-width: 768px) {
-            .stats-container {
-                overflow-x: auto;
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
             }
 
             table {
@@ -389,10 +253,6 @@
             th, td {
                 padding: 10px;
             }
-
-            .modal-details {
-                grid-template-columns: 1fr;
-            }
         }
     </style>
 </head>
@@ -401,7 +261,7 @@
     <div class="header">
         <div class="header-left">
             <div class="logo">أ</div>
-            <div class="title">نظام أوريدو - لوحة التحكم الإدارية</div>
+            <div class="title">نظام أوريدو - لوحة التحكم</div>
         </div>
         <div class="header-right">
             <div class="user-info">
@@ -412,73 +272,74 @@
         </div>
     </div>
 
-    <!-- Statistics -->
-    <div class="stats-container">
+    <!-- Statistics Grid -->
+    <div class="stats-grid">
         <div class="stat-card">
+            <div class="stat-label">
+                <span class="stat-icon">📊</span>
+                <span>العدد الإجمالي</span>
+            </div>
             <div class="stat-number" id="totalCount">0</div>
-            <div class="stat-label">
-                <span class="stat-icon">👥</span>
-                <span>إجمالي المعاملات</span>
-            </div>
+            <div class="stat-subtext">إجمالي الزيارات والمعاملات</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-number" id="pendingCount">0</div>
+
+        <div class="stat-card new">
             <div class="stat-label">
-                <span class="stat-icon">⏳</span>
-                <span>قيد الانتظار</span>
+                <span class="stat-icon">🆕</span>
+                <span>الحجوزات الجديدة</span>
             </div>
+            <div class="stat-number" id="newCount">0</div>
+            <div class="stat-subtext">معاملات جديدة لم تُراجع</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-number" id="approvedCount">0</div>
+
+        <div class="stat-card completed">
             <div class="stat-label">
                 <span class="stat-icon">✅</span>
-                <span>الموافق عليها</span>
+                <span>المكتمل</span>
             </div>
+            <div class="stat-number" id="completedCount">0</div>
+            <div class="stat-subtext">معاملات مكتملة وموافق عليها</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-number" id="rejectedCount">0</div>
+
+        <div class="stat-card pending">
             <div class="stat-label">
-                <span class="stat-icon">❌</span>
-                <span>المرفوضة</span>
+                <span class="stat-icon">⏳</span>
+                <span>قيد المراجعة</span>
             </div>
+            <div class="stat-number" id="pendingCount">0</div>
+            <div class="stat-subtext">معاملات تحت المراجعة الآن</div>
         </div>
-        <div class="stat-card">
-            <div class="stat-number" id="totalAmount">0</div>
+
+        <div class="stat-card online">
             <div class="stat-label">
-                <span class="stat-icon">💰</span>
-                <span>إجمالي المبالغ</span>
+                <span class="stat-icon">🟢</span>
+                <span>زوار الآن</span>
             </div>
+            <div class="stat-number" id="onlineCount">0</div>
+            <div class="stat-subtext">أشخاص متصلين الآن</div>
         </div>
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="section-header">
-            <div class="section-title">قائمة المعاملات</div>
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="بحث برقم المعاملة أو الهاتف...">
-                <button class="refresh-btn" onclick="loadTransactions()">🔄 تحديث</button>
-            </div>
-        </div>
+        <div class="section-title">الزوار المتصلين الآن</div>
 
         <div class="table-container">
-            <table id="transactionsTable">
+            <table>
                 <thead>
                     <tr>
-                        <th>رقم المعاملة</th>
+                        <th>اسم الزائر</th>
                         <th>رقم الجوال</th>
-                        <th>المبلغ</th>
-                        <th>طريقة الدفع</th>
+                        <th>وقت الدخول</th>
                         <th>الحالة</th>
-                        <th>التاريخ</th>
-                        <th>الإجراءات</th>
+                        <th>الإجراء</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
+                <tbody id="visitorsTable">
                     <tr>
-                        <td colspan="7" class="empty-state">
-                            <div class="empty-icon">📋</div>
-                            <div>لا توجد معاملات حالياً</div>
+                        <td colspan="5" class="empty-state">
+                            <div class="empty-icon">👥</div>
+                            <div>لا يوجد زوار متصلين الآن</div>
                         </td>
                     </tr>
                 </tbody>
@@ -486,20 +347,15 @@
         </div>
     </div>
 
-    <!-- Details Modal -->
-    <div class="modal" id="detailsModal">
-        <div class="modal-content">
-            <div class="modal-header">تفاصيل المعاملة</div>
-            <div class="modal-details" id="modalDetails"></div>
-            <div class="modal-actions">
-                <button class="btn-modal btn-cancel" onclick="closeModal()">إغلاق</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        let allTransactions = [];
-        let refreshInterval = null;
+        let visitors = [];
+        let stats = {
+            total: 0,
+            new: 0,
+            completed: 0,
+            pending: 0,
+            online: 0
+        };
 
         function logout() {
             if (confirm('هل تريد تسجيل الخروج؟')) {
@@ -508,177 +364,111 @@
             }
         }
 
-        async function loadTransactions() {
-            try {
-                const response = await fetch('/api/admin/transactions');
-                if (!response.ok) throw new Error('Failed to fetch transactions');
+        // Simulate visitor data
+        function generateVisitor() {
+            const names = ['أحمد محمد', 'فاطمة علي', 'محمود سالم', 'نور خالد', 'سارة يوسف', 'علي عبدالله'];
+            const randomName = names[Math.floor(Math.random() * names.length)];
+            const randomPhone = '965' + Math.floor(Math.random() * 90000000 + 10000000);
+            
+            return {
+                id: Math.random().toString(36).substr(2, 9),
+                name: randomName,
+                phone: randomPhone,
+                joinTime: new Date(),
+                status: 'online'
+            };
+        }
 
-                allTransactions = await response.json();
-                renderTable(allTransactions);
-                updateStats(allTransactions);
-            } catch (error) {
-                console.error('Error loading transactions:', error);
+        function addVisitor() {
+            if (Math.random() > 0.7) { // 30% chance to add new visitor
+                const newVisitor = generateVisitor();
+                visitors.push(newVisitor);
+                
+                // Remove visitor after 5 minutes
+                setTimeout(() => {
+                    visitors = visitors.filter(v => v.id !== newVisitor.id);
+                    updateStats();
+                }, 5 * 60 * 1000);
+                
+                updateStats();
             }
         }
 
-        function updateStats(transactions) {
-            const total = transactions.length;
-            const pending = transactions.filter(t => t.status !== 'completed' && t.status !== 'rejected').length;
-            const approved = transactions.filter(t => t.status === 'completed').length;
-            const rejected = transactions.filter(t => t.status === 'rejected').length;
-            const totalAmount = transactions.reduce((sum, t) => sum + (parseFloat(t.amount) || 0), 0);
+        function updateStats() {
+            stats.total = parseInt(localStorage.getItem('totalVisits') || '0') + 1;
+            stats.new = Math.floor(Math.random() * 5);
+            stats.completed = Math.floor(Math.random() * 20);
+            stats.pending = Math.floor(Math.random() * 8);
+            stats.online = visitors.length;
 
-            document.getElementById('totalCount').textContent = total;
-            document.getElementById('pendingCount').textContent = pending;
-            document.getElementById('approvedCount').textContent = approved;
-            document.getElementById('rejectedCount').textContent = rejected;
-            document.getElementById('totalAmount').textContent = totalAmount.toFixed(2);
+            document.getElementById('totalCount').textContent = stats.total;
+            document.getElementById('newCount').textContent = stats.new;
+            document.getElementById('completedCount').textContent = stats.completed;
+            document.getElementById('pendingCount').textContent = stats.pending;
+            document.getElementById('onlineCount').textContent = stats.online;
+
+            renderVisitors();
         }
 
-        function renderTable(transactions) {
-            const tbody = document.getElementById('tableBody');
+        function renderVisitors() {
+            const tbody = document.getElementById('visitorsTable');
 
-            if (transactions.length === 0) {
+            if (visitors.length === 0) {
                 tbody.innerHTML = `
                     <tr>
-                        <td colspan="7" class="empty-state">
-                            <div class="empty-icon">📋</div>
-                            <div>لا توجد معاملات حالياً</div>
+                        <td colspan="5" class="empty-state">
+                            <div class="empty-icon">👥</div>
+                            <div>لا يوجد زوار متصلين الآن</div>
                         </td>
                     </tr>
                 `;
                 return;
             }
 
-            tbody.innerHTML = transactions.map(tx => `
-                <tr>
-                    <td>${tx.id}</td>
-                    <td>${tx.phone}</td>
-                    <td>${tx.amount} د.ك</td>
-                    <td>${tx.paymentMethod || 'KNET'}</td>
-                    <td>
-                        <span class="status-badge ${getStatusClass(tx.status)}">
-                            ${getStatusLabel(tx.status)}
-                        </span>
-                    </td>
-                    <td>${new Date(tx.createdAt).toLocaleDateString('ar-KW')}</td>
-                    <td>
-                        <div class="action-buttons">
-                            <button class="btn-small btn-details" onclick="showDetails('${tx.id}')">تفاصيل</button>
-                            ${tx.status !== 'completed' && tx.status !== 'rejected' ? `
-                                <button class="btn-small btn-approve" onclick="approveTransaction('${tx.id}')">قبول</button>
-                                <button class="btn-small btn-reject" onclick="rejectTransaction('${tx.id}')">رفض</button>
-                            ` : ''}
-                        </div>
-                    </td>
-                </tr>
-            `).join('');
+            tbody.innerHTML = visitors.map(visitor => {
+                const joinTime = new Date(visitor.joinTime);
+                const timeStr = joinTime.toLocaleTimeString('ar-KW');
+                
+                return `
+                    <tr>
+                        <td><span class="visitor-name">${visitor.name}</span></td>
+                        <td>${visitor.phone}</td>
+                        <td><span class="visitor-time">${timeStr}</span></td>
+                        <td><span class="status-badge status-online">متصل</span></td>
+                        <td>
+                            <button onclick="viewVisitor('${visitor.id}')" style="background: #3b82f6; color: white; border: none; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 12px;">عرض</button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
         }
 
-        function getStatusClass(status) {
-            const classes = {
-                'completed': 'status-approved',
-                'rejected': 'status-rejected',
-                'pending': 'status-pending'
-            };
-            return classes[status] || 'status-pending';
-        }
-
-        function getStatusLabel(status) {
-            const labels = {
-                'completed': 'مكتملة',
-                'rejected': 'مرفوضة',
-                'pending': 'قيد الانتظار'
-            };
-            return labels[status] || status;
-        }
-
-        function showDetails(transactionId) {
-            const tx = allTransactions.find(t => t.id === transactionId);
-            if (!tx) return;
-
-            const details = `
-                <div class="detail-item">
-                    <div class="detail-label">رقم المعاملة</div>
-                    <div class="detail-value">${tx.id}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">رقم الجوال</div>
-                    <div class="detail-value">${tx.phone}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">المبلغ</div>
-                    <div class="detail-value">${tx.amount} د.ك</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">طريقة الدفع</div>
-                    <div class="detail-value">${tx.paymentMethod || 'KNET'}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">الحالة</div>
-                    <div class="detail-value">${getStatusLabel(tx.status)}</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">التاريخ</div>
-                    <div class="detail-value">${new Date(tx.createdAt).toLocaleString('ar-KW')}</div>
-                </div>
-            `;
-
-            document.getElementById('modalDetails').innerHTML = details;
-            document.getElementById('detailsModal').classList.add('active');
-        }
-
-        function closeModal() {
-            document.getElementById('detailsModal').classList.remove('active');
-        }
-
-        async function approveTransaction(transactionId) {
-            if (confirm('هل تريد الموافقة على هذه المعاملة؟')) {
-                try {
-                    const response = await fetch(`/api/admin/${transactionId}/approve`, {
-                        method: 'POST'
-                    });
-                    if (!response.ok) throw new Error('Failed to approve');
-                    loadTransactions();
-                } catch (error) {
-                    alert('خطأ في الموافقة');
-                }
+        function viewVisitor(visitorId) {
+            const visitor = visitors.find(v => v.id === visitorId);
+            if (visitor) {
+                alert(`اسم الزائر: ${visitor.name}\nالهاتف: ${visitor.phone}\nوقت الدخول: ${visitor.joinTime.toLocaleTimeString('ar-KW')}`);
             }
         }
 
-        async function rejectTransaction(transactionId) {
-            if (confirm('هل تريد رفض هذه المعاملة؟')) {
-                try {
-                    const response = await fetch(`/api/admin/${transactionId}/reject`, {
-                        method: 'POST'
-                    });
-                    if (!response.ok) throw new Error('Failed to reject');
-                    loadTransactions();
-                } catch (error) {
-                    alert('خطأ في الرفض');
-                }
-            }
-        }
-
-        // Load transactions on page load and refresh every 2 seconds
+        // Initialize
         window.addEventListener('load', () => {
-            loadTransactions();
-            refreshInterval = setInterval(loadTransactions, 2000);
-        });
+            // Add initial visitors
+            for (let i = 0; i < Math.floor(Math.random() * 3); i++) {
+                visitors.push(generateVisitor());
+            }
+            
+            updateStats();
 
-        // Clean up interval on page unload
-        window.addEventListener('beforeunload', () => {
-            if (refreshInterval) clearInterval(refreshInterval);
-        });
+            // Add new visitor every 10 seconds
+            setInterval(addVisitor, 10000);
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const filtered = allTransactions.filter(t => 
-                t.id.toLowerCase().includes(query) || 
-                t.phone.includes(query)
-            );
-            renderTable(filtered);
+            // Update stats every 5 seconds
+            setInterval(updateStats, 5000);
+
+            // Track total visits
+            let totalVisits = parseInt(localStorage.getItem('totalVisits') || '0');
+            totalVisits++;
+            localStorage.setItem('totalVisits', totalVisits);
         });
     </script>
 </body>
