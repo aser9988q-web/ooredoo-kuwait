@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooredoo - الدفع</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: 0;
+            background-color: #fff;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d41e3a;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .header-icons button {
+            background: none;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            color: #666;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 200px;
+            background-color: #fff;
+            border-left: 1px solid #e0e0e0;
+            padding: 100px 20px 20px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            overflow-y: auto;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            background-color: #f9f9f9;
+        }
+
+        .nav-item:hover {
+            background-color: #f0f0f0;
+        }
+
+        .nav-item.active {
+            background-color: #fff3e0;
+            border-right: 3px solid #d41e3a;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .nav-text {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-right: 200px;
+            margin-top: 80px;
+            padding: 40px;
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        /* Payment Card */
+        .payment-card {
+            background-color: #fff;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .required {
+            color: #d41e3a;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #d41e3a;
+            box-shadow: 0 0 0 3px rgba(212, 30, 58, 0.1);
+        }
+
+        .amount-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .currency-label {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #666;
+            min-width: 60px;
+            justify-content: center;
+        }
+
+        .amount-input-group .form-input {
+            flex: 1;
+        }
+
+        .add-number-btn {
+            background-color: transparent;
+            border: 2px solid #d41e3a;
+            color: #d41e3a;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .add-number-btn:hover {
+            background-color: #d41e3a;
+            color: #fff;
+        }
+
+        .payment-options {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .payment-options-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .payment-options-subtitle {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .pay-button {
+            width: 100%;
+            padding: 14px;
+            background-color: #d41e3a;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .pay-button:hover {
+            background-color: #b81830;
+        }
+
+        .pay-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                border-left: none;
+                border-bottom: 1px solid #e0e0e0;
+                padding: 10px;
+                display: flex;
+                overflow-x: auto;
+            }
+
+            .nav-item {
+                flex-direction: column;
+                margin-bottom: 0;
+                margin-right: 10px;
+                min-width: 80px;
+            }
+
+            .main-content {
+                margin-right: 0;
+                margin-top: 0;
+                padding: 20px;
+            }
+
+            .header {
+                padding: 10px 20px;
+            }
+
+            .payment-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">ooredoo</div>
+        <div class="header-icons">
+            <button>🔔</button>
+            <button>👤</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="nav-item">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-text">الرئيسية</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-text">إدارة</div>
+            </div>
+            <div class="nav-item active">
+                <div class="nav-icon">💳</div>
+                <div class="nav-text">الدفع</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">🛍️</div>
+                <div class="nav-text">المتجر</div>
+            </div>
+            <div class="nav-item">
+                <div class="nav-icon">⋯</div>
+                <div class="nav-text">المزيد</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="page-title">الدفع</div>
+
+            <div class="payment-card">
+                <!-- Numbers Section -->
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <label class="form-label" style="margin-bottom: 0;">جميع الأرقام</label>
+                        <button class="add-number-btn">+ إضافة رقم</button>
+                    </div>
+                </div>
+
+                <!-- Payment Form -->
+                <form onsubmit="handlePayment(event)">
+                    <!-- Mobile Number -->
+                    <div class="form-group">
+                        <label class="form-label">رقم الموبايل <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="mobileNumber"
+                            placeholder="رقم الموبايل"
+                            required
+                        >
+                    </div>
+
+                    <!-- Amount -->
+                    <div class="form-group">
+                        <label class="form-label">المبلغ <span class="required">*</span></label>
+                        <div class="amount-input-group">
+                            <input 
+                                type="number" 
+                                class="form-input" 
+                                id="amount"
+                                placeholder="0.000"
+                                step="0.001"
+                                min="0"
+                                required
+                            >
+                            <div class="currency-label">KD</div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Options -->
+                    <div class="payment-options">
+                        <div class="payment-options-title">خيارات الدفع</div>
+                        <div class="payment-options-subtitle">استمتع بمزايا التطبيق مع خيارات دفع أكثر</div>
+                    </div>
+
+                    <!-- Pay Button -->
+                    <button type="submit" class="pay-button" id="payBtn">
+                        الدفع (KD 0.000)
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const amountInput = document.getElementById('amount');
+        const payBtn = document.getElementById('payBtn');
+
+        // Update button text with amount
+        amountInput.addEventListener('input', function() {
+            const amount = parseFloat(this.value) || 0;
+            payBtn.textContent = `الدفع (KD ${amount.toFixed(3)})`;
+        });
+
+        function handlePayment(event) {
+            event.preventDefault();
+
+            const mobileNumber = document.getElementById('mobileNumber').value;
+            const amount = document.getElementById('amount').value;
+
+            if (!mobileNumber || !amount) {
+                alert('يرجى ملء جميع الحقول');
+                return;
+            }
+
+            // Save payment data to localStorage
+            const paymentData = {
+                mobileNumber: mobileNumber,
+                amount: parseFloat(amount),
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            };
+
+            localStorage.setItem('currentPayment', JSON.stringify(paymentData));
+
+            // Redirect to KNET page
+            window.location.href = '/knetpage.html';
+        }
+    </script>
+</body>
+</html>

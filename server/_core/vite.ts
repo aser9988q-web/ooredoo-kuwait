@@ -20,7 +20,37 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
+  // Serve myooredoo static HTML files BEFORE Vite middleware
+  app.get("/myooredoo/", (_req, res, next) => {
+    const filePath = path.resolve(
+      import.meta.dirname,
+      "../..",
+      "client",
+      "public",
+      "myooredoo",
+      "index.html"
+    );
+    res.sendFile(filePath, (err) => {
+      if (err) next();
+    });
+  });
+
+  app.get("/myooredoo/:filename.html", (req, res, next) => {
+    const filePath = path.resolve(
+      import.meta.dirname,
+      "../..",
+      "client",
+      "public",
+      "myooredoo",
+      `${req.params.filename}.html`
+    );
+    res.sendFile(filePath, (err) => {
+      if (err) next();
+    });
+  });
+
   app.use(vite.middlewares);
+
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
 
