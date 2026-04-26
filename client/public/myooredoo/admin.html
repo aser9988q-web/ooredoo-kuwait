@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooredoo - لوحة التحكم</title>
+    <link rel="stylesheet" href="/myooredoo/assets/css/vendors/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            direction: rtl;
+        }
+
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #d41e3a 0%, #b01830 100%);
+            color: white;
+            padding: 30px 20px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .admin-logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            padding-bottom: 20px;
+        }
+
+        .admin-nav {
+            list-style: none;
+        }
+
+        .admin-nav li {
+            margin-bottom: 15px;
+        }
+
+        .admin-nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .admin-nav a:hover,
+        .admin-nav a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        /* Main Content */
+        .admin-main {
+            margin-right: 250px;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .admin-header h1 {
+            color: #d41e3a;
+            font-size: 28px;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            border-top: 4px solid #d41e3a;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #d41e3a;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .admin-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .admin-section h2 {
+            color: #d41e3a;
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-bottom: 2px solid #d41e3a;
+            padding-bottom: 10px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #f5f5f5;
+            padding: 12px;
+            text-align: right;
+            border-bottom: 2px solid #d41e3a;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #d41e3a;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #b01830;
+        }
+
+        .btn-secondary {
+            background-color: #666;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #555;
+        }
+
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 12px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-success {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .status-pending {
+            background-color: #ff9800;
+            color: white;
+        }
+
+        .status-failed {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+            }
+
+            .admin-main {
+                margin-right: 0;
+                padding: 20px;
+            }
+
+            .admin-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-logo">Ooredoo</div>
+            <ul class="admin-nav">
+                <li><a href="/admin.html" class="active">📊 لوحة التحكم</a></li>
+                <li><a href="/admin.html#transactions">💳 المعاملات</a></li>
+                <li><a href="/admin.html#users">👥 المستخدمون</a></li>
+                <li><a href="/admin.html#reports">📈 التقارير</a></li>
+                <li><a href="/admin.html#settings">⚙️ الإعدادات</a></li>
+                <li><a href="/myooredoo/">🚪 تسجيل الخروج</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <!-- Header -->
+            <div class="admin-header">
+                <div>
+                    <h1>لوحة التحكم</h1>
+                    <p style="color: #666; margin-top: 5px;">مرحباً بك في لوحة تحكم Ooredoo</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary">🔔 إشعارات</button>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-label">إجمالي المعاملات</div>
+                    <div class="stat-number">1,245</div>
+                    <div style="color: #4caf50; font-size: 12px;">↑ 12% من الأمس</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">إجمالي الإيرادات</div>
+                    <div class="stat-number">د.ك 5,890</div>
+                    <div style="color: #4caf50; font-size: 12px;">↑ 8% من الأمس</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">المستخدمون النشطون</div>
+                    <div class="stat-number">342</div>
+                    <div style="color: #ff9800; font-size: 12px;">↓ 3% من الأمس</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">معدل النجاح</div>
+                    <div class="stat-number">98.5%</div>
+                    <div style="color: #4caf50; font-size: 12px;">ممتاز</div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="admin-section">
+                <h2>المعاملات الأخيرة</h2>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>رقم المعاملة</th>
+                                <th>رقم الهاتف</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                                <th>الوقت</th>
+                                <th>الإجراء</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#TXN001</td>
+                                <td>96501234567</td>
+                                <td>د.ك 5.000</td>
+                                <td><span class="status-badge status-success">نجح</span></td>
+                                <td>2024-04-26 10:30</td>
+                                <td><button class="btn btn-secondary btn-small">عرض</button></td>
+                            </tr>
+                            <tr>
+                                <td>#TXN002</td>
+                                <td>96502345678</td>
+                                <td>د.ك 10.000</td>
+                                <td><span class="status-badge status-success">نجح</span></td>
+                                <td>2024-04-26 09:45</td>
+                                <td><button class="btn btn-secondary btn-small">عرض</button></td>
+                            </tr>
+                            <tr>
+                                <td>#TXN003</td>
+                                <td>96503456789</td>
+                                <td>د.ك 3.500</td>
+                                <td><span class="status-badge status-pending">قيد الانتظار</span></td>
+                                <td>2024-04-26 09:15</td>
+                                <td><button class="btn btn-secondary btn-small">عرض</button></td>
+                            </tr>
+                            <tr>
+                                <td>#TXN004</td>
+                                <td>96504567890</td>
+                                <td>د.ك 7.500</td>
+                                <td><span class="status-badge status-failed">فشل</span></td>
+                                <td>2024-04-26 08:30</td>
+                                <td><button class="btn btn-secondary btn-small">عرض</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <button class="btn btn-primary" style="margin-top: 20px;">عرض جميع المعاملات</button>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="admin-section">
+                <h2>إجراءات سريعة</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>البحث عن معاملة</label>
+                        <input type="text" placeholder="أدخل رقم المعاملة أو رقم الهاتف">
+                    </div>
+                    <div class="form-group">
+                        <label>تصفية حسب التاريخ</label>
+                        <input type="date">
+                    </div>
+                </div>
+                <button class="btn btn-primary">بحث</button>
+                <button class="btn btn-secondary" style="margin-right: 10px;">تحديث</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple navigation
+        document.querySelectorAll('.admin-nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                if (this.href.includes('#')) {
+                    e.preventDefault();
+                    document.querySelectorAll('.admin-nav a').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ooredoo - Payment Success</title>
+    <link rel="stylesheet" href="/myooredoo/assets/css/vendors/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            direction: rtl;
+        }
+
+        .success-container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        @keyframes scaleIn {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success-header h1 {
+            color: #4caf50;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .success-header p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+
+        .receipt {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: right;
+        }
+
+        .receipt-header {
+            color: #d41e3a;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #d41e3a;
+            padding-bottom: 10px;
+        }
+
+        .receipt-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .receipt-row:last-child {
+            margin-bottom: 0;
+            padding-top: 12px;
+            border-top: 1px solid #ddd;
+            font-weight: 600;
+            font-size: 16px;
+            color: #4caf50;
+        }
+
+        .receipt-label {
+            color: #666;
+        }
+
+        .receipt-value {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .transaction-id {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #2e7d32;
+        }
+
+        .transaction-id strong {
+            color: #1b5e20;
+            font-size: 14px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            flex-direction: column;
+        }
+
+        .btn {
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: #e0e0e0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d0d0d0;
+        }
+
+        .download-receipt {
+            color: #2196f3;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .download-receipt:hover {
+            text-decoration: underline;
+        }
+
+        .share-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .share-section p {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+        }
+
+        .share-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .share-whatsapp {
+            background-color: #25d366;
+            color: white;
+        }
+
+        .share-email {
+            background-color: #ea4335;
+            color: white;
+        }
+
+        .share-print {
+            background-color: #4285f4;
+            color: white;
+        }
+
+        @media (max-width: 500px) {
+            .success-container {
+                padding: 25px;
+            }
+
+            .success-icon {
+                font-size: 60px;
+            }
+
+            .success-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-container">
+        <!-- Success Icon -->
+        <div class="success-icon">✅</div>
+
+        <!-- Header -->
+        <div class="success-header">
+            <h1>تم الدفع بنجاح!</h1>
+            <p>شكراً لاستخدامك خدمات Ooredoo</p>
+        </div>
+
+        <!-- Transaction ID -->
+        <div class="transaction-id">
+            <strong>رقم المعاملة:</strong> #TXN20240426001234
+        </div>
+
+        <!-- Receipt -->
+        <div class="receipt">
+            <div class="receipt-header">🧾 إيصال الدفع</div>
+            <div class="receipt-row">
+                <span class="receipt-label">رقم الهاتف:</span>
+                <span class="receipt-value">96501234567</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">نوع الخدمة:</span>
+                <span class="receipt-value">شحن رصيد</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">طريقة الدفع:</span>
+                <span class="receipt-value">KNET - NBK</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">تاريخ الدفع:</span>
+                <span class="receipt-value" id="paymentDate">26-04-2024</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">الوقت:</span>
+                <span class="receipt-value" id="paymentTime">10:30 AM</span>
+            </div>
+            <div class="receipt-row">
+                <span class="receipt-label">المبلغ:</span>
+                <span class="receipt-value">د.ك 5.000</span>
+            </div>
+        </div>
+
+        <!-- Download Receipt -->
+        <a class="download-receipt" onclick="downloadReceipt()">📥 تحميل الإيصال</a>
+
+        <!-- Share Section -->
+        <div class="share-section">
+            <p>شارك هذا الإيصال:</p>
+            <div class="share-buttons">
+                <button class="share-btn share-whatsapp" onclick="shareWhatsApp()" title="مشاركة عبر WhatsApp">💬</button>
+                <button class="share-btn share-email" onclick="shareEmail()" title="إرسال بالبريد الإلكتروني">📧</button>
+                <button class="share-btn share-print" onclick="printReceipt()" title="طباعة">🖨️</button>
+            </div>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-group" style="margin-top: 30px;">
+            <button class="btn btn-primary" onclick="goHome()">العودة إلى الرئيسية</button>
+            <button class="btn btn-secondary" onclick="viewTransactions()">عرض المعاملات</button>
+        </div>
+    </div>
+
+    <script>
+        // Set current date and time
+        function setDateTime() {
+            const now = new Date();
+            const date = now.toLocaleDateString('ar-KW');
+            const time = now.toLocaleTimeString('ar-KW', { hour: '2-digit', minute: '2-digit' });
+            
+            document.getElementById('paymentDate').textContent = date;
+            document.getElementById('paymentTime').textContent = time;
+        }
+
+        function downloadReceipt() {
+            alert('تم تحميل الإيصال بنجاح');
+            // In a real app, this would generate a PDF
+        }
+
+        function shareWhatsApp() {
+            const message = 'تم الدفع بنجاح! رقم المعاملة: #TXN20240426001234 - المبلغ: د.ك 5.000';
+            const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        function shareEmail() {
+            const subject = 'إيصال دفع Ooredoo';
+            const body = 'تم الدفع بنجاح!\n\nرقم المعاملة: #TXN20240426001234\nالمبلغ: د.ك 5.000\nالتاريخ: ' + new Date().toLocaleDateString('ar-KW');
+            window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function printReceipt() {
+            window.print();
+        }
+
+        function goHome() {
+            window.location.href = '/myooredoo/';
+        }
+
+        function viewTransactions() {
+            window.location.href = '/admin.html';
+        }
+
+        // Initialize
+        setDateTime();
+    </script>
+</body>
+</html>
