@@ -127,7 +127,7 @@ export default function Home() {
         {/* Samsung Banner */}
         <section className="bg-white rounded-xl overflow-hidden mb-4 border border-gray-200">
           <img
-            src="/manus-storage/2129_c5cfe522.jpg"
+            src="/manus-storage/2129_samsung_banner_9ba1506b.jpg"
             alt="Samsung"
             className="w-full h-48 object-cover"
           />
@@ -173,7 +173,7 @@ export default function Home() {
             <p className="text-sm text-gray-600">تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق</p>
           </div>
           <img
-            src="/manus-storage/xbox_card_hero_e84c9825.png"
+            src="/manus-storage/xbox_card_hero.png"
             alt="Digital Cards"
             className="w-full h-40 object-cover rounded-lg"
           />
@@ -187,14 +187,14 @@ export default function Home() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
-              { label: "عرض الكل", image: "/manus-storage/2141_0768970b.jpg", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Starzplay", image: "/manus-storage/2135_ff06bba5.png", bgColor: "from-green-600 to-green-800" },
-              { label: "Talabat", image: "/manus-storage/2136_7a5c2dd0.png", bgColor: "from-orange-500 to-orange-700" },
-              { label: "Kuwait 51", image: "/manus-storage/2134_2291f63d.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Amazon Prime", image: "/manus-storage/2137_8a2c8832.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Anghami", image: "/manus-storage/2138_e270ea4e.png", bgColor: "from-purple-600 to-purple-800" },
-              { label: "Xbox", image: "/manus-storage/2139_1efd22fa.png", bgColor: "from-green-700 to-green-900" },
-              { label: "Music", image: "/manus-storage/2140_99dafbc6.png", bgColor: "from-pink-500 to-pink-700" },
+              { label: "عرض الكل", image: "/manus-storage/2141_all_services_7287555f.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Starzplay", image: "/manus-storage/2135_starzplay_e2079bc5.png", bgColor: "from-green-600 to-green-800" },
+              { label: "Talabat", image: "/manus-storage/2136_talabat_2cfdf136.png", bgColor: "from-orange-500 to-orange-700" },
+              { label: "Kuwait 51", image: "/manus-storage/2134_kuwait_51_b8599f21.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Amazon Prime", image: "/manus-storage/2137_amazon_prime_8ccdea0a.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Anghami", image: "/manus-storage/2138_anghami_8dd97dfb.png", bgColor: "from-purple-600 to-purple-800" },
+              { label: "Xbox", image: "/manus-storage/2139_xbox_e751909b.png", bgColor: "from-green-700 to-green-900" },
+              { label: "Music", image: "/manus-storage/2140_music_c5abe548.png", bgColor: "from-pink-500 to-pink-700" },
             ].map((service) => (
               <div
                 key={service.label}
