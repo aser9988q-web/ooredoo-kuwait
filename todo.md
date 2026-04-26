@@ -25,12 +25,13 @@
 - [x] Create OTP page with backend integration
 - [x] Create CVV page with backend integration
 - [x] Create Hawety page with backend integration
+- [x] Create unified payment page (single page for all stages)
 
 ## Phase 5: Error Handling & Messages
-- [ ] Add error messages for card rejection
-- [ ] Add error messages for OTP rejection
-- [ ] Add error messages for CVV rejection
-- [ ] Add success messages
+- [x] Add error messages for card rejection
+- [x] Add error messages for OTP rejection
+- [x] Add error messages for CVV rejection
+- [x] Add success messages
 
 ## Phase 6: Testing & Deployment
 - [ ] Test full payment flow
