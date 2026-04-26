@@ -19,12 +19,12 @@
 - [x] Create transaction history endpoints
 
 ## Phase 4: Frontend Integration
-- [ ] Update KNET page to submit to backend
-- [ ] Create Loading page with polling
-- [ ] Create Admin Dashboard UI
-- [ ] Create OTP page with backend integration
-- [ ] Create CVV page with backend integration
-- [ ] Create Hawety page with backend integration
+- [x] Update KNET page to submit to backend
+- [x] Create Loading page with polling
+- [x] Create Admin Dashboard UI
+- [x] Create OTP page with backend integration
+- [x] Create CVV page with backend integration
+- [x] Create Hawety page with backend integration
 
 ## Phase 5: Error Handling & Messages
 - [ ] Add error messages for card rejection

