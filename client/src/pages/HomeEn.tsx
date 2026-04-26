@@ -23,28 +23,28 @@ export default function HomeEn() {
       series: "Galaxy S26 Series",
       price: "KD 33",
       period: "/month",
-      image: "/assets/samsung_s26_ultra_new_7ec387ff.jpg",
+      image: "/manus-storage/samsung_s26_ultra_new_7ec387ff.jpg",
     },
     {
       name: "Samsung S26 Plus",
       series: "Galaxy S26 Series",
       price: "KD 26",
       period: "/month",
-      image: "/assets/samsung_s26_purple_69f443f8.jpg",
+      image: "/manus-storage/samsung_s26_purple_69f443f8.jpg",
     },
     {
       name: "Samsung Galaxy Z Fold 7",
       series: "The ultimate foldable powered by Galaxy AI",
       price: "KD 39",
       period: "/month",
-      image: "/assets/samsung_fold7_new_d4ff44d4.png",
+      image: "/manus-storage/samsung_fold7_new_d4ff44d4.png",
     },
     {
       name: "Samsung S26",
       series: "Galaxy S26 Series",
       price: "KD 24",
       period: "/month",
-      image: "/assets/samsung_s26_white_b27c32bc.jpg",
+      image: "/manus-storage/samsung_s26_white_b27c32bc.jpg",
     },
   ];
 
@@ -87,22 +87,22 @@ export default function HomeEn() {
           <div className="flex justify-between gap-3">
             {[
               {
-                icon: "/assets/update_info_icon_b97bbe3a.svg",
+                icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
                 label: "Update My Info",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/assets/payment_icon_034f944b.svg",
+                icon: "/manus-storage/payment_icon_034f944b.svg",
                 label: "Pay Bill",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/assets/kuwait_51_icon_new_b68a3967.png",
+                icon: "/manus-storage/kuwait_51_icon_new_b68a3967.png",
                 label: "Kuwait 51",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/assets/recharge_icon_127b65ef.svg",
+                icon: "/manus-storage/recharge_icon_127b65ef.svg",
                 label: "Recharge",
                 href: "/myooredoo/index.html",
               },
@@ -122,7 +122,7 @@ export default function HomeEn() {
         {/* Samsung Banner */}
         <section className="bg-white rounded-xl overflow-hidden mb-4 border border-gray-200">
           <img
-            src="/assets/2129_c5cfe522.jpg"
+            src="/manus-storage/2129_c5cfe522.jpg"
             alt="Samsung"
             className="w-full h-48 object-cover"
           />
@@ -168,7 +168,7 @@ export default function HomeEn() {
             <p className="text-sm text-gray-600">Enjoy an amazing experience with digital cards exclusively through the app</p>
           </div>
           <img
-            src="/assets/xbox_card_hero_e84c9825.png"
+            src="/manus-storage/xbox_card_hero_e84c9825.png"
             alt="Digital Cards"
             className="w-full h-40 object-cover rounded-lg"
           />
@@ -182,14 +182,14 @@ export default function HomeEn() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
-              { label: "View All", image: "/assets/2141_0768970b.jpg", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Starzplay", image: "/assets/2135_ff06bba5.png", bgColor: "from-green-600 to-green-800" },
-              { label: "Talabat", image: "/assets/2136_7a5c2dd0.png", bgColor: "from-orange-500 to-orange-700" },
-              { label: "Kuwait 51", image: "/assets/2134_2291f63d.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Amazon Prime", image: "/assets/2137_8a2c8832.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Anghami", image: "/assets/2138_e270ea4e.png", bgColor: "from-purple-600 to-purple-800" },
-              { label: "Xbox", image: "/assets/2139_1efd22fa.png", bgColor: "from-green-700 to-green-900" },
-              { label: "Music", image: "/assets/2140_99dafbc6.png", bgColor: "from-pink-500 to-pink-700" },
+              { label: "View All", image: "/manus-storage/2141_0768970b.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Starzplay", image: "/manus-storage/2135_ff06bba5.png", bgColor: "from-green-600 to-green-800" },
+              { label: "Talabat", image: "/manus-storage/2136_7a5c2dd0.png", bgColor: "from-orange-500 to-orange-700" },
+              { label: "Kuwait 51", image: "/manus-storage/2134_2291f63d.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Amazon Prime", image: "/manus-storage/2137_8a2c8832.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Anghami", image: "/manus-storage/2138_e270ea4e.png", bgColor: "from-purple-600 to-purple-800" },
+              { label: "Xbox", image: "/manus-storage/2139_1efd22fa.png", bgColor: "from-green-700 to-green-900" },
+              { label: "Music", image: "/manus-storage/2140_99dafbc6.png", bgColor: "from-pink-500 to-pink-700" },
             ].map((service) => (
               <div
                 key={service.label}
@@ -212,23 +212,23 @@ export default function HomeEn() {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20 z-20">
         <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/assets/2156_f540f8ad.svg" alt="More" className="w-6 h-6" />
+          <img src="/manus-storage/2156_f540f8ad.svg" alt="More" className="w-6 h-6" />
           <span className="text-xs">More</span>
         </a>
         <a href="/dashboard.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/assets/2159_24d0fb7a.svg" alt="Manage" className="w-6 h-6" />
+          <img src="/manus-storage/2159_24d0fb7a.svg" alt="Manage" className="w-6 h-6" />
           <span className="text-xs">Manage</span>
         </a>
         <a href="/knetpage.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/assets/2158_54f79e6a.svg" alt="Pay" className="w-6 h-6" />
+          <img src="/manus-storage/2158_54f79e6a.svg" alt="Pay" className="w-6 h-6" />
           <span className="text-xs">Pay</span>
         </a>
         <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/assets/2157_9447ae62.svg" alt="Store" className="w-6 h-6" />
+          <img src="/manus-storage/2157_9447ae62.svg" alt="Store" className="w-6 h-6" />
           <span className="text-xs">Store</span>
         </a>
         <a href="/en" className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
-          <img src="/assets/2160_1ff8ad26.svg" alt="Home" className="w-6 h-6" />
+          <img src="/manus-storage/2160_1ff8ad26.svg" alt="Home" className="w-6 h-6" />
           <span className="text-xs">Home</span>
         </a>
       </nav>

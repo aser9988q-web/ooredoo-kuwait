@@ -3,7 +3,7 @@
 ## Phase 1: Database & Backend Setup
 - [x] Add database schema (payments, otp_requests, cvv_requests, users)
 - [x] Create database migrations
-- [x] Set up database connection in Railway
+- [ ] Set up database connection in Railway
 
 ## Phase 2: Payment Flow API
 - [x] Create KNET payment submission endpoint
@@ -34,26 +34,14 @@
 - [x] Add success messages
 
 ## Phase 6: Testing & Deployment
-- [x] Test full payment flow
-- [x] Test admin approval/rejection
-- [x] Test error scenarios
-- [x] Deploy to Railway
-- [x] Verify all pages work correctly
+- [ ] Test full payment flow
+- [ ] Test admin approval/rejection
+- [ ] Test error scenarios
+- [ ] Deploy to Railway
+- [ ] Verify all pages work correctly
 
 ## Phase 3B: Admin Dashboard Enhancements
-- [x] Create admin dashboard aggregate stats endpoint
-- [x] Create transaction history endpoint
-- [x] Wire admin UI to real backend endpoints
-- [x] Replace hardcoded admin login with real auth
-
-## Phase 7: Final Deployment
-- [ ] Publish latest commit to Railway
-- [ ] Configure Railway DATABASE_URL
-- [ ] Test key production routes on Railway
-- [ ] Verify production API endpoints and auth/session behavior
-
-## Phase 8: Loading Page Redesign
-- [x] Create new loading page with Ooredoo logo and spinner
-- [x] Update CSS for new loading design
-- [x] Integrate loading page into payment flow
-- [x] Test loading page display
+- [ ] Create admin dashboard aggregate stats endpoint
+- [ ] Create transaction history endpoint
+- [ ] Wire admin UI to real backend endpoints
+- [ ] Replace hardcoded admin login with real auth
