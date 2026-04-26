@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - Ooredoo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 24px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-danger {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #ee5a52;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        /* Content */
+        .content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th {
+            background: #f5f5f5;
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #666;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status.completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status.rejected {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Actions */
+        .actions {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn.view {
+            background: #667eea;
+            color: white;
+        }
+
+        .action-btn.view:hover {
+            background: #5568d3;
+        }
+
+        .action-btn.transfer {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .action-btn.transfer:hover {
+            background: #e0a800;
+        }
+
+        .action-btn.accept {
+            background: #28a745;
+            color: white;
+        }
+
+        .action-btn.accept:hover {
+            background: #218838;
+        }
+
+        .action-btn.reject {
+            background: #dc3545;
+            color: white;
+        }
+
+        .action-btn.reject:hover {
+            background: #c82333;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .info-group {
+            margin-bottom: 20px;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .info-value {
+            color: #666;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+            justify-content: flex-end;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .empty-state h3 {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-card h3 {
+            font-size: 12px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-actions {
+                width: 100%;
+            }
+
+            .header-actions .btn {
+                flex: 1;
+            }
+
+            table {
+                font-size: 12px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            .actions {
+                flex-wrap: wrap;
+            }
+
+            .action-btn {
+                padding: 4px 8px;
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔐 لوحة التحكم - Ooredoo</h1>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="goHome()">الرئيسية</button>
+                <button class="btn btn-danger" onclick="logout()">تسجيل الخروج</button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="switchTab('transactions')">المعاملات</button>
+                <button class="tab" onclick="switchTab('accounts')">الحسابات</button>
+                <button class="tab" onclick="switchTab('reports')">التقارير</button>
+            </div>
+
+            <!-- Transactions Tab -->
+            <div id="transactions" class="tab-content active">
+                <div class="stats">
+                    <div class="stat-card">
+                        <h3>إجمالي المعاملات</h3>
+                        <div class="value" id="totalTransactions">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>المعاملات المعلقة</h3>
+                        <div class="value" id="pendingTransactions">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>المعاملات المكتملة</h3>
+                        <div class="value" id="completedTransactions">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>إجمالي المبلغ</h3>
+                        <div class="value" id="totalAmount">0 د.ك</div>
+                    </div>
+                </div>
+
+                <div class="table-wrapper">
+                    <table id="transactionsTable">
+                        <thead>
+                            <tr>
+                                <th>الوقت</th>
+                                <th>رقم الموبايل</th>
+                                <th>المبلغ</th>
+                                <th>الحالة</th>
+                                <th>الإجراءات</th>
+                            </tr>
+                        </thead>
+                        <tbody id="transactionsBody">
+                            <!-- Populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyTransactions" class="empty-state" style="display: none;">
+                    <div class="empty-state-icon">📋</div>
+                    <h3>لا توجد معاملات</h3>
+                    <p>لم يتم تسجيل أي معاملات حتى الآن</p>
+                </div>
+            </div>
+
+            <!-- Accounts Tab -->
+            <div id="accounts" class="tab-content">
+                <div class="empty-state">
+                    <div class="empty-state-icon">👥</div>
+                    <h3>قريباً</h3>
+                    <p>سيتم إضافة إدارة الحسابات قريباً</p>
+                </div>
+            </div>
+
+            <!-- Reports Tab -->
+            <div id="reports" class="tab-content">
+                <div class="empty-state">
+                    <div class="empty-state-icon">📊</div>
+                    <h3>قريباً</h3>
+                    <p>سيتم إضافة التقارير قريباً</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transaction Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تفاصيل المعاملة</h2>
+                <button class="close-btn" onclick="closeModal('detailsModal')">&times;</button>
+            </div>
+            <div id="detailsContent">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Transfer Modal -->
+    <div id="transferModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>نقل المعاملة</h2>
+                <button class="close-btn" onclick="closeModal('transferModal')">&times;</button>
+            </div>
+            <div class="info-group">
+                <label class="info-label">نقل إلى:</label>
+                <select id="transferTo" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">اختر...</option>
+                    <option value="cvv">صفحة CVV</option>
+                    <option value="otp">صفحة OTP</option>
+                    <option value="hawety">صفحة الهويتي</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal('transferModal')">إلغاء</button>
+                <button class="btn btn-primary" onclick="confirmTransfer()">نقل</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTransactionId = null;
+
+        // Load transactions on page load
+        window.addEventListener('DOMContentLoaded', loadTransactions);
+
+        function loadTransactions() {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            const tbody = document.getElementById('transactionsBody');
+            const emptyState = document.getElementById('emptyTransactions');
+
+            // Sort by timestamp (newest first)
+            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            if (transactions.length === 0) {
+                tbody.innerHTML = '';
+                emptyState.style.display = 'block';
+                updateStats([]);
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            tbody.innerHTML = transactions.map((t, index) => `
+                <tr>
+                    <td>${new Date(t.timestamp).toLocaleString('ar-KW')}</td>
+                    <td>${t.phoneNumber}</td>
+                    <td>${t.amount} د.ك</td>
+                    <td><span class="status ${t.status}">${getStatusLabel(t.status)}</span></td>
+                    <td>
+                        <div class="actions">
+                            <button class="action-btn view" onclick="viewDetails(${index})">عرض</button>
+                            <button class="action-btn transfer" onclick="openTransferModal(${index})">نقل</button>
+                            <button class="action-btn accept" onclick="acceptTransaction(${index})">✓</button>
+                            <button class="action-btn reject" onclick="rejectTransaction(${index})">✕</button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+
+            updateStats(transactions);
+        }
+
+        function updateStats(transactions) {
+            const total = transactions.length;
+            const pending = transactions.filter(t => t.status === 'pending').length;
+            const completed = transactions.filter(t => t.status === 'completed').length;
+            const totalAmount = transactions.reduce((sum, t) => sum + parseFloat(t.amount || 0), 0);
+
+            document.getElementById('totalTransactions').textContent = total;
+            document.getElementById('pendingTransactions').textContent = pending;
+            document.getElementById('completedTransactions').textContent = completed;
+            document.getElementById('totalAmount').textContent = totalAmount.toFixed(3) + ' د.ك';
+        }
+
+        function getStatusLabel(status) {
+            const labels = {
+                'pending': 'معلقة',
+                'completed': 'مكتملة',
+                'rejected': 'مرفوضة',
+                'cvv': 'في CVV',
+                'otp': 'في OTP',
+                'hawety': 'في الهويتي'
+            };
+            return labels[status] || status;
+        }
+
+        function viewDetails(index) {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            const transaction = transactions[index];
+
+            const content = document.getElementById('detailsContent');
+            content.innerHTML = `
+                <div class="info-group">
+                    <div class="info-label">رقم الموبايل</div>
+                    <div class="info-value">${transaction.phoneNumber}</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">المبلغ</div>
+                    <div class="info-value">${transaction.amount} د.ك</div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">الحالة</div>
+                    <div class="info-value"><span class="status ${transaction.status}">${getStatusLabel(transaction.status)}</span></div>
+                </div>
+                <div class="info-group">
+                    <div class="info-label">الوقت</div>
+                    <div class="info-value">${new Date(transaction.timestamp).toLocaleString('ar-KW')}</div>
+                </div>
+                ${transaction.cardNumber ? `
+                <div class="info-group">
+                    <div class="info-label">رقم البطاقة</div>
+                    <div class="info-value">****-****-****-${transaction.cardNumber.slice(-4)}</div>
+                </div>
+                ` : ''}
+            `;
+
+            openModal('detailsModal');
+        }
+
+        function openTransferModal(index) {
+            currentTransactionId = index;
+            openModal('transferModal');
+        }
+
+        function confirmTransfer() {
+            const transferTo = document.getElementById('transferTo').value;
+            if (!transferTo) {
+                alert('يرجى اختيار الوجهة');
+                return;
+            }
+
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            transactions[currentTransactionId].status = transferTo;
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+
+            closeModal('transferModal');
+            loadTransactions();
+            alert('تم نقل المعاملة بنجاح');
+        }
+
+        function acceptTransaction(index) {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            transactions[index].status = 'completed';
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            loadTransactions();
+            alert('تم قبول المعاملة');
+        }
+
+        function rejectTransaction(index) {
+            const transactions = JSON.parse(localStorage.getItem('transactions') || '[]');
+            transactions.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+            
+            transactions[index].status = 'rejected';
+            localStorage.setItem('transactions', JSON.stringify(transactions));
+            loadTransactions();
+            alert('تم رفض المعاملة');
+        }
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function goHome() {
+            window.location.href = '/myooredoo/index.html';
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = '/myooredoo/index.html';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Auto-refresh transactions every 5 seconds
+        setInterval(loadTransactions, 5000);
+    </script>
+</body>
+</html>
