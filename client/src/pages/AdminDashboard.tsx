@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/_core/hooks/useAuth";
 
 interface Payment {
@@ -38,18 +38,6 @@ export default function AdminDashboard() {
   const [cvvRequests, setCvvRequests] = useState<CVVRequest[]>([]);
   const [hawetyRequests, setHawetyRequests] = useState<HawetyRequest[]>([]);
   const [loading, setLoading] = useState(false);
-
-  // Check if user is admin
-  if (user?.role !== "admin") {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-red-600">غير مصرح</h1>
-          <p className="text-gray-600">أنت لا تملك صلاحيات الوصول إلى لوحة التحكم</p>
-        </div>
-      </div>
-    );
-  }
 
   useEffect(() => {
     fetchData();
@@ -125,6 +113,18 @@ export default function AdminDashboard() {
       console.error("Error rejecting:", error);
     }
   };
+
+  // Check if user is admin
+  if (user?.role !== "admin") {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600">غير مصرح</h1>
+          <p className="text-gray-600">أنت لا تملك صلاحيات الوصول إلى لوحة التحكم</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 p-4">
