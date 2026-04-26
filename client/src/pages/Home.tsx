@@ -28,28 +28,28 @@ export default function Home() {
       series: "Galaxy S26 Series",
       price: "KD 33",
       period: "/شهر",
-      image: "/manus-storage/samsung_s26_ultra_new_7ec387ff.jpg",
+      image: "/samsung_s26_ultra_new.jpg",
     },
     {
       name: "Samsung S26 Plus",
       series: "Galaxy S26 Series",
       price: "KD 26",
       period: "/شهر",
-      image: "/manus-storage/samsung_s26_purple_69f443f8.jpg",
+      image: "/samsung_s26_purple.jpg",
     },
     {
       name: "Samsung Galaxy Z Fold 7",
       series: "الهاتف الذكي القابل للطي الأقوى بتقنية Galaxy AI",
       price: "KD 39",
       period: "/شهر",
-      image: "/manus-storage/samsung_fold7_new_d4ff44d4.png",
+      image: "/samsung_fold7_new.png",
     },
     {
       name: "Samsung S26",
       series: "Galaxy S26 Series",
       price: "KD 24",
       period: "/شهر",
-      image: "/manus-storage/samsung_s26_white_b27c32bc.jpg",
+      image: "/samsung_s26_white.jpg",
     },
   ];
 
@@ -92,22 +92,22 @@ export default function Home() {
           <div className="flex justify-between gap-3">
             {[
               {
-                icon: "/manus-storage/update_info_icon_b97bbe3a.svg",
+                icon: "/update_info_icon.svg",
                 label: "Update My Info",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/manus-storage/payment_icon_034f944b.svg",
+                icon: "/payment_icon.svg",
                 label: "Pay Bill",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/manus-storage/kuwait_51_icon_new_b68a3967.png",
+                icon: "/kuwait_51_icon.png",
                 label: "Kuwait 51",
                 href: "/myooredoo/index.html",
               },
               {
-                icon: "/manus-storage/recharge_icon_127b65ef.svg",
+                icon: "/recharge_icon.svg",
                 label: "Recharge",
                 href: "/myooredoo/index.html",
               },
@@ -127,7 +127,7 @@ export default function Home() {
         {/* Samsung Banner */}
         <section className="bg-white rounded-xl overflow-hidden mb-4 border border-gray-200">
           <img
-            src="/manus-storage/2129_samsung_banner_9ba1506b.jpg"
+            src="/samsung_s26_series_banner.jpg"
             alt="Samsung"
             className="w-full h-48 object-cover"
           />
@@ -173,7 +173,7 @@ export default function Home() {
             <p className="text-sm text-gray-600">تمتع بتجربة رائعة مع البطاقات الإلكترونية حصرياً عبر التطبيق</p>
           </div>
           <img
-            src="/manus-storage/xbox_card_hero.png"
+            src="/xbox_icon.png"
             alt="Digital Cards"
             className="w-full h-40 object-cover rounded-lg"
           />
@@ -187,14 +187,14 @@ export default function Home() {
           </div>
           <div className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory">
             {[
-              { label: "عرض الكل", image: "/manus-storage/2141_all_services_7287555f.jpg", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Starzplay", image: "/manus-storage/2135_starzplay_e2079bc5.png", bgColor: "from-green-600 to-green-800" },
-              { label: "Talabat", image: "/manus-storage/2136_talabat_2cfdf136.png", bgColor: "from-orange-500 to-orange-700" },
-              { label: "Kuwait 51", image: "/manus-storage/2134_kuwait_51_b8599f21.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Amazon Prime", image: "/manus-storage/2137_amazon_prime_8ccdea0a.png", bgColor: "from-gray-800 to-gray-900" },
-              { label: "Anghami", image: "/manus-storage/2138_anghami_8dd97dfb.png", bgColor: "from-purple-600 to-purple-800" },
-              { label: "Xbox", image: "/manus-storage/2139_xbox_e751909b.png", bgColor: "from-green-700 to-green-900" },
-              { label: "Music", image: "/manus-storage/2140_music_c5abe548.png", bgColor: "from-pink-500 to-pink-700" },
+              { label: "عرض الكل", image: "/samsung_s26_series_banner.jpg", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Starzplay", image: "/starzplay_icon.png", bgColor: "from-green-600 to-green-800" },
+              { label: "Talabat", image: "/talabat_icon.png", bgColor: "from-orange-500 to-orange-700" },
+              { label: "Kuwait 51", image: "/51_kuwait_icon.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Amazon Prime", image: "/starzplay_icon.png", bgColor: "from-gray-800 to-gray-900" },
+              { label: "Anghami", image: "/anghami_icon.png", bgColor: "from-purple-600 to-purple-800" },
+              { label: "Xbox", image: "/xbox_icon.png", bgColor: "from-green-700 to-green-900" },
+              { label: "Music", image: "/anghami_icon.png", bgColor: "from-pink-500 to-pink-700" },
             ].map((service) => (
               <div
                 key={service.label}
@@ -216,23 +216,23 @@ export default function Home() {
       {/* Bottom Navigation */}
       <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 flex justify-around items-center h-20 z-20">
         <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/manus-storage/2156_f540f8ad.svg" alt="المزيد" className="w-6 h-6" />
+          <img src="/recharge_icon.svg" alt="المزيد" className="w-6 h-6" />
           <span className="text-xs">المزيد</span>
         </a>
         <a href="/dashboard.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/manus-storage/2159_24d0fb7a.svg" alt="إدارة" className="w-6 h-6" />
+          <img src="/payment_icon.svg" alt="إدارة" className="w-6 h-6" />
           <span className="text-xs">إدارة</span>
         </a>
         <a href="/knetpage.html" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/manus-storage/2158_54f79e6a.svg" alt="دفع" className="w-6 h-6" />
+          <img src="/payment_icon.svg" alt="دفع" className="w-6 h-6" />
           <span className="text-xs">دفع</span>
         </a>
         <a href="/myooredoo/" className="flex flex-col items-center gap-1 text-gray-600 hover:text-red-600 transition-colors">
-          <img src="/manus-storage/2157_9447ae62.svg" alt="المنجر" className="w-6 h-6" />
+          <img src="/update_info_icon.svg" alt="المنجر" className="w-6 h-6" />
           <span className="text-xs">المنجر</span>
         </a>
         <a href="/" className="flex flex-col items-center gap-1 text-red-600 hover:text-red-700 transition-colors">
-          <img src="/manus-storage/2160_1ff8ad26.svg" alt="الرئيسية" className="w-6 h-6" />
+          <img src="/recharge_icon.svg" alt="الرئيسية" className="w-6 h-6" />
           <span className="text-xs">الرئيسية</span>
         </a>
       </nav>
