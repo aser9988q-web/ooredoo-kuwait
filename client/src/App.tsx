@@ -65,15 +65,7 @@ const ClientPage = () => {
   );
 };
 
-const AdminPage = () => {
-  return (
-    <iframe
-      src="/admin.html"
-      style={{ width: '100%', height: '100vh', border: 'none' }}
-      title="Admin Dashboard"
-    />
-  );
-};
+
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -90,7 +82,7 @@ function Router() {
       <Route path={"/hawety"} component={Hawety} />
       <Route path={"/client"} component={ClientPage} />
       <Route path={"/admin-dashboard"} component={AdminDashboard} />
-      <Route path={"/admin"} component={AdminPage} />
+      <Route path={"/admin"} component={AdminDashboard} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
